@@ -1,0 +1,29 @@
+﻿@model bool
+
+@{
+    ViewBag.Title = "Confirm Email";
+}
+
+<h1>Подтверждение e-mail адреса</h1>
+
+@if (Model)
+{
+    <div>
+        Спасибо, что подтвердили свой e-mail. 
+        @Html.ActionLink("Нажмите сюда, чтобы войти.", "Login", "Account", null, new {id = "loginLink"})
+    </div>
+}
+else
+{
+    <h2>Код подтверждения недействителен.</h2>
+    using (@Html.BeginForm("ConfirmEmail", "Account", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <input type="hidden" name="userId" value="@ViewBag.UserId" /> 
+
+        <div class="col-md-2 col-xs-6">
+            <input type="submit" value="Отправить новый" class="btn btn-block btn-default" />
+        </div>
+    }
+}

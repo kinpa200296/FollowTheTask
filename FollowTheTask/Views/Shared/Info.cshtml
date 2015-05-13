@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Info";
+}
+
+@if (string.IsNullOrWhiteSpace(ViewBag.Message))
+{
+    <h2>Действие выполнено.</h2>
+}
+else
+{
+    <h2>@ViewBag.Message</h2>
+}
+
