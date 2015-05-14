@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using FollowTheTask.Models;
@@ -52,8 +53,9 @@ namespace FollowTheTask.Controllers
             var result = await UserManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
-                var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code });
+                var token = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ConfirmEmail", "Account", new {userId = user.Id, token = token},
+                    Request.Url.Scheme);
                 await
                     UserManager.SendEmailAsync(user.Id, "Подтверждение учетной записи",
                         "Подтвердите вашу учетную запись, щелкнув <a href=\"" + callbackUrl + "\">здесь</a>");
@@ -70,7 +72,7 @@ namespace FollowTheTask.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult> ConfirmEmail(string userId, string code)
+        public async Task<ActionResult> ConfirmEmail(string userId, string token)
         {
             var user = await UserManager.FindByIdAsync(userId);
             if (user == null) 
@@ -80,7 +82,7 @@ namespace FollowTheTask.Controllers
                 ViewBag.Message = "Учетная запись уже подтверждена";
                 return View("Info");
             }
-            var result = await UserManager.ConfirmEmailAsync(userId, code);
+            var result = await UserManager.ConfirmEmailAsync(userId, token);
             ViewBag.UserId = userId;
             return View(result.Succeeded);
         }
@@ -91,8 +93,9 @@ namespace FollowTheTask.Controllers
         public async Task<ActionResult> ConfirmEmail(string userId)
         {
             var user = await UserManager.FindByIdAsync(userId);
-            var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code });
+            var token = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+            var callbackUrl = Url.Action("ConfirmEmail", "Account", new {userId = user.Id, token = token},
+                Request.Url.Scheme);
             await
                 UserManager.SendEmailAsync(user.Id, "Подтверждение учетной записи",
                     "Подтвердите вашу учетную запись, щелкнув <a href=\"" + callbackUrl + "\">здесь</a>");
@@ -124,13 +127,21 @@ namespace FollowTheTask.Controllers
                 }
                 else
                 {
+                    if (!user.EmailConfirmed)
+                        return RedirectToAction("ConfirmEmail", "Account", new {userId = user.Id, token = "bad_token"});
                     var claim =
                         await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
                     AuthenticationManager.SignOut();
-                    AuthenticationManager.SignIn(new AuthenticationProperties {IsPersistent = true}, claim);
+                    AuthenticationManager.SignIn(
+                        new AuthenticationProperties
+                        {
+                            IsPersistent = true,
+                            IssuedUtc = DateTime.UtcNow,
+                            ExpiresUtc = DateTime.UtcNow.AddMinutes(15)
+                        }, claim);
                     if (string.IsNullOrEmpty(returnUrl))
-                        RedirectToAction("Index", "Main");
-                    else Redirect(returnUrl);
+                        return RedirectToAction("Index", "Main");
+                    return Redirect(returnUrl);
                 }
             }
             ViewBag.ReturnUrl = returnUrl;

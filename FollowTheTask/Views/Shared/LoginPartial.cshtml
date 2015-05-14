@@ -15,7 +15,7 @@ else
 
         <ul class="nav navbar-nav navbar-right">
             <li>@Html.ActionLink(@User.Identity.GetUserName(), "Index", "Manage", null, new {title = "Manage"})</li>
-            <li href="javascript:document.getElementById('logoutForm').submit()"><a>Выйти</a></li>
+            <li><a href="#" onclick="document.getElementById('logoutForm').submit()">Выйти</a></li>
         </ul>
     }
 }
