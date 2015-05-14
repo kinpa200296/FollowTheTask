@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using FollowTheTask.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -96,6 +98,11 @@ namespace FollowTheTask.Controllers
             var token = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
             var callbackUrl = Url.Action("ConfirmEmail", "Account", new {userId = user.Id, token = token},
                 Request.Url.Scheme);
+            if (Request.Url.Host != "localhost")
+            {
+                var s = callbackUrl.Split('/').First(x => x.Contains(Request.Url.Host));
+                callbackUrl = callbackUrl.Replace(s, Request.Url.Host);
+            }
             await
                 UserManager.SendEmailAsync(user.Id, "Подтверждение учетной записи",
                     "Подтвердите вашу учетную запись, щелкнув <a href=\"" + callbackUrl + "\">здесь</a>");
