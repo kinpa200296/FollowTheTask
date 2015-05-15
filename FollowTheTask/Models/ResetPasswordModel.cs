@@ -2,17 +2,11 @@
 
 namespace FollowTheTask.Models
 {
-    public class RegisterModel
+    public class ResetPasswordModel
     {
-        [Required(ErrorMessage = "Введите имя пользователя")]
-        [Display(Name = "Имя пользователя")]
-        public string UserName { get; set; }
+        public string UserId { get; set; }
 
-        [Required(ErrorMessage = "Введите e-mail")]
-        [Display(Name = "E-mail адрес")]
-        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "Некорректный e-mail адрес")]
-        [DataType(DataType.EmailAddress)]
-        public string Email { get; set; }
+        public string Token { get; set; }
 
         [Required(ErrorMessage = "Введите пароль")]
         [DataType(DataType.Password)]

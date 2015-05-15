@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using FollowTheTask.Models;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 
-namespace FollowTheTask.Models
+namespace FollowTheTask
 {
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {

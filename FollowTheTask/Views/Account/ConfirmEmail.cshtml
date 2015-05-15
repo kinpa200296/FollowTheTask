@@ -1,14 +1,14 @@
 ﻿@model bool
 
 @{
-    ViewBag.Title = "Confirm Email";
+    ViewBag.Title = "Подтверждение e-mail";
 }
 
 <h1>Подтверждение e-mail адреса</h1>
 
 @if (Model)
 {
-    <div class="col-md-12 col-xs-12">
+    <div class="col-md-12">
         Спасибо, что подтвердили свой e-mail.
         @Html.ActionLink("Нажмите сюда, чтобы войти.", "Login", "Account", null, new { id = "loginLink" })
     </div>
@@ -16,7 +16,7 @@
 else
 {
     <div class="row">
-        <div class="col-md-12 col-xs-12">
+        <div class="col-md-12">
             <h3 class="text-danger">E-mail не подтвержден.</h3>
             Нажмите на кнопку, если вам не пришло письмо, или ссылка в письме не сработала.
         </div>
@@ -28,7 +28,7 @@ else
         <input type="hidden" name="userId" value="@ViewBag.UserId" />
 
         <div class="row form-group">
-            <div class="col-md-2 col-xs-6">
+            <div class="col-md-2">
                 <input type="submit" value="Отправить новый" class="btn btn-block btn-default" />
             </div>
         </div>

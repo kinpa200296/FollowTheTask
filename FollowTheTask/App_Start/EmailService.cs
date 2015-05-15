@@ -4,7 +4,7 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 
-namespace FollowTheTask.Models
+namespace FollowTheTask
 {
     public class EmailService : IIdentityMessageService
     {

@@ -2,17 +2,17 @@
 @model HandleErrorInfo
 
 @{
-    ViewBag.Title = "Error";
+    ViewBag.Title = "Ошибка";
 }
 
-<h1 class="text-danger">Ошибка.</h1>
+<h1 class="text-danger">Ошибка</h1>
 @{
     if (String.IsNullOrEmpty(ViewBag.ErrorMessage))
     {
-        <h2 class="text-danger">An error occurred while processing your request.</h2>
+        <h4>Во время обработки вашего запроса произошла ошибка</h4>
     }
     else
     {
-        <h2 class="text-danger">@ViewBag.ErrorMessage</h2>
+        <h4>@ViewBag.ErrorMessage</h4>
     }
 }
