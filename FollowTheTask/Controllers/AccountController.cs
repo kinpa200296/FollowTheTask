@@ -29,6 +29,22 @@ namespace FollowTheTask.Controllers
             return View();
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<JsonResult> CheckUserName(string userName)
+        {
+            var user = await UserManager.FindByNameAsync(userName);
+            return Json(user == null, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<JsonResult> CheckEmail(string email)
+        {
+            var user = await UserManager.FindByEmailAsync(email);
+            return Json(user == null, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -50,10 +66,26 @@ namespace FollowTheTask.Controllers
                 ModelState.AddModelError("Email", "На данный e-mail уже зарегистрирован пользователь");
                 return View(model);
             }
-            var user = new ApplicationUser {UserName = model.UserName, Email = model.Email, EmailConfirmed = false};
+            var user = new ApplicationUser
+            {
+                UserName = model.UserName,
+                Email = model.Email,
+                EmailConfirmed = false,
+                FirstName = model.FirstName,
+                LastName = model.LastName
+            };
             var result = await UserManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
+                await UserManager.AddToRoleAsync(user.Id, "user");
+                if (model.MakeManager)
+                {
+                    await UserManager.AddToRoleAsync(user.Id, "manager");
+                }
+                if (model.MakeWorker)
+                {
+                    await UserManager.AddToRoleAsync(user.Id, "worker");
+                }
                 var token = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                 var callbackUrl = Utility.GetCallbackUrl(Url, "ConfirmEmail", "Account",
                     new {userId = user.Id, token = token},

@@ -42,6 +42,36 @@
                 </div>
             </div>
             <div class="row form-group">
+                @Html.LabelFor(m => m.FirstName, new { @class = "col-md-6 text-right control-label" })
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row form-group">
+                @Html.LabelFor(m => m.LastName, new { @class = "col-md-6 text-right control-label" })
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-offset-6">
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(m => m.MakeManager)
+                        @Html.LabelFor(m => m.MakeManager, new {@class = "control-label"})
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-offset-6">
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(m => m.MakeWorker)
+                        @Html.LabelFor(m => m.MakeWorker, new {@class = "control-label"})
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
                 <div class="col-md-offset-5 col-md-2">
                     <input type="submit" value="Зарегистрироваться" class="btn btn-block btn-default" />
                 </div>

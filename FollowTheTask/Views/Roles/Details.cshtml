@@ -1,0 +1,51 @@
+﻿@model FollowTheTask.Models.RoleModel
+
+@{
+    ViewBag.Title = "Подробности";
+}
+
+<h2>Подробности</h2>
+
+<ul class="nav nav-pills">
+    <li>@Html.ActionLink("Назад к списку ролей", "Index", "Roles")</li>
+    <li>@Html.ActionLink("Редактирование", "Edit", "Roles", new { name = Model.Name }, null)</li>
+    @if (User.IsInRole("owner") || Model.AllowDeletion)
+    {
+        <li>@Html.ActionLink("Удаление", "Delete", "Roles", new { name = Model.Name }, null)</li>
+    }
+</ul>
+
+<div class="table">
+    <div class="row ">
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.DisplayName, new { @class = "control-label"})
+        </div>
+        <div class="col-md-4">
+            @Html.DisplayFor(model => model.DisplayName)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+        </div>
+        <div class="col-md-4">
+            @Html.DisplayFor(model => model.Name)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.AllowDeletion, new { @class = "control-label" })
+        </div>
+        <div class="col-md-4">
+            @Html.DisplayFor(model => model.AllowDeletion)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            @Html.LabelFor(model => model.Description, new { @class = "control-label" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextAreaFor(model => model.Description, 10, 50, new { @class = "form-control", disabled = "disabled" })
+        </div>
+    </div>
+</div>

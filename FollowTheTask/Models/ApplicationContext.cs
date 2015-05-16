@@ -10,5 +10,7 @@ namespace FollowTheTask.Models
         {
             return new ApplicationContext();
         }
+
+        public System.Data.Entity.DbSet<FollowTheTask.Models.ApplicationRole> IdentityRoles { get; set; }
     }
 }

@@ -141,12 +141,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\ApplicationRoleManager.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StartupOwin.cs" />
     <Compile Include="App_Start\Utility.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -155,8 +157,17 @@
     <Compile Include="Migrations\201505141618510_BasicUsers.Designer.cs">
       <DependentUpon>201505141618510_BasicUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201505160807388_RolesAdded.cs" />
+    <Compile Include="Migrations\201505160807388_RolesAdded.Designer.cs">
+      <DependentUpon>201505160807388_RolesAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505161318258_RolesAndUsersUpdate.cs" />
+    <Compile Include="Migrations\201505161318258_RolesAndUsersUpdate.Designer.cs">
+      <DependentUpon>201505161318258_RolesAndUsersUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationContext.cs" />
+    <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="App_Start\ApplicationUserManager.cs" />
     <Compile Include="App_Start\EmailService.cs" />
@@ -164,6 +175,7 @@
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\ResetPasswordModel.cs" />
+    <Compile Include="Models\RoleModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -208,6 +220,11 @@
     <Content Include="Views\Shared\Info.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Roles\Create.cshtml" />
+    <Content Include="Views\Roles\Delete.cshtml" />
+    <Content Include="Views\Roles\Details.cshtml" />
+    <Content Include="Views\Roles\Edit.cshtml" />
+    <Content Include="Views\Roles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -221,6 +238,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201505141618510_BasicUsers.resx">
       <DependentUpon>201505141618510_BasicUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505160807388_RolesAdded.resx">
+      <DependentUpon>201505160807388_RolesAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505161318258_RolesAndUsersUpdate.resx">
+      <DependentUpon>201505161318258_RolesAndUsersUpdate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
