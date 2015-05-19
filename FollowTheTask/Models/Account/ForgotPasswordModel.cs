@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FollowTheTask.Models
+namespace FollowTheTask.Models.Account
 {
     public class ForgotPasswordModel
     {

@@ -1,10 +1,10 @@
-﻿using FollowTheTask.Models;
+﻿using FollowTheTask.Models.DataBase;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 
-namespace FollowTheTask
+namespace FollowTheTask.Identity
 {
     public class ApplicationRoleManager : RoleManager<ApplicationRole>
     {

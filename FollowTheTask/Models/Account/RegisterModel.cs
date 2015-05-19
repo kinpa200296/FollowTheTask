@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
-namespace FollowTheTask.Models
+namespace FollowTheTask.Models.Account
 {
     public class RegisterModel
     {

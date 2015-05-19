@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FollowTheTask.Models
+namespace FollowTheTask.Models.Account
 {
-    public class LoginModel
+    public class ResetPasswordModel
     {
-        [Required(ErrorMessage = "Введите имя пользователя")]
-        [Display(Name = "Имя пользователя")]
-        public string UserName { get; set; }
+        public string UserId { get; set; }
+
+        public string Token { get; set; }
 
         [Required(ErrorMessage = "Введите пароль")]
         [DataType(DataType.Password)]
@@ -14,5 +14,10 @@ namespace FollowTheTask.Models
         [Display(Name = "Пароль")]
         [RegularExpression(@"^(?=.*\d)(?=.*[a-z]).*$", ErrorMessage = "Пароль должен состоять из цифр и как минимум одной строчной латинской буквы")]
         public string Password { get; set; }
+
+        [Compare("Password", ErrorMessage = "Пароли должны совпадать")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Подтверждение пароля")]
+        public string PasswordConfirm { get; set; }
     }
 }

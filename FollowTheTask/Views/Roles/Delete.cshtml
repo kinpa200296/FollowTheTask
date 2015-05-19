@@ -1,10 +1,16 @@
-﻿@model FollowTheTask.Models.ApplicationRole
+﻿@model FollowTheTask.Models.DataBase.ApplicationRole
 
 @{
     ViewBag.Title = "Удаление роли";
 }
 
 <h2>Удаление роли</h2>
+
+<ul class="nav nav-pills">
+    <li>@Html.ActionLink("Назад к списку ролей", "Index", "Roles")</li>
+    <li>@Html.ActionLink("Редактирование", "Edit", "Roles", new { name = Model.Name }, null)</li>
+    <li>@Html.ActionLink("Подробности", "Details", "Roles", new { name = Model.Name }, null)</li>
+</ul>
 
 <h3>Вы уверены что хотите удалить эту роль?</h3>
 <div>

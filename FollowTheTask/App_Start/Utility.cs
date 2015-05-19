@@ -3,7 +3,7 @@ using System.Web.Mvc;
 
 namespace FollowTheTask
 {
-    public static  class Utility
+    public static class Utility
     {
         public static string GetCallbackUrl(UrlHelper url, string actionName, string controllerName, object routeValues,
             string protocol, string hostname)

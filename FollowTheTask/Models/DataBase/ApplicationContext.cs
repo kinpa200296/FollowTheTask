@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace FollowTheTask.Models
+namespace FollowTheTask.Models.DataBase
 {
     public class ApplicationContext : IdentityDbContext<ApplicationUser>
     {
@@ -11,6 +11,6 @@ namespace FollowTheTask.Models
             return new ApplicationContext();
         }
 
-        public System.Data.Entity.DbSet<FollowTheTask.Models.ApplicationRole> IdentityRoles { get; set; }
+        public System.Data.Entity.DbSet<ApplicationRole> IdentityRoles { get; set; }
     }
 }

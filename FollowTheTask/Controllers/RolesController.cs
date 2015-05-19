@@ -2,7 +2,9 @@
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using FollowTheTask.Models;
+using FollowTheTask.Identity;
+using FollowTheTask.Models.DataBase;
+using FollowTheTask.Models.Role;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace FollowTheTask.Controllers

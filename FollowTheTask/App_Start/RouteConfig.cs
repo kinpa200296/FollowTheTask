@@ -11,7 +11,8 @@ namespace FollowTheTask
 
             //routes.MapRoute("UserAnonymous", "user/{action}", new {controller = "Account"});
 
-            routes.MapRoute("Roles", "role/{name}/{action}", new {controller = "Roles", action = "Details"});
+            routes.MapRoute("Roles", "role/{name}/{action}", new {controller = "Roles", action = "Details"},
+                new {action = "^[^I].*"});
 
             routes.MapRoute("Default", "{controller}/{action}/{id}",
                 new {controller = "Main", action = "Index", id = UrlParameter.Optional});

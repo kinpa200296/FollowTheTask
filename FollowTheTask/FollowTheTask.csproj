@@ -141,7 +141,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\ApplicationRoleManager.cs" />
+    <Compile Include="App_Start\Identity\ApplicationRoleManager.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -166,16 +166,16 @@
       <DependentUpon>201505161318258_RolesAndUsersUpdate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\ApplicationContext.cs" />
-    <Compile Include="Models\ApplicationRole.cs" />
-    <Compile Include="Models\ApplicationUser.cs" />
-    <Compile Include="App_Start\ApplicationUserManager.cs" />
-    <Compile Include="App_Start\EmailService.cs" />
-    <Compile Include="Models\ForgotPasswordModel.cs" />
-    <Compile Include="Models\LoginModel.cs" />
-    <Compile Include="Models\RegisterModel.cs" />
-    <Compile Include="Models\ResetPasswordModel.cs" />
-    <Compile Include="Models\RoleModel.cs" />
+    <Compile Include="Models\DataBase\ApplicationContext.cs" />
+    <Compile Include="Models\DataBase\ApplicationRole.cs" />
+    <Compile Include="Models\DataBase\ApplicationUser.cs" />
+    <Compile Include="App_Start\Identity\ApplicationUserManager.cs" />
+    <Compile Include="App_Start\Identity\EmailService.cs" />
+    <Compile Include="Models\Account\ForgotPasswordModel.cs" />
+    <Compile Include="Models\Account\LoginModel.cs" />
+    <Compile Include="Models\Account\RegisterModel.cs" />
+    <Compile Include="Models\Account\ResetPasswordModel.cs" />
+    <Compile Include="Models\Role\RoleModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace FollowTheTask.Models
+namespace FollowTheTask.Models.DataBase
 {
     public class ApplicationUser : IdentityUser
     {

@@ -1,4 +1,5 @@
-﻿using FollowTheTask.Models;
+﻿using FollowTheTask.Identity;
+using FollowTheTask.Models.DataBase;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
