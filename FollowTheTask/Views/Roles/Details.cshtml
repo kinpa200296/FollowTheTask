@@ -15,37 +15,41 @@
     }
 </ul>
 
-<div class="table">
-    <div class="row ">
-        <div class="col-md-3">
-            @Html.LabelFor(model => model.DisplayName, new { @class = "control-label"})
-        </div>
-        <div class="col-md-4">
-            @Html.DisplayFor(model => model.DisplayName)
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
-            @Html.LabelFor(model => model.Name, new { @class = "control-label" })
-        </div>
-        <div class="col-md-4">
-            @Html.DisplayFor(model => model.Name)
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
-            @Html.LabelFor(model => model.AllowDeletion, new { @class = "control-label" })
-        </div>
-        <div class="col-md-4">
-            @Html.DisplayFor(model => model.AllowDeletion)
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-3">
-            @Html.LabelFor(model => model.Description, new { @class = "control-label" })
-        </div>
-        <div class="col-md-4">
-            @Html.TextAreaFor(model => model.Description, 10, 50, new { @class = "form-control", disabled = "disabled" })
-        </div>
+<div class="row">
+    <div class="col-md-7">
+        <table class="table">
+            <tr class="row ">
+                <td class="col-md-4">
+                    @Html.LabelFor(model => model.DisplayName, new {@class = "control-label"})
+                </td>
+                <td class="col-md-8">
+                    @Html.DisplayFor(model => model.DisplayName)
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="col-md-4">
+                    @Html.LabelFor(model => model.Name, new {@class = "control-label"})
+                </td>
+                <td class="col-md-8">
+                    @Html.DisplayFor(model => model.Name)
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="col-md-4">
+                    @Html.LabelFor(model => model.AllowDeletion, new {@class = "control-label"})
+                </td>
+                <td class="col-md-8">
+                    @Html.DisplayFor(model => model.AllowDeletion)
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="col-md-4">
+                    @Html.LabelFor(model => model.Description, new {@class = "control-label"})
+                </td>
+                <td class="col-md-8">
+                    @Html.TextAreaFor(model => model.Description, 10, 50, new {@class = "form-control", disabled = "disabled"})
+                </td>
+            </tr>
+        </table>
     </div>
 </div>

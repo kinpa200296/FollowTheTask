@@ -14,7 +14,7 @@ else
         @Html.AntiForgeryToken()
 
         <ul class="nav navbar-nav navbar-right">
-            <li>@Html.ActionLink(@User.Identity.GetUserName(), "Index", "Manage", null, new {title = "Manage"})</li>
+            <li>@Html.ActionLink(@User.Identity.GetUserName(), "Index", "ManageAccount", new { username = @User.Identity.Name }, new { title = "Manage" })</li>
             <li><a href="#" onclick="document.getElementById('logoutForm').submit()">Выйти</a></li>
         </ul>
     }

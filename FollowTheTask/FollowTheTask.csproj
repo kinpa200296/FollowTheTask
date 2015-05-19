@@ -148,6 +148,7 @@
     <Compile Include="App_Start\StartupOwin.cs" />
     <Compile Include="App_Start\Utility.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ManageAccountController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Global.asax.cs">
@@ -175,6 +176,8 @@
     <Compile Include="Models\Account\LoginModel.cs" />
     <Compile Include="Models\Account\RegisterModel.cs" />
     <Compile Include="Models\Account\ResetPasswordModel.cs" />
+    <Compile Include="Models\ManageAccount\ChangePasswordModel.cs" />
+    <Compile Include="Models\ManageAccount\UserModel.cs" />
     <Compile Include="Models\Role\RoleModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -225,6 +228,9 @@
     <Content Include="Views\Roles\Details.cshtml" />
     <Content Include="Views\Roles\Edit.cshtml" />
     <Content Include="Views\Roles\Index.cshtml" />
+    <Content Include="Views\ManageAccount\Index.cshtml" />
+    <Content Include="Views\ManageAccount\Edit.cshtml" />
+    <Content Include="Views\ManageAccount\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

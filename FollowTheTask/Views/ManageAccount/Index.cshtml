@@ -1,0 +1,49 @@
+﻿@model FollowTheTask.Models.ManageAccount.UserModel
+
+@{
+    ViewBag.Title = "Пользователь " + Model.UserName;
+}
+
+<h2>Управление данными аккаунта</h2>
+<ul class="nav nav-pills">
+    <li>@Html.ActionLink("Редактировать данные", "Edit", "ManageAccount", new { username = Model.UserName }, null)</li>
+    <li>@Html.ActionLink("Сменить пароль", "ChangePassword", "ManageAccount", new { username = Model.UserName }, null)</li>
+</ul>
+<div class="row">
+    <div class="col-md-5">
+        <table class="table">
+            <tr class="row">
+                <td class="col-md-6">
+                    @Html.LabelFor(m => m.UserName)
+                </td>
+                <td class="col-md-6">
+                    @Html.DisplayFor(m => m.UserName)
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="col-md-6">
+                    @Html.LabelFor(m => m.Email)
+                </td>
+                <td class="col-md-6">
+                    @Html.DisplayFor(m => m.Email)
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="col-md-6">
+                    @Html.LabelFor(m => m.FirstName)
+                </td>
+                <td class="col-md-6">
+                    @Html.DisplayFor(m => m.FirstName)
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="col-md-6">
+                    @Html.LabelFor(m => m.LastName)
+                </td>
+                <td class="col-md-6">
+                    @Html.DisplayFor(m => m.LastName)
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
