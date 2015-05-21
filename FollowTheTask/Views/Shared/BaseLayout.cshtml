@@ -33,7 +33,11 @@
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li>@Html.ActionLink("Главная", "Index", "Main")</li>
+                            @if (User.IsInRole("owner") || User.IsInRole("admin"))
+                            {
+                                <li>@Html.ActionLink("Управление пользователями", "Index", "Users")</li>
+                                <li>@Html.ActionLink("Управление ролями", "Index", "Roles")</li>
+                            }
                         </ul>
                         @Html.Partial("LoginPartial")
                     </div>

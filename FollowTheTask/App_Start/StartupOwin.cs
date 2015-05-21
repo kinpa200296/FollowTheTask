@@ -1,4 +1,5 @@
-﻿using FollowTheTask.Identity;
+﻿using System.Configuration;
+using FollowTheTask.Identity;
 using FollowTheTask.Models.DataBase;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
@@ -19,7 +20,8 @@ namespace FollowTheTask
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/Account/Login")
+                LoginPath = new PathString("/Account/Login"),
+                CookieName = ConfigurationManager.AppSettings["CookieName"]
             });
         }
     }

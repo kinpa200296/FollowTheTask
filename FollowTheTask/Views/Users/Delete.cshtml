@@ -1,0 +1,77 @@
+﻿@model FollowTheTask.Models.Users.UserModel
+@{
+    ViewBag.Title = "Удаление пользователя " + Model.UserName;
+}
+
+<h2>@ViewBag.Title</h2>
+
+<ul class="nav nav-pills">
+    <li>@Html.ActionLink("Назад к списку пользователей", "Index", "Users")</li>
+    <li>@Html.ActionLink("Подробности", "Details", "Users", new { username = Model.UserName }, null)</li>
+    @if ((User.IsInRole("owner") && !Model.Roles.First(role => role.Name == "owner").IsUserInRole) ||
+         User.IsInRole("admin") && !(Model.Roles.First(role => role.Name == "owner").IsUserInRole ||
+                                     Model.Roles.First(role => role.Name == "admin").IsUserInRole) ||
+         User.Identity.Name == Model.UserName)
+    {
+        <li>@Html.ActionLink("Редактирование", "Edit", "Users", new {username = Model.UserName}, null)</li>
+    }
+</ul>
+
+<h4>Вы уверены что хотите удалить этого пользователя?</h4>
+
+<div class="row">
+    <div class="col-md-6">
+        <table class="table">
+            <tr class="row">
+                <td class="col-md-4">
+                    @Html.LabelFor(m => m.UserName, new { @class = "control-label" })
+                </td>
+                <td class="col-md-8">
+                    @Html.DisplayFor(m => m.UserName)
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="col-md-4">
+                    @Html.LabelFor(m => m.FirstName, new { @class = "control-label" })
+                </td>
+                <td class="col-md-8">
+                    @Html.DisplayFor(m => m.FirstName)
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="col-md-4">
+                    @Html.LabelFor(m => m.LastName, new { @class = "control-label" })
+                </td>
+                <td class="col-md-8">
+                    @Html.DisplayFor(m => m.LastName)
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="col-md-4">
+                    @Html.LabelFor(m => m.Roles, new { @class = "control-label" })
+                </td>
+                <td class="col-md-8">
+                    @foreach (var role in Model.Roles.Where(role => role.IsUserInRole))
+                    {
+                        <p>
+                            @Html.DisplayFor(roleItem => role.DisplayName)
+                        </p>
+                    }
+                </td>
+            </tr>
+        </table>
+        
+        @using (Html.BeginForm("Delete", "Users", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group row">
+                <div class="col-md-offset-2">
+                    <input type="submit" value="Удалить" class="btn btn-primary" />
+                    @Html.ActionLink("Отмена", "Index", "Users", new { @class = "btn btn-default" })
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

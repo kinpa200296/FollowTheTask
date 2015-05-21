@@ -151,6 +151,8 @@
     <Compile Include="Controllers\ManageAccountController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -179,6 +181,9 @@
     <Compile Include="Models\ManageAccount\ChangePasswordModel.cs" />
     <Compile Include="Models\ManageAccount\UserModel.cs" />
     <Compile Include="Models\Role\RoleModel.cs" />
+    <Compile Include="Models\Users\UserModel.cs" />
+    <Compile Include="Models\Users\UserRoleModel.cs" />
+    <Compile Include="Models\User\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -231,6 +236,11 @@
     <Content Include="Views\ManageAccount\Index.cshtml" />
     <Content Include="Views\ManageAccount\Edit.cshtml" />
     <Content Include="Views\ManageAccount\ChangePassword.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
