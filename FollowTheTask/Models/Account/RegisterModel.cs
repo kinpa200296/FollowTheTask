@@ -8,6 +8,8 @@ namespace FollowTheTask.Models.Account
         [Required(ErrorMessage = "Введите имя пользователя")]
         [Display(Name = "Имя пользователя")]
         [Remote("CheckUserName", "Account", ErrorMessage = "Имя пользователя уже занято")]
+        [RegularExpression(@"[A-Za-z0-9]+", 
+            ErrorMessage = "Имя пользователя может состоять только из латинских символов и цифр")]
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "Введите e-mail")]

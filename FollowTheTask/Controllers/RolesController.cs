@@ -115,10 +115,6 @@ namespace FollowTheTask.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (!User.IsInRole("owner"))
-                {
-                    role.AllowDeletion = true;
-                }
                 var appRole = await RoleManager.FindByNameAsync(role.Name);
                 appRole.DisplayName = role.DisplayName;
                 appRole.Description = role.Description;
