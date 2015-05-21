@@ -49,6 +49,7 @@ namespace FollowTheTask.Controllers
             {
                 Id = user.Id,
                 UserName = user.UserName,
+                Email = user.Email,
                 FirstName = user.FirstName,
                 LastName = user.LastName
             };

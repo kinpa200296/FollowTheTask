@@ -10,6 +10,7 @@
         <table class="table table-responsive">
             <tr class="row">
                 <th>@Html.DisplayNameFor(m => m.UserName)</th>
+                <th>@Html.DisplayNameFor(m => m.Email)</th>
                 <th>@Html.DisplayNameFor(m => m.FirstName)</th>
                 <th>@Html.DisplayNameFor(m => m.LastName)</th>
                 <th>@Html.DisplayNameFor(m => m.Roles)</th>
@@ -22,9 +23,12 @@
                         @Html.DisplayFor(modelItem => user.UserName)
                     </td>
                     <td class="col-md-2">
+                        @Html.DisplayFor(modelItem => user.Email)
+                    </td>
+                    <td class="col-md-1">
                         @Html.DisplayFor(modelItem => user.FirstName)
                     </td>
-                    <td class="col-md-2">
+                    <td class="col-md-1">
                         @Html.DisplayFor(modelItem => user.LastName)
                     </td>
                     <td class="col-md-2">

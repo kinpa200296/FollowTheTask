@@ -9,6 +9,9 @@ namespace FollowTheTask.Models.Users
         [Display(Name = "Имя пользователя")]
         public string UserName { get; set; }
 
+        [Display(Name = "E-mail адрес")]
+        public string Email { get; set; }
+
         [Required(ErrorMessage = "Введите имя")]
         [Display(Name = "Имя")]
         public string FirstName { get; set; }
