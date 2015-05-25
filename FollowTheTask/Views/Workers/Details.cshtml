@@ -1,0 +1,60 @@
+﻿@model FollowTheTask.Models.Workers.WorkerModel
+
+@{
+    ViewBag.Title = "Данные исполнителя " + Model.UserName;
+}
+
+<h2>@ViewBag.Title</h2>
+
+<ul class="nav nav-pills">
+    <li>@Html.ActionLink("Назад к списку исполнителей", "Index", "Workers")</li>
+</ul>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <table class="table">
+            <tr class="row">
+                <td>@Html.LabelFor(m => m.UserName)</td>
+                <td>@Html.DisplayFor(m => m.UserName)</td>
+            </tr>
+            <tr class="row">
+                <td>@Html.LabelFor(m => m.Email)</td>
+                <td>@Html.DisplayFor(m => m.Email)</td>
+            </tr>
+            <tr class="row">
+                <td>@Html.LabelFor(m => m.FirstName)</td>
+                <td>@Html.DisplayFor(m => m.FirstName)</td>
+            </tr>
+            <tr class="row">
+                <td>@Html.LabelFor(m => m.LastName)</td>
+                <td>@Html.DisplayFor(m => m.LastName)</td>
+            </tr>
+            @if (Model.Manager.UserName != null)
+            {
+                <tr class="row">
+                    <td><label>Менеджер</label></td>
+                    <td>@Html.DisplayFor(m => m.Manager.UserName)</td>   
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <h4>Подзадачи</h4>
+        <table class="table">
+            <tr class="row">
+                <th class="col-md-6">Название подзадачи</th>
+                <th class="col-md-6">Выполнена</th>
+            </tr>
+            @foreach (var quest in Model.Quests)
+            {
+                <tr class="row">
+                    <td>@Html.DisplayFor(m => quest.Title)</td>
+                    <td>@Html.DisplayFor(m => quest.IsFinished)</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

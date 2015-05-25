@@ -1,0 +1,56 @@
+﻿@model IEnumerable<FollowTheTask.Models.TrackedTasks.TrackedTaskModel>
+
+@{
+    ViewBag.Title = "Задачи";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@if (User.IsInRole("manager"))
+{
+    <ul class="nav nav-pills">
+        <li>@Html.ActionLink("Создать задачу", "Create", "TrackedTasks", new {username=User.Identity.Name}, null)</li>
+    </ul>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <tr class="row">
+                <th class="col-md-2">Название задачи</th>
+                <th class="col-md-1">Менеджер</th>
+                <th class="col-md-2">Подзадачи</th>
+                <th class="col-md-2">Дата выдачи</th>
+                <th class="col-md-2">Крайний срок</th>
+                <th class="col-md-2">Дата завершения</th>
+                <th class="col-md-1">Потраченные часы</th>
+            </tr>
+            @foreach (var task in Model)
+            {
+                <tr class="row">
+                    <td>@Html.ActionLink(task.Title, "Details", "TrackedTasks", new{username=task.Manager.UserName, id=task.Id}, null)</td>
+                    <td>@Html.ActionLink(task.Manager.UserName, "Details", "Managers", new { username = task.Manager.UserName }, null)</td>
+                    <td>
+                        @foreach (var quest in task.Quests)
+                        {
+                            <p>@Html.DisplayFor(m => quest.Title)</p>
+                        }
+                    </td>
+
+                    <td>@Html.DisplayFor(m => task.IssuedDate)</td>
+                    <td>@Html.DisplayFor(m => task.DeadLine)</td>
+                    @if (task.IsFinished)
+                    {
+                        <td>@Html.DisplayFor(m => task.CompletionDate)</td>
+                        <td>@Html.DisplayFor(m => task.HoursSpent)</td>
+                    }
+                    else
+                    {
+                        <td>Неизвестно</td>
+                        <td>Неизвестно</td>
+                    }
+                </tr>
+            }
+        </table>
+    </div>
+</div>

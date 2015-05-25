@@ -1,0 +1,69 @@
+﻿@model FollowTheTask.Models.Managers.ManagerModel
+
+@{
+    ViewBag.Title = "Данные менеджера " + Model.UserName;
+}
+
+<h2>@ViewBag.Title</h2>
+
+<ul class="nav nav-pills">
+    <li>@Html.ActionLink("Назад к списку менеджеров", "Index", "Managers")</li>
+</ul>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <table class="table">
+            <tr class="row">
+                <td>@Html.LabelFor(m => m.UserName)</td>
+                <td>@Html.DisplayFor(m => m.UserName)</td>
+            </tr>
+            <tr class="row">
+                <td>@Html.LabelFor(m => m.Email)</td>
+                <td>@Html.DisplayFor(m => m.Email)</td>
+            </tr>
+            <tr class="row">
+                <td>@Html.LabelFor(m => m.FirstName)</td>
+                <td>@Html.DisplayFor(m => m.FirstName)</td>
+            </tr>
+            <tr class="row">
+                <td>@Html.LabelFor(m => m.LastName)</td>
+                <td>@Html.DisplayFor(m => m.LastName)</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <h4>Задачи</h4>
+        <table class="table">
+            <tr class="row">
+                <th class="col-md-6">Название задачи</th>
+                <th class="col-md-6">Выполнена</th>
+            </tr>
+            @foreach (var task in Model.TrackedTasks)
+            {
+                <tr class="row">
+                    <td>@Html.DisplayFor(m => task.Title)</td>
+                    <td>@Html.DisplayFor(m => task.IsFinished)</td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="col-md-6">
+        <h4>Исполнители</h4>
+        <table class="table">
+            <tr class="row">
+                <th class="col-md-6">Имя пользователя</th>
+                <th class="col-md-6">E-mail</th>
+            </tr>
+            @foreach (var worker in Model.Workers)
+            {
+                <tr class="row">
+                    <td>@Html.DisplayFor(m => worker.UserName)</td>
+                    <td>@Html.DisplayFor(m => worker.Email)</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

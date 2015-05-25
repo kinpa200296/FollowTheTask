@@ -1,0 +1,97 @@
+﻿@model FollowTheTask.Models.TrackedTasks.TrackedTaskModel
+
+@{
+    ViewBag.Title = "Данные о задаче";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<script>
+    function deleteCallback(data) {
+        $('#delete')[0].innerHTML = data;
+    };
+</script>
+
+<ul class="nav nav-pills">
+    <li>@Html.ActionLink("Назад к списку задач", "Index", "TrackedTasks", new {username=Model.Manager.UserName}, null)</li>
+    <li>@Html.ActionLink("Редактирование", "Edit", "TrackedTasks", new { username = Model.Manager.UserName, id = Model.Id }, null)</li>
+    @if (User.Identity.Name == Model.Manager.UserName)
+    {
+        var link = Url.Action("Delete", "TrackedTasks", new { username = Model.Manager.UserName, id = Model.Id });
+        <li><a href="#" onclick="$.get('@link', deleteCallback)">Удаление</a></li>
+    }
+</ul>
+
+<div class="row">
+    <div class="col-md-6">
+        <table class="table">
+            <tr class="row">
+                <td class="col-md-4">@Html.LabelFor(m => m.Title)</td>
+                <td class="col-md-8">@Html.DisplayFor(m => m.Title)</td>
+            </tr>
+            <tr class="row">
+                <td class="col-md-4">@Html.LabelFor(m => m.Description)</td>
+                <td class="col-md-8">@Html.TextAreaFor(model => model.Description, 5, 40, new { @class = "form-control", disabled = "disabled" })</td> 
+            </tr>
+            <tr class="row">
+                <td class="col-md-4"><label>Менеджер</label></td>
+                <td class="col-md-8">@Html.ActionLink(Model.Manager.UserName, "Details", "Managers", new { username = Model.Manager.UserName }, null)</td>
+            </tr>
+            <tr class="row">
+                <td class="col-md-4">@Html.LabelFor(m => m.IssuedDate)</td>
+                <td class="col-md-8">@Html.DisplayFor(m => m.IssuedDate)</td>
+            </tr>
+            <tr class="row">
+                <td class="col-md-4">@Html.LabelFor(m => m.DeadLine)</td>
+                <td class="col-md-8">@Html.DisplayFor(m => m.DeadLine)</td>
+            </tr>
+            <tr class="row">
+                <td class="col-md-4">@Html.LabelFor(m => m.CompletionDate)</td>
+                <td class="col-md-8">@(Model.IsFinished ? Html.DisplayFor(m => m.CompletionDate) : new MvcHtmlString("Неизвестно"))</td>
+            </tr>
+            <tr class="row">
+                <td class="col-md-4">@Html.LabelFor(m => m.HoursSpent)</td>
+                <td class="col-md-8">@(Model.IsFinished ? Html.DisplayFor(m => m.HoursSpent) : new MvcHtmlString("Неизвестно"))</td>
+            </tr>
+        </table>
+    </div>
+    @if (User.Identity.Name == Model.Manager.UserName)
+    {
+        <div class="col-md-6" id="delete">
+        </div>
+    }
+</div>
+<div class="row">
+    <div class="col-md-10">
+        <h4>Подзадачи</h4>
+        <table class="table">
+            <tr class="row">
+                <th class="col-md-2">Название подзадачи</th>
+                <th class="col-md-2">Исполнитель</th>
+                <th class="col-md-2">Дата выдачи</th>
+                <th class="col-md-2">Крайний срок</th>
+                <th class="col-md-2">Дата завершения</th>
+                <th class="col-md-2">Потраченные часы</th>
+            </tr>
+            @foreach (var quest in Model.Quests)
+            {
+                <tr class="row">
+                    <td>@Html.DisplayFor(m => quest.Title)</td>
+                    <td>@Html.DisplayFor(m => quest.Worker.UserName)</td>
+                    <td>@Html.DisplayFor(m => quest.IssuedDate)</td>
+                    <td>@Html.DisplayFor(m => quest.DeadLine)</td>
+                    @if (quest.IsFinished)
+                    {
+                        <td>@Html.DisplayFor(m => quest.CompletionDate)</td>
+                        <td>@Html.DisplayFor(m => quest.HoursSpent)</td>
+                    }
+                    else
+                    {
+                        <td>Неизвестно</td>
+                        <td>Неизвестно</td>
+                    }
+                </tr>
+            }
+        </table>
+    </div>
+</div>

@@ -20,6 +20,18 @@ namespace FollowTheTask
             routes.MapRoute("UsersManagement", "users/{username}/{action}", new {controller = "Users", action = "Index"},
                 new { action = "^[^I].*" });
 
+            routes.MapRoute("TrackedTasks", "manager/{username}/tasks/{action}/{id}",
+                new {controller = "TrackedTasks", action = "Index", id = UrlParameter.Optional});
+
+            routes.MapRoute("Quests", "worker/{username}/quests/{action}/{id}",
+                new {controller = "Quests", action = "Index", id = UrlParameter.Optional});
+
+            routes.MapRoute("Managers", "manager/{username}/{action}/{id}",
+                new {controller = "Managers", id = UrlParameter.Optional}, new {action = "^[^I].*"});
+
+            routes.MapRoute("Workers", "worker/{username}/{action}/{id}",
+                new {controller = "Workers", id = UrlParameter.Optional}, new {action = "^[^I].*"});
+
             routes.MapRoute("Default", "{controller}/{action}/{id}",
                 new {controller = "Main", action = "Index", id = UrlParameter.Optional});
         }

@@ -1,0 +1,22 @@
+﻿@model FollowTheTask.Models.TrackedTasks.TrackedTaskModel
+           
+<span class="text-danger">@ViewBag.ErrorMessage</span>
+
+@if (Model != null)
+{
+    <h4>Вы уверены что хотите удалить эту задачу?</h4>
+
+    <div class="form-horizontal col-md-offset-2">
+        <div>
+            @using (Ajax.BeginForm("Delete", "TrackedTasks", new {username = Model.Manager.UserName, id = Model.Id}, new AjaxOptions()))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    <input type="submit" value="Удалить" class="btn btn-primary" />
+                    <input type="button" value="Отменить" class="btn btn-default" onclick="$('#delete')[0].innerHTML = ''"/>
+                </div>
+            }
+        </div>
+    </div>
+}
