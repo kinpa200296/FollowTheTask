@@ -319,16 +319,27 @@
     <Content Include="Views\Managers\Create.cshtml" />
     <Content Include="Views\Managers\Details.cshtml" />
     <Content Include="Views\Managers\Index.cshtml" />
-    <Content Include="Views\TrackedTasks\Create.cshtml" />
-    <Content Include="Views\TrackedTasks\Delete.cshtml" />
     <Content Include="Views\TrackedTasks\Details.cshtml" />
-    <Content Include="Views\TrackedTasks\Edit.cshtml" />
     <Content Include="Views\TrackedTasks\Index.cshtml" />
-    <Content Include="Views\Quests\Create.cshtml" />
-    <Content Include="Views\Quests\Delete.cshtml" />
+    <Content Include="Views\Managers\TasksCreate.cshtml" />
+    <Content Include="Views\Managers\TasksDelete.cshtml" />
+    <Content Include="Views\Managers\TasksDetails.cshtml" />
+    <Content Include="Views\Managers\TasksEdit.cshtml" />
+    <Content Include="Views\Managers\TasksIndex.cshtml" />
+    <Content Include="Views\Managers\QuestsCreate.cshtml" />
+    <Content Include="Views\Managers\QuestsDelete.cshtml" />
+    <Content Include="Views\Managers\QuestsDetails.cshtml" />
+    <Content Include="Views\Managers\QuestsEdit.cshtml" />
     <Content Include="Views\Quests\Details.cshtml" />
-    <Content Include="Views\Quests\Edit.cshtml" />
-    <Content Include="Views\Quests\Index.cshtml" />
+    <Content Include="Views\Workers\QuestsDetails.cshtml" />
+    <Content Include="Views\Workers\QuestsIndex.cshtml" />
+    <Content Include="Views\Managers\WorkerApply.cshtml" />
+    <Content Include="Views\Managers\ConfirmWorker.cshtml" />
+    <Content Include="Views\Workers\ManagerApply.cshtml" />
+    <Content Include="Views\Workers\ConfirmManager.cshtml" />
+    <Content Include="Views\Workers\PassQuestOff.cshtml" />
+    <Content Include="Views\Managers\TasksComplete.cshtml" />
+    <Content Include="Views\Managers\QuestsNotify.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -6,8 +6,22 @@
 
 <h2>@ViewBag.Title</h2>
 
+<script>
+    function getCallback(data) {
+        $('#tempdiv')[0].innerHTML = data;
+    };
+</script>
+
 <ul class="nav nav-pills">
-    <li>@Html.ActionLink("Назад к задаче", "Details", "TrackedTasks", new {id=Model.TrackedTask.Id}, null)</li>
+    <li>@Html.ActionLink("Назад к задаче", "TasksDetails", "Managers", new { username = ViewBag.UserName, id=Model.TrackedTask.Id}, null)</li>
+    @if (User.Identity.Name == ViewBag.UserName)
+    {
+        <li>@Html.ActionLink("Редактирование", "QuestsEdit", "Managers", new { username = ViewBag.UserName, taskId = Model.TrackedTask.Id, id = Model.Id }, null)</li>
+        var deleteLink = Url.Action("QuestsDelete", "Managers", new { username = ViewBag.UserName, taskId = Model.TrackedTask.Id, id = Model.Id });
+        var notifyLink = Url.Action("QuestsNotify", "Managers", new { username = ViewBag.UserName, taskId = Model.TrackedTask.Id, id = Model.Id });
+        <li><a href="javascript:$.get('@deleteLink', getCallback)">Удаление</a></li>
+        <li><a href="javascript:$.get('@notifyLink', getCallback)" onclick="$('#tempdiv')[0].innerHTML='Подождите...'">Напомнить исполнителю о подзадаче</a></li>
+    }
 </ul>
 
 <div class="row">
@@ -31,7 +45,7 @@
             </tr>
             <tr class="row">
                 <td class="col-md-4"><label>Задача</label></td>
-                <td class="col-md-8">@Html.ActionLink(Model.TrackedTask.Title, "Details", "TrackedTasks", new { id = Model.TrackedTask.Id }, null)</td>
+                <td class="col-md-8">@Html.ActionLink(Model.TrackedTask.Title, "TasksDetails", "Managers", new { username = ViewBag.UserName, id = Model.TrackedTask.Id }, null)</td>
             </tr>
             <tr class="row">
                 <td class="col-md-4">@Html.LabelFor(m => m.IssuedDate)</td>
@@ -51,4 +65,13 @@
             </tr>
         </table>
     </div>
+    @if (User.Identity.Name == ViewBag.Username)
+    {
+        <div class="col-md-6" id="tempdiv">
+        </div>
+    }
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+}

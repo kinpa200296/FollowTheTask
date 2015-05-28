@@ -32,36 +32,43 @@
         <table class="table">
             <tr class="row">
                 <th class="col-md-2">Имя пользователя</th>
+                <th class="col-md-2">Имя</th>
+                <th class="col-md-2">Фамилия</th>
                 <th class="col-md-2">E-mail адрес</th>
-                <th class="col-md-1">Имя</th>
-                <th class="col-md-1">Фамилия</th>
                 <th class="col-md-2">Задачи</th>
                 <th class="col-md-2">Исполнители</th>
-                <th class="col-md-2">Действия</th>
             </tr>
             @foreach (var manager in Model)
             {
                 <tr class="row">
-                    <td>@Html.DisplayFor(m => manager.UserName)</td>
-                    <td>@Html.DisplayFor(m => manager.Email)</td>
+                    <td>@Html.ActionLink(manager.UserName, "Details", "Managers", 
+                            new{username = manager.UserName}, null)</td>
                     <td>@Html.DisplayFor(m => manager.FirstName)</td>
                     <td>@Html.DisplayFor(m => manager.LastName)</td>
+                    <td>@Html.DisplayFor(m => manager.Email)</td>
                     <td>
-                        @foreach (var task in manager.TrackedTasks)
+                        @if (manager.UserName == User.Identity.Name)
                         {
-                            <p>@Html.DisplayFor(m => task.Title)</p>
+                            foreach (var task in manager.TrackedTasks)
+                             {
+                                 <p>@Html.ActionLink(task.Title, "TasksDetails", "Managers", 
+                                        new {username = manager.UserName, id = task.Id}, null)</p>
+                             }
+                        }
+                        else
+                        {
+                            foreach (var task in manager.TrackedTasks)
+                            {
+                                <p>@Html.ActionLink(task.Title, "Details", "TrackedTasks", new { id = task.Id }, null)</p>
+                            }
                         }
                     </td>
                     <td>
-                        @foreach (var task in manager.Workers)
+                        @foreach (var worker in manager.Workers)
                         {
-                            <p>@Html.DisplayFor(m => task.UserName)</p>
+                            <p>@Html.ActionLink(worker.UserName, "Details", "Workers", 
+                                   new {username = worker.UserName}, null)</p>
                         }
-                    </td>
-                    <td>
-                        <ul class="nav nav-pills">
-                            <li>@Html.ActionLink("Подробности", "Details", "Managers", new {username = manager.UserName}, null)</li>
-                        </ul>
                     </td>
                 </tr>
             }

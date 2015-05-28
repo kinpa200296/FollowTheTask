@@ -32,31 +32,36 @@
         <table class="table">
             <tr class="row">
                 <th class="col-md-2">Имя пользователя</th>
+                <th class="col-md-2">Имя</th>
+                <th class="col-md-2">Фамилия</th>
                 <th class="col-md-2">E-mail адрес</th>
-                <th class="col-md-1">Имя</th>
-                <th class="col-md-1">Фамилия</th>
-                <th class="col-md-2">Подзадачи</th>
                 <th class="col-md-2">Менеджер</th>
-                <th class="col-md-2">Действия</th>
+                <th class="col-md-2">Подзадачи</th>
             </tr>
             @foreach (var worker in Model)
             {
                 <tr class="row">
-                    <td>@Html.DisplayFor(m => worker.UserName)</td>
-                    <td>@Html.DisplayFor(m => worker.Email)</td>
+                    <td>@Html.ActionLink(worker.UserName, "Details", "Workers", new{username = worker.UserName}, null)</td>
                     <td>@Html.DisplayFor(m => worker.FirstName)</td>
                     <td>@Html.DisplayFor(m => worker.LastName)</td>
+                    <td>@Html.DisplayFor(m => worker.Email)</td>
+                    <td>@Html.ActionLink(worker.Manager.UserName, "Details", "Managers", new{username = worker.Manager.UserName}, null)</td>
                     <td>
-                        @foreach (var quest in worker.Quests)
+                        @if (User.Identity.Name == worker.UserName)
                         {
-                            <p>@Html.DisplayFor(m => quest.Title)</p>
+                            foreach (var quest in worker.Quests)
+                            {
+                                <p>@Html.ActionLink(quest.Title, "QuestsDetails", "Workers", 
+                                       new { username = worker.UserName, id = quest.Id }, null)</p>
+                            }
                         }
-                    </td>
-                    <td>@Html.DisplayFor(m => worker.Manager.UserName)</td>
-                    <td>
-                        <ul class="nav nav-pills">
-                            <li>@Html.ActionLink("Подробности", "Details", "Workers", new { username = worker.UserName }, null)</li>
-                        </ul>
+                        else
+                        {
+                            foreach (var quest in worker.Quests)
+                            {
+                                <p>@Html.ActionLink(quest.Title, "Details", "Quests", new { taskId = quest.TrackedTask.Id, id = quest.Id }, null)</p>
+                            }
+                        }
                     </td>
                 </tr>
             }

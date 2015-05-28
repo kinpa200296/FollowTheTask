@@ -7,13 +7,22 @@
 <h2>@ViewBag.Title</h2>
 
 <script>
-    function deleteCallback(data) {
-        $('#delete')[0].innerHTML = data;
+    function getCallback(data) {
+        $('#tempdiv')[0].innerHTML = data;
     };
 </script>
 
 <ul class="nav nav-pills">
-    <li>@Html.ActionLink("Назад к списку задач", "Index", "TrackedTasks", new {username=Model.Manager.UserName}, null)</li>
+    <li>@Html.ActionLink("Назад к списку задач", "TasksIndex", "Managers", new {username=Model.Manager.UserName}, null)</li>
+    @if (User.Identity.Name == Model.Manager.UserName)
+    {
+        <li>@Html.ActionLink("Редактирование", "TasksEdit", "Managers", new { username = Model.Manager.UserName, id = Model.Id }, null)</li>
+        var deleteLink = Url.Action("TasksDelete", "Managers", new { username = Model.Manager.UserName, id = Model.Id });
+        var completeLink = Url.Action("TasksComplete", "Managers", new { username = Model.Manager.UserName, id = Model.Id });
+        <li><a href="javascript:$.get('@completeLink', getCallback)">Завершить задачу</a></li>
+        <li><a href="javascript:$.get('@deleteLink', getCallback)">Удаление</a></li>
+        <li>@Html.ActionLink("Создание подзадачи", "QuestsCreate", "Managers", new{username = Model.Manager.UserName, taskId = Model.Id}, null)</li>
+    }
 </ul>
 
 <div class="row">
@@ -55,8 +64,7 @@
     </div>
     @if (User.Identity.Name == Model.Manager.UserName)
     {
-        <div class="col-md-6" id="delete">
-        </div>
+        <div class="col-md-6" id="tempdiv"></div>
     }
 </div>
 <div class="row">
@@ -74,7 +82,8 @@
             {
                 <tr class="row @Utility.GetStatusCssClass(quest.DeadLine, quest.CompletionDate, quest.IsFinished)">
                     <td>
-                        @Html.ActionLink(quest.Title, "Details", "Quests", new { taskId = Model.Id, id = quest.Id }, null)
+                        @Html.ActionLink(quest.Title, "QuestsDetails", "Managers",
+                            new { username = Model.Manager.UserName, taskId = Model.Id, id = quest.Id }, null)
                     </td>
                     <td>
                         @Html.ActionLink(quest.Worker.UserName, "Details", "Workers",
@@ -88,3 +97,7 @@
         </table>
     </div>
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+}

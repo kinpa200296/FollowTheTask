@@ -6,8 +6,19 @@
 
 <h2>@ViewBag.Title</h2>
 
+<script>
+    function passCallback(data) {
+        $('#passQuest')[0].innerHTML = data;
+    };
+</script>
+
 <ul class="nav nav-pills">
-    <li>@Html.ActionLink("Назад к задаче", "Details", "TrackedTasks", new {id=Model.TrackedTask.Id}, null)</li>
+    <li>@Html.ActionLink("Назад к подзадачам", "QuestsIndex", "Workers", new {username = Model.Worker.UserName}, null)</li>
+    @if (User.Identity.Name == Model.Worker.UserName)
+    {
+        var link = Url.Action("PassQuestOff", "Workers", new { username = ViewBag.UserName, id = Model.Id });
+        <li><a href="javascript:$.get('@link', passCallback)">Сдать подзадачу</a></li>
+    }
 </ul>
 
 <div class="row">
@@ -51,4 +62,11 @@
             </tr>
         </table>
     </div>
+    <div id="passQuest" class="col-md-6">
+        
+    </div>
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+}

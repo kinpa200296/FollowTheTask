@@ -1,0 +1,53 @@
+﻿@model FollowTheTask.Models.Quests.QuestModel
+
+@if (Model != null)
+{
+    <script>
+        function onPassOffSuccess() {
+            if ($('#passQuest')[0].innerText == 'Подзадача сдана. Обновите страницу') {
+                document.location.href = '@Url.Action("QuestsDetails", "Workers",
+                    new { username = Model.Worker.UserName, id = Model.Id }, null)';
+            }
+        }
+    </script>
+
+    if (Model.IsFinished)
+    {
+        <span class="text-success">@ViewBag.Message</span>
+    }
+    else
+    {
+        <div class="form-horizontal">
+            @using (Ajax.BeginForm("PassQuestOff", "Workers", new {username = User.Identity.Name, id = Model.Id}, new AjaxOptions
+            {
+                UpdateTargetId = "passQuest",
+                OnSuccess = "onPassOffSuccess"
+            }))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, null, new {@class = "text-danger"})
+
+                @Html.HiddenFor(m => m.Title)
+                @Html.HiddenFor(m => m.Description)
+
+                <div class="form-group">
+                    <div class="col-md-4">@Html.LabelFor(m => m.HoursSpent, null, new {@class = "control-label"})</div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(m => m.HoursSpent, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(m => m.HoursSpent, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Сдать подзадачу" class="btn btn-primary col-md-offset-4" />
+                    <input type="button" value="Отменить" class="btn btn-default" onclick=" $('#passQuest')[0].innerHTML = '' "/>
+                </div>
+            }
+        </div>
+    }
+}
+else
+{
+    <span class="text-danger">@ViewBag.ErrorMessage</span>
+}

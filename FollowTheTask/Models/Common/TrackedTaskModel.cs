@@ -48,7 +48,7 @@ namespace FollowTheTask.Models.Common
 
         //[Required(ErrorMessage = "Введите количество потраченных часов")]
         //[RegularExpression(@"[1-9][0-9]*", ErrorMessage = "Введите челое число")]
-        [Display(Name = "Потраченное время")]
+        [Display(Name = "Потраченные часы")]
         public int HoursSpent { get; set; }        
     }
 }

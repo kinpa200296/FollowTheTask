@@ -36,10 +36,28 @@
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
+                            <li>@Html.ActionLink("Задачи", "Index", "TrackedTasks")</li>
+                            <li>@Html.ActionLink("Менеджеры", "Index", "Managers")</li>
+                            <li>@Html.ActionLink("Исполнители", "Index", "Workers")</li>
+                            @if (User.IsInRole("manager"))
+                            {
+                                <li>@Html.ActionLink("Панель менеджера", "TasksIndex", "Managers", 
+                                        new{username = User.Identity.Name}, null)</li>
+                            }
+                            @if (User.IsInRole("worker"))
+                            {
+                                <li>@Html.ActionLink("Панель исполнителя", "QuestsIndex", "Workers",
+                                        new { username = User.Identity.Name }, null)</li>
+                            }
                             @if (User.IsInRole("owner") || User.IsInRole("admin"))
                             {
-                                <li>@Html.ActionLink("Управление пользователями", "Index", "Users")</li>
-                                <li>@Html.ActionLink("Управление ролями", "Index", "Roles")</li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Управление</a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("Управление пользователями", "Index", "Users")</li>
+                                        <li>@Html.ActionLink("Управление ролями", "Index", "Roles")</li>
+                                    </ul>
+                                </li>
                             }
                         </ul>
                         @Html.Partial("LoginPartial")

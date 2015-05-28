@@ -34,27 +34,72 @@
             {
                 <tr class="row">
                     <td><label>Менеджер</label></td>
-                    <td>@Html.DisplayFor(m => m.Manager.UserName)</td>   
+                    <td>@Html.ActionLink(Model.Manager.UserName, "Details", "Managers", 
+                            new { username = Model.Manager.UserName }, null)</td>
                 </tr>
             }
         </table>
     </div>
+    @if (User.IsInRole("manager") && Model.Manager.UserName == null)
+    {
+        <div class="col-md-6">
+            <div id="managerMessage">
+                <h4>Вы хотите работать с этим исполнителем?</h4>
+            </div>
+            @using (Ajax.BeginForm("ManagerApply", "Workers", new { username = Model.UserName }, new AjaxOptions
+            {
+                UpdateTargetId = "managerMessage",
+                LoadingElementId = "loading",
+                OnSuccess = "$('#managerForm')[0].remove()"
+            }, new { id = "managerForm" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="col-md-offset-2 form-group">
+                    <input type="submit" value="Да" class="btn btn-primary" />
+                    <a class="btn btn-default" href="javascript:$('#managerForm')[0].remove();$('#managerMessage')[0].remove()">Нет</a>
+                </div>
+            }
+            <div id="loading" class="col-md-offset-2" style="display:none; color:green;">
+                <h4>Подождите...</h4>
+            </div>
+        </div>
+    }
 </div>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-8">
         <h4>Подзадачи</h4>
         <table class="table">
             <tr class="row">
-                <th class="col-md-6">Название подзадачи</th>
-                <th class="col-md-6">Выполнена</th>
+                <th class="col-md-3">Название подзадачи</th>
+                <th class="col-md-3">Дата выдачи</th>
+                <th class="col-md-3">Крайний срок</th>
+                <th class="col-md-3">Статус</th>
             </tr>
             @foreach (var quest in Model.Quests)
             {
-                <tr class="row">
-                    <td>@Html.DisplayFor(m => quest.Title)</td>
-                    <td>@Html.DisplayFor(m => quest.IsFinished)</td>
+                <tr class="row @Utility.GetStatusCssClass(quest.DeadLine, quest.CompletionDate, quest.IsFinished)">
+                    <td>
+                        @if (Model.UserName == User.Identity.Name)
+                        {
+                        @Html.ActionLink(quest.Title, "QuestsDetails", "Workers", new { username = Model.UserName, id = quest.Id }, null)
+                        }
+                        else
+                        {
+                            @Html.ActionLink(quest.Title, "Details", "Quests", 
+                                    new { taskId = quest.TrackedTask.Id, id = quest.Id }, null)
+                        }
+                    </td>
+                    <td>@Html.DisplayFor(m => quest.IssuedDate)</td>
+                    <td>@Html.DisplayFor(m => quest.DeadLine)</td>
+                    <td>@Utility.GetStatus(quest.DeadLine, quest.CompletionDate, quest.IsFinished)</td>
                 </tr>
             }
         </table>
     </div>
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/scripts/jquery-1.10.2.min.js")
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+}

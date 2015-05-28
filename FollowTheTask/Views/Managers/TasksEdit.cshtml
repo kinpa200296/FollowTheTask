@@ -58,7 +58,7 @@
                 <div class="form-group">
                     <div class="col-md-offset-4 col-md-8">
                         <input type="submit" value="Сохранить" class="btn btn-primary" />
-                        @Html.ActionLink("Отмена", "Details", "TrackedTasks", new { username = Model.Manager.UserName, id = Model.Id }, new { @class = "btn btn-default" })
+                        @Html.ActionLink("Отмена", "TasksDetails", "Managers", new { username = Model.Manager.UserName, id = Model.Id }, new { @class = "btn btn-default" })
                     </div>
                 </div>
             </div>

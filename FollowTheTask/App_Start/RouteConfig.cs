@@ -20,17 +20,23 @@ namespace FollowTheTask
             routes.MapRoute("UsersManagement", "users/{username}/{action}", new {controller = "Users", action = "Index"},
                 new { action = "^[^I].*" });
 
-            routes.MapRoute("TrackedTasks", "manager/{username}/tasks/{action}/{id}",
-                new {controller = "TrackedTasks", action = "Index", id = UrlParameter.Optional});
+            routes.MapRoute("TrackedTasksManagment", "manager/{username}/tasks/{action}/{id}",
+                new {controller = "Managers", action = "TasksIndex", id = UrlParameter.Optional}, new {action = "^Tasks.*"});
 
-            routes.MapRoute("Quests", "worker/{username}/quests/{action}/{id}",
-                new {controller = "Quests", action = "Index", id = UrlParameter.Optional});
+            routes.MapRoute("QuestsManagement", "manager/{username}/task/{taskId}/quests/{action}/{id}",
+                new {controller = "Managers", id = UrlParameter.Optional}, new {action = "^Quests.*"});
+
+            routes.MapRoute("WorkerQuests", "worker/{username}/quests/{action}/{id}",
+                new {controller = "Workers", action = "QuestsIndex", id = UrlParameter.Optional},
+                new {action = "^Quests.*"});
 
             routes.MapRoute("Managers", "manager/{username}/{action}/{id}",
                 new {controller = "Managers", id = UrlParameter.Optional}, new {action = "^[^I].*"});
 
             routes.MapRoute("Workers", "worker/{username}/{action}/{id}",
                 new {controller = "Workers", id = UrlParameter.Optional}, new {action = "^[^I].*"});
+
+            routes.MapRoute("Quests", "task/{taskId}/quest/{id}/{action}", new {controller = "Quests"});
 
             routes.MapRoute("Default", "{controller}/{action}/{id}",
                 new {controller = "Main", action = "Index", id = UrlParameter.Optional});

@@ -28,7 +28,7 @@ namespace FollowTheTask.Models.Common
         [Display(Name = "Название подзадачи")]
         public string Title { get; set; }
 
-        [Required(ErrorMessage = "Введите описание задачи")]
+        [Required(ErrorMessage = "Введите описание подзадачи")]
         [Display(Name = "Описание подзадачи")]
         public string Description { get; set; }
 

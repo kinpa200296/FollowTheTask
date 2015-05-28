@@ -6,6 +6,13 @@
 
 <h2>@ViewBag.Title</h2>
 
+@if (User.IsInRole("manager"))
+{
+    <ul class="nav nav-pills">
+        <li>@Html.ActionLink("Создать задачу", "TasksCreate", "Managers", new {username=User.Identity.Name}, null)</li>
+    </ul>
+}
+
 <div class="row">
     <div class="col-md-12">
         <table class="table">
@@ -22,16 +29,17 @@
             @foreach (var task in Model)
             {
                 <tr class="row @Utility.GetStatusCssClass(task.DeadLine, task.CompletionDate, task.IsFinished)">
-                    <td>@Html.ActionLink(task.Title, "Details", "TrackedTasks", new { id = task.Id }, null)</td>
+                    <td>@Html.ActionLink(task.Title, "TasksDetails", "Managers", new { username = task.Manager.UserName, id = task.Id }, null)</td>
                     <td>@Html.ActionLink(task.Manager.UserName, "Details", "Managers", new { username = task.Manager.UserName }, null)</td>
                     <td>@Utility.GetStatus(task.DeadLine, task.CompletionDate, task.IsFinished)</td>
                     <td>
                         @foreach (var quest in task.Quests)
                         {
-                            <p>@Html.ActionLink(quest.Title, "Details", "Quests", 
-                                   new { taskId = task.Id, id = quest.Id }, null)</p>
+                            <p>@Html.ActionLink(quest.Title, "QuestsDetails", "Managers",
+                                   new{username = task.Manager.UserName, taskId = task.Id, id=quest.Id}, null)</p>
                         }
                     </td>
+
                     <td>@Html.DisplayFor(m => task.IssuedDate)</td>
                     <td>@Html.DisplayFor(m => task.DeadLine)</td>
                     @if (task.IsFinished)

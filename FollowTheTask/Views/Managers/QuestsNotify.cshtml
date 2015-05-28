@@ -1,0 +1,10 @@
+﻿@model bool
+
+@if (Model)
+{
+    <span class="text-success">@ViewBag.Message</span>
+}
+else
+{
+    <span class="text-danger">@ViewBag.ErrorMessage</span>
+}

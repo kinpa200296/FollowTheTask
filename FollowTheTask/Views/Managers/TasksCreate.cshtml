@@ -19,7 +19,7 @@
 </script>
 
 <ul class="nav nav-pills">
-    <li>@Html.ActionLink("Назад к списку задач", "Index", "TrackedTasks", new { username = User.Identity.Name }, null)</li>
+    <li>@Html.ActionLink("Назад к списку задач", "TasksIndex", "Managers", new { username = User.Identity.Name }, null)</li>
 </ul>
 
 <div class="row">
@@ -67,7 +67,7 @@
                 <div class="form-group">
                     <div class="col-md-offset-4 col-md-8">
                         <input type="submit" value="Создать" class="btn btn-primary" />
-                        @Html.ActionLink("Отмена", "Index", "TrackedTasks", new { username = User.Identity.Name }, new { @class = "btn btn-default" })
+                        @Html.ActionLink("Отмена", "TasksIndex", "Managers", new { username = User.Identity.Name }, new { @class = "btn btn-default" })
                     </div>
                 </div>
             </div>

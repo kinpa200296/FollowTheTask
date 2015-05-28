@@ -32,25 +32,63 @@
             </tr>
         </table>
     </div>
+    @if (User.IsInRole("worker") && Model.Workers.All(w => w.UserName != User.Identity.Name))
+    {
+        <div class="col-md-6">
+            <div id="workerMessage">
+                <h4>Вы хотите работать с этим менеджером?</h4>
+            </div>
+            @using (Ajax.BeginForm("WorkerApply", "Managers", new {username = Model.UserName}, new AjaxOptions
+            {
+                UpdateTargetId = "workerMessage",
+                LoadingElementId = "loading",
+                OnSuccess = "$('#workerForm')[0].remove()"
+            }, new { id = "workerForm" }))
+            {
+                @Html.AntiForgeryToken()
+                
+                <div class="col-md-offset-2 form-group">
+                    <input type="submit" value="Да" class="btn btn-primary"/>
+                    <a class="btn btn-default" href="javascript:$('#workerForm')[0].remove();$('#workerMessage')[0].remove()">Нет</a>
+                </div>
+            }
+            <div id="loading" class="col-md-offset-2" style="display:none; color:green;">
+                <h4>Подождите...</h4>
+            </div>
+        </div>
+    }
 </div>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-8">
         <h4>Задачи</h4>
         <table class="table">
             <tr class="row">
-                <th class="col-md-6">Название задачи</th>
-                <th class="col-md-6">Выполнена</th>
+                <th class="col-md-3">Название задачи</th>
+                <th class="col-md-3">Дата выдачи</th>
+                <th class="col-md-3">Крайний срок</th>
+                <th class="col-md-3">Статус</th>
             </tr>
             @foreach (var task in Model.TrackedTasks)
             {
-                <tr class="row">
-                    <td>@Html.DisplayFor(m => task.Title)</td>
-                    <td>@Html.DisplayFor(m => task.IsFinished)</td>
+                <tr class="row @Utility.GetStatusCssClass(task.DeadLine, task.CompletionDate, task.IsFinished)">
+                    <td>
+                        @if (Model.UserName == User.Identity.Name)
+                        {
+                            @Html.ActionLink(task.Title, "TasksDetails", "Managers", new {username = Model.UserName, id = task.Id}, null)
+                        }
+                        else
+                        {
+                            @Html.ActionLink(task.Title, "Details", "TrackedTasks", new {id = task.Id}, null)
+                        }
+                    </td>
+                    <td>@Html.DisplayFor(m => task.IssuedDate)</td>
+                    <td>@Html.DisplayFor(m => task.DeadLine)</td>
+                    <td>@Utility.GetStatus(task.DeadLine, task.CompletionDate, task.IsFinished)</td>
                 </tr>
             }
         </table>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
         <h4>Исполнители</h4>
         <table class="table">
             <tr class="row">
@@ -60,10 +98,15 @@
             @foreach (var worker in Model.Workers)
             {
                 <tr class="row">
-                    <td>@Html.DisplayFor(m => worker.UserName)</td>
+                    <td>@Html.ActionLink(worker.UserName, "Details", "Workers", new {username=worker.UserName}, null)</td>
                     <td>@Html.DisplayFor(m => worker.Email)</td>
                 </tr>
             }
         </table>
     </div>
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/scripts/jquery-1.10.2.min.js")
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+}
