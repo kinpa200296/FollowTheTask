@@ -1,4 +1,5 @@
-﻿@model FollowTheTask.Models.TrackedTasks.TrackedTaskModel
+﻿@using System.Configuration
+@model FollowTheTask.Models.TrackedTasks.TrackedTaskModel
 
 @{
     ViewBag.Title = "Создание задачи";
@@ -9,7 +10,7 @@
 <script>
     $(document).ready(function () {
         var a = $.datepicker.regional["en-US"];
-        a.dateFormat = "dd.mm.yy";
+        a.dateFormat = '@(ConfigurationManager.AppSettings["CookieName"] == "FollowTheTask.Cookie" ? "dd.mm.yy": "mm.dd.yy")';
         $.datepicker.setDefaults(a);
         $('#IssuedDate').datepicker();
         $('#DeadLine').datepicker();
