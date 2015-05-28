@@ -45,7 +45,16 @@
                     <td>@Html.DisplayFor(m => worker.FirstName)</td>
                     <td>@Html.DisplayFor(m => worker.LastName)</td>
                     <td>@Html.DisplayFor(m => worker.Email)</td>
-                    <td>@Html.ActionLink(worker.Manager.UserName, "Details", "Managers", new{username = worker.Manager.UserName}, null)</td>
+                    <td>@if (worker.Manager.UserName != null)
+                        {
+                            @Html.ActionLink(worker.Manager.UserName, "Details", "Managers", new {username = worker.Manager.UserName}, null)
+
+                        }
+                        else
+                        {
+                            <span class="text-info">Нет менеджера</span>
+                        }
+                    </td>
                     <td>
                         @if (User.Identity.Name == worker.UserName)
                         {
