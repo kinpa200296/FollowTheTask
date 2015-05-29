@@ -46,7 +46,9 @@ namespace FollowTheTask.Controllers
             }
             trackedTask.Manager = AppContext.Managers.Find(trackedTask.ManagerId);
             trackedTask.Manager.User = AppContext.Users.Find(trackedTask.Manager.UserId);
-            trackedTask.Quests = AppContext.Quests.Include(q => q.Worker).Where(q => q.TrackedTaskId == trackedTask.Id);
+            trackedTask.Quests =
+                AppContext.Quests.Include(q => q.Worker).Include(q => q.Worker.User)
+                    .Where(q => q.TrackedTaskId == trackedTask.Id);
             var model = new TrackedTaskModel(trackedTask);
             return View(model);
         }

@@ -22,3 +22,99 @@ select,
 textarea {
     max-width: 500px;
 }
+
+.chat-block {
+    display: block;
+    position: fixed;
+    left: 5%;
+    right: 50%;
+    top: 10%;
+    bottom: 5%;
+    background: #c8c8c8;
+    background: rgba(240, 240, 240, 1.0);
+    z-index: 110;
+    
+    -ms-border-radius: 20px;
+    border-radius: 20px;
+    
+    -webkit-transition: all 1.0s ease-in-out 0s;
+    -moz-transition: all 1.0s ease-in-out 0s;
+    -ms-transition: all 1.0s ease-in-out 0s;
+    -o-transition: all 1.0s ease-in-out 0s;
+    transition: all 1.0s ease-in-out 0s;
+}
+
+.chat-block-collapsed {
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    -o-transform: translateX(-100%);
+    transform: translateX(-100%);
+    
+    -ms-opacity: 0.2;
+    opacity: 0.2;
+}
+
+.btn-show-chat {
+
+    position: relative;
+
+    top: 45%;
+    bottom: 55%;
+    left: 45%;
+    right: 50%;
+
+    -webkit-transform: rotateZ(-90deg);
+    -moz-transform: rotateZ(-90deg);
+    -ms-transform: rotateZ(-90deg);
+    -o-transform: rotateZ(-90deg);
+    transform: rotateZ(-90deg);
+}
+
+.chat-body {
+    display: block;
+    position: relative;
+    width: 85%;
+    height: 90%;
+    margin: 0 0 0 5%;
+}
+
+.chat-input {
+    display: block;
+    position: relative;
+}
+
+.chat-display {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 85%;
+    margin: 0 0 5% 0;
+}
+
+.chat-room {
+    display: block;
+    position: relative;
+    width: 68%;
+    height: 100%;
+    background: white;
+    -ms-border-radius: 10px;
+    border-radius: 10px;
+    overflow-y: scroll;
+}
+
+.chat-users {
+    display: block;
+    position: relative;
+    width: 30%;
+    height: 100%;
+    margin: 0 0 0 2%;
+    background: white;
+    -ms-border-radius: 10px;
+    border-radius: 10px;
+    overflow-y: scroll;
+}
+
+.chat-window {
+    padding: 0 0 0 10px;
+}

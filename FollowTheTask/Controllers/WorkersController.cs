@@ -54,7 +54,8 @@ namespace FollowTheTask.Controllers
                 return View("Error");
             }
             user.Worker =
-                AppContext.Workers.Include(m => m.User).Include(m => m.Manager).First(x => x.Id == user.WorkerId);
+                AppContext.Workers.Include(m => m.User)
+                    .Include(m => m.Manager).Include(m => m.Manager.User).First(x => x.Id == user.WorkerId);
             user.Worker.Quests = AppContext.Quests.Include(q => q.TrackedTask).Where(q => q.WorkerId == user.WorkerId);
             var worker = new WorkerModel(user.Worker);
             return View(worker);

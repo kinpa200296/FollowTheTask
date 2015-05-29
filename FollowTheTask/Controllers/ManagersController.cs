@@ -30,7 +30,7 @@ namespace FollowTheTask.Controllers
         {
             var managers = AppContext.Managers.Include(m => m.User).ToList();
             var trackedTasks = AppContext.TrackedTasks.ToLookup(trackedTask => trackedTask.ManagerId);
-            var workers = AppContext.Workers.ToLookup(worker => worker.ManagerId);
+            var workers = AppContext.Workers.Include(w => w.User).ToLookup(worker => worker.ManagerId);
             foreach (var manager in managers)
             {
                 manager.TrackedTasks = trackedTasks.Contains(manager.Id)
@@ -60,7 +60,7 @@ namespace FollowTheTask.Controllers
             }
             user.Manager = AppContext.Managers.Include(m => m.User).First(x => x.Id == user.ManagerId);
             user.Manager.TrackedTasks = AppContext.TrackedTasks.Where(t => t.ManagerId == user.ManagerId);
-            user.Manager.Workers = AppContext.Workers.Where(w => w.ManagerId == user.ManagerId);
+            user.Manager.Workers = AppContext.Workers.Include(w => w.User).Where(w => w.ManagerId == user.ManagerId);
             var manager = new ManagerModel(user.Manager);
             return View(manager);
         }
@@ -315,7 +315,9 @@ namespace FollowTheTask.Controllers
                 return View("Error");
             }
             trackedTask.Manager = AppContext.Managers.Find(trackedTask.ManagerId);
-            trackedTask.Quests = AppContext.Quests.Include(q => q.Worker).Where(q => q.TrackedTaskId == trackedTask.Id);
+            trackedTask.Quests =
+                AppContext.Quests.Include(q => q.Worker).Include(q => q.Worker.User)
+                    .Where(q => q.TrackedTaskId == trackedTask.Id);
             var model = new TrackedTaskModel(trackedTask);
             return View(model);
         }
@@ -542,6 +544,7 @@ namespace FollowTheTask.Controllers
                 return View("Error");
             }
             quest.Worker = AppContext.Workers.Find(quest.WorkerId);
+            quest.Worker.User = await UserManager.FindByIdAsync(quest.Worker.UserId);
             quest.TrackedTask = AppContext.TrackedTasks.Find(quest.TrackedTaskId);
             if (quest.TrackedTask.ManagerId != user.ManagerId)
             {

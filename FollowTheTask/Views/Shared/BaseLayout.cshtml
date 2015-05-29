@@ -15,6 +15,9 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/jquery.signalR-2.2.0.min.js")
+    @Scripts.Render("~/signalr/hubs")
+    @Scripts.Render("~/scripts/chat.js")
     @RenderSection("scripts", required: false)
 </head>
     <body>
@@ -61,6 +64,35 @@
                             }
                         </ul>
                         @Html.Partial("LoginPartial")
+                    </div>
+                </div>
+            </div>
+        }
+        @if (Request.IsAuthenticated)
+        {
+            <div class="chat-block chat-block-collapsed" id="chat">
+                <div class="btn-show-chat">
+                    <a id="showButton" class="btn btn-primary" 
+                       href="javascript:$('#chat').toggleClass('chat-block-collapsed')">Показать чат</a>
+                </div>
+                <div class="chat-body" id="chatBody">
+                    <div class="chat-display row">
+                        <div class="chat-room col-md-8">
+                            <h4 class="text-center text-info">Сообщения</h4>
+                            <div class="chat-window" id="chatRoom"></div>
+                        </div>
+                        <div class="chat-users col-md-4">
+                            <h4 class="text-center text-info">Пользователи</h4>
+                            <div class="chat-window" id="chatUsers"></div>
+                        </div>
+                    </div>
+                    <div id="inputForm" class="chat-input row">
+                        <input id="hdId" type="hidden" />
+                        <input id="username" type="hidden" value="@User.Identity.Name"/>
+                        <div class="col-md-8">
+                            <textarea class="form-control" id="message" placeholder="Введите сообщение..."></textarea>
+                        </div>
+                        <input class="btn btn-primary col-md-3" type="button" id="sendmessage" value="Отправить" />
                     </div>
                 </div>
             </div>

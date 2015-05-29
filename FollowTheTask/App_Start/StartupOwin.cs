@@ -23,6 +23,7 @@ namespace FollowTheTask
                 LoginPath = new PathString("/Account/Login"),
                 CookieName = ConfigurationManager.AppSettings["CookieName"]
             });
+            app.MapSignalR();
         }
     }
 }

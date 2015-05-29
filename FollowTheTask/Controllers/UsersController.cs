@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -20,6 +21,11 @@ namespace FollowTheTask.Controllers
         private ApplicationRoleManager RoleManager
         {
             get { return HttpContext.GetOwinContext().GetUserManager<ApplicationRoleManager>(); }
+        }
+
+        private ApplicationContext AppContext
+        {
+            get { return HttpContext.GetOwinContext().GetUserManager<ApplicationContext>(); }
         }
 
         private bool CheckPermission(UserModel user, string roleName)
@@ -193,6 +199,36 @@ namespace FollowTheTask.Controllers
             {
                 ViewBag.ErrorMessage = "У вас недостаточно прав";
                 return View("Error");
+            }
+            if (user.WorkerId != null)
+            {
+                var worker = AppContext.Workers.Find(user.WorkerId);
+                worker.Quests = AppContext.Quests.Include(q => q.Worker).Include(q => q.TrackedTask)
+                    .Include(q => q.TrackedTask.Manager).Where(q => q.WorkerId == user.WorkerId).ToList();
+                foreach (var quest in worker.Quests)
+                {
+                    AppContext.Quests.Remove(quest);
+                }
+                AppContext.Workers.Remove(worker);
+                AppContext.SaveChanges();
+            }
+            if (user.ManagerId != null)
+            {
+                var manager = AppContext.Managers.Find(user.ManagerId);
+                manager.TrackedTasks =
+                    AppContext.TrackedTasks.Include(t => t.Manager).Where(t => t.ManagerId == user.ManagerId).ToList();
+                manager.Workers = AppContext.Workers.Where(w => w.ManagerId == user.ManagerId);
+                foreach (var task in manager.TrackedTasks)
+                {
+                    AppContext.TrackedTasks.Remove(task);
+                }
+                foreach (var worker in manager.Workers)
+                {
+                    worker.ManagerId = null;
+                    AppContext.Entry(worker).State = EntityState.Modified;
+                }
+                AppContext.Managers.Remove(manager);
+                AppContext.SaveChanges();
             }
             var result = await UserManager.DeleteAsync(user);
             if (result.Succeeded)

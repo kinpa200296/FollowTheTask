@@ -19,6 +19,11 @@ namespace FollowTheTask.Controllers
             get { return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
         }
 
+        private ApplicationContext AppContext
+        {
+            get { return HttpContext.GetOwinContext().GetUserManager<ApplicationContext>(); }
+        }
+
         private IAuthenticationManager AuthenticationManager
         {
             get { return HttpContext.GetOwinContext().Authentication; }
@@ -83,11 +88,20 @@ namespace FollowTheTask.Controllers
                 if (model.MakeManager)
                 {
                     await UserManager.AddToRoleAsync(user.Id, "manager");
+                    var manager = new Manager { UserId = user.Id, User = user };
+                    manager = AppContext.Managers.Add(manager);
+                    AppContext.SaveChanges();
+                    user.ManagerId = manager.Id;
                 }
                 if (model.MakeWorker)
                 {
                     await UserManager.AddToRoleAsync(user.Id, "worker");
+                    var worker = new Worker { UserId = user.Id, User = user };
+                    worker = AppContext.Workers.Add(worker);
+                    AppContext.SaveChanges();
+                    user.WorkerId = worker.Id;
                 }
+                await UserManager.UpdateAsync(user);
                 var token = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                 var callbackUrl = Utility.GetCallbackUrl(Url, "ConfirmEmail", "Account",
                     new {userId = user.Id, token = token},
