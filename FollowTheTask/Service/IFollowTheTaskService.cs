@@ -1,8 +1,8 @@
 ﻿using System.ServiceModel;
-using FollowTheTaskServiceModels.DataBase;
-using FollowTheTaskServiceModels.Models;
+using FollowTheTask.ServiceModels.DataBase;
+using FollowTheTask.ServiceModels.Models;
 
-namespace FollowTheTaskService
+namespace FollowTheTask.Service
 {
     [ServiceContract]
     public interface IFollowTheTaskService

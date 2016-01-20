@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Serialization;
-using FollowTheTaskServiceModels.DataBase;
+using FollowTheTask.ServiceModels.DataBase;
 
-namespace FollowTheTaskServiceModels.Models
+namespace FollowTheTask.ServiceModels.Models
 {
     [DataContract]
     public class WorkerModel

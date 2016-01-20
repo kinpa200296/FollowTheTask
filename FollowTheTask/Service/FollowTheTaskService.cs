@@ -1,13 +1,13 @@
 ﻿using System.Linq;
-using FollowTheTaskServiceModels.DataBase;
-using FollowTheTaskServiceModels.Models;
+using FollowTheTask.ServiceModels.DataBase;
+using FollowTheTask.ServiceModels.Models;
 
-namespace FollowTheTaskService
+namespace FollowTheTask.Service
 {
     public class FollowTheTaskService : IFollowTheTaskService
     {
-        private FollowTheTask.Models.DataBase.ApplicationContext AppContext =
-            FollowTheTask.Models.DataBase.ApplicationContext.Create();
+        private Models.DataBase.ApplicationContext AppContext =
+            Models.DataBase.ApplicationContext.Create();
 
         public User[] GetUsers()
         {

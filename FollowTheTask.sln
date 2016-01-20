@@ -5,10 +5,6 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FollowTheTask", "FollowTheTask\FollowTheTask.csproj", "{6995B6E5-B9A2-423F-BC2B-B0A5A9EEF331}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FollowTheTaskService", "FollowTheTaskService\FollowTheTaskService.csproj", "{ED919F00-F61C-45D2-891F-130E9DFD25E1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FollowTheTaskServiceModels", "FollowTheTaskServiceModels\FollowTheTaskServiceModels.csproj", "{71FA1860-58D7-4073-91C1-4553B5F168A3}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,14 +15,6 @@ Global
 		{6995B6E5-B9A2-423F-BC2B-B0A5A9EEF331}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6995B6E5-B9A2-423F-BC2B-B0A5A9EEF331}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6995B6E5-B9A2-423F-BC2B-B0A5A9EEF331}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ED919F00-F61C-45D2-891F-130E9DFD25E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED919F00-F61C-45D2-891F-130E9DFD25E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ED919F00-F61C-45D2-891F-130E9DFD25E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ED919F00-F61C-45D2-891F-130E9DFD25E1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{71FA1860-58D7-4073-91C1-4553B5F168A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{71FA1860-58D7-4073-91C1-4553B5F168A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{71FA1860-58D7-4073-91C1-4553B5F168A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{71FA1860-58D7-4073-91C1-4553B5F168A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

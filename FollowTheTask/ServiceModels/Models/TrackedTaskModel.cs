@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using FollowTheTask.ServiceModels.DataBase;
 
-namespace FollowTheTaskServiceModels.DataBase
+namespace FollowTheTask.ServiceModels.Models
 {
     [DataContract]
-    public class TrackedTask
+    public class TrackedTaskModel
     {
         [DataMember]
         public int Id { get; set; }
@@ -31,9 +32,9 @@ namespace FollowTheTaskServiceModels.DataBase
         public int? HoursSpent { get; set; }
 
         [DataMember]
-        public int ManagerId { get; set; }
+        public Manager Manager { get; set; }
 
         [DataMember]
-        public int[] QuestsIds { get; set; } 
+        public Quest[] Quests { get; set; }
     }
 }
