@@ -11,6 +11,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FollowTheTask.DAL", "Follow
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FollowTheTask.Sandbox", "FollowTheTask.Sandbox\FollowTheTask.Sandbox.csproj", "{30F793B4-2B14-4BFC-86F9-C67B35B4AF55}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FollowTheTask.Database", "FollowTheTask.Database", "{2205E94E-A617-48CA-88B1-6B45BA45E35A}"
+	ProjectSection(SolutionItems) = preProject
+		FollowTheTask.Database\CreateTables.sql = FollowTheTask.Database\CreateTables.sql
+		FollowTheTask.Database\DropTables.sql = FollowTheTask.Database\DropTables.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

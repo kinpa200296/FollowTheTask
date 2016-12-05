@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using FollowTheTask.DAL.Entities.Issue;
 
 namespace FollowTheTask.DAL.Entities
@@ -8,7 +9,7 @@ namespace FollowTheTask.DAL.Entities
     {
         public string Message { get; set; }
 
-        public string DateCreatedUtc { get; set; }
+        public DateTimeOffset DateCreatedUtc { get; set; }
 
         public int UserId { get; set; }
         
