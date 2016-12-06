@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contexts\TestContext.cs" />
+    <Compile Include="Entities\ActionSourceEntity.cs" />
     <Compile Include="Entities\ActionTypeEntity.cs" />
     <Compile Include="Entities\AuthEntity.cs" />
     <Compile Include="Entities\CommentEntity.cs" />

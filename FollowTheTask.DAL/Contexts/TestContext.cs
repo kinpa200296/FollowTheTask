@@ -28,6 +28,8 @@ namespace FollowTheTask.DAL.Contexts
 
         public DbSet<CommentEntity> Comments { get; set; }
 
+        public DbSet<ActionSourceEntity> ActionSources { get; set; }
+
         public DbSet<ActionTypeEntity> ActionTypes { get; set; }
 
         public DbSet<RequestEntity> Requests { get; set; }
@@ -37,7 +39,7 @@ namespace FollowTheTask.DAL.Contexts
 
         public TestContext() : base("TestConnection")
         {
-            Database.Initialize(false);
+            //Database.Initialize(false);
         }
 
 
@@ -90,6 +92,7 @@ namespace FollowTheTask.DAL.Contexts
             //modelBuilder.Entity<StatusEntity>().MapToStoredProcedures();
             ////modelBuilder.Entity<IssueEntity>().MapToStoredProcedures();
             //modelBuilder.Entity<CommentEntity>().MapToStoredProcedures();
+            //modelBuilder.Entity<ActionSourceEntity>().MapToStoredProcedures();
             //modelBuilder.Entity<ActionTypeEntity>().MapToStoredProcedures();
             ////modelBuilder.Entity<RequestEntity>().MapToStoredProcedures();
             ////modelBuilder.Entity<NotificationEntity>().MapToStoredProcedures();

@@ -22,6 +22,8 @@ DROP TABLE [dbo].[Requests];
 GO
 DROP TABLE [dbo].[ActionTypes];
 GO
+DROP TABLE [dbo].[ActionSources];
+GO
 DROP TABLE [dbo].[UserRoles];
 GO
 DROP TABLE [dbo].[Roles];

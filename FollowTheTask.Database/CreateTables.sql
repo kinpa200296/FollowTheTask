@@ -53,6 +53,14 @@ GO
 CREATE INDEX [IX_UserRoles_RoleId] ON [dbo].[UserRoles]([RoleId]);
 GO
 
+CREATE TABLE [dbo].[ActionSources] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(100) NULL
+
+    CONSTRAINT [PK_ActionSources] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+GO
+
 CREATE TABLE [dbo].[ActionTypes] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(100) NULL
@@ -85,17 +93,21 @@ GO
 CREATE TABLE [dbo].[Notifications] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [TargetId] int NOT NULL,
+    [ActionSourceId] int NOT NULL,
     [ActionTypeId] int NOT NULL,
     [SenderId] int NOT NULL,
     [ReceiverId] int NOT NULL
 
     CONSTRAINT [PK_Notifications] PRIMARY KEY CLUSTERED ([Id] ASC)
+    CONSTRAINT [FK_Notifications_ActionSourceId] FOREIGN KEY ([ActionSourceId]) REFERENCES [dbo].[ActionSources]([Id]),
     CONSTRAINT [FK_Notifications_ActionTypeId] FOREIGN KEY ([ActionTypeId]) REFERENCES [dbo].[ActionTypes]([Id]),
     CONSTRAINT [FK_Notifications_SenderId] FOREIGN KEY ([SenderId]) REFERENCES [dbo].[Users]([Id]),
     CONSTRAINT [FK_Notifications_ReceiverId] FOREIGN KEY ([ReceiverId]) REFERENCES [dbo].[Users]([Id])
 );
 GO
 
+CREATE INDEX [IX_Notifications_ActionSourceId] ON [dbo].[Notifications]([ActionSourceId]);
+GO
 CREATE INDEX [IX_Notifications_ActionTypeId] ON [dbo].[Notifications]([ActionTypeId]);
 GO
 CREATE INDEX [IX_Notifications_SenderId] ON [dbo].[Notifications]([SenderId]);

@@ -7,6 +7,10 @@ namespace FollowTheTask.DAL.Entities
     {
         public int TargetId { get; set; }
 
+        public int ActionSourceId { get; set; }
+
+        public virtual ActionSourceEntity ActionSource { get; set; }
+
         public int ActionTypeId { get; set; }
 
         public virtual ActionTypeEntity ActionType { get; set; }

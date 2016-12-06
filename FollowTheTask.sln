@@ -13,7 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FollowTheTask.Sandbox", "Fo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FollowTheTask.Database", "FollowTheTask.Database", "{2205E94E-A617-48CA-88B1-6B45BA45E35A}"
 	ProjectSection(SolutionItems) = preProject
+		FollowTheTask.Database\CreateProcedures.sql = FollowTheTask.Database\CreateProcedures.sql
 		FollowTheTask.Database\CreateTables.sql = FollowTheTask.Database\CreateTables.sql
+		FollowTheTask.Database\CreateTriggers.sql = FollowTheTask.Database\CreateTriggers.sql
+		FollowTheTask.Database\DropProcedures.sql = FollowTheTask.Database\DropProcedures.sql
 		FollowTheTask.Database\DropTables.sql = FollowTheTask.Database\DropTables.sql
 		FollowTheTask.Database\InitTables.sql = FollowTheTask.Database\InitTables.sql
 	EndProjectSection
