@@ -30,7 +30,7 @@ namespace FollowTheTask.DAL.Entities.Issue
 
         public DateTimeOffset CreatedDateUtc { get; set; }
 
-        public DateTimeOffset DeadlineDateUtc { get; set; }
+        public DateTimeOffset? DeadlineDateUtc { get; set; }
 
         public int FeatureId { get; set; }
 

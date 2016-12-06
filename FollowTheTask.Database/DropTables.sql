@@ -16,8 +16,6 @@ DROP TABLE [dbo].[UserTeams];
 GO
 DROP TABLE [dbo].[Teams];
 GO
-DROP TABLE [dbo].[Leaders];
-GO
 DROP TABLE [dbo].[Notifications];
 GO
 DROP TABLE [dbo].[Requests];

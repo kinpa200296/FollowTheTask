@@ -12,8 +12,6 @@ namespace FollowTheTask.DAL.Contexts
 
         public DbSet<RoleEntity> Roles { get; set; }
 
-        public DbSet<LeaderEntity> Leaders { get; set; }
-
         public DbSet<TeamEntity> Teams { get; set; }
 
         public DbSet<FeatureEntity> Features { get; set; }
@@ -45,11 +43,6 @@ namespace FollowTheTask.DAL.Contexts
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<LeaderEntity>()
-                .HasRequired(e => e.User)
-                .WithRequiredDependent()
-                .WillCascadeOnDelete(false);
-
             modelBuilder.Entity<IssueEntity>()
                 .HasRequired(e => e.Reporter)
                 .WithRequiredDependent()
@@ -85,21 +78,21 @@ namespace FollowTheTask.DAL.Contexts
                 .WithRequiredDependent()
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<UserEntity>().MapToStoredProcedures();
-            modelBuilder.Entity<AuthEntity>().MapToStoredProcedures();
-            modelBuilder.Entity<RoleEntity>().MapToStoredProcedures();
-            //modelBuilder.Entity<LeaderEntity>().MapToStoredProcedures();
-            modelBuilder.Entity<TeamEntity>().MapToStoredProcedures();
-            //modelBuilder.Entity<FeatureEntity>().MapToStoredProcedures();
-            modelBuilder.Entity<IssueTypeEntity>().MapToStoredProcedures();
-            modelBuilder.Entity<PriorityEntity>().MapToStoredProcedures();
-            modelBuilder.Entity<ResolutionEntity>().MapToStoredProcedures();
-            modelBuilder.Entity<StatusEntity>().MapToStoredProcedures();
-            //modelBuilder.Entity<IssueEntity>().MapToStoredProcedures();
-            modelBuilder.Entity<CommentEntity>().MapToStoredProcedures();
-            modelBuilder.Entity<ActionTypeEntity>().MapToStoredProcedures();
-            //modelBuilder.Entity<RequestEntity>().MapToStoredProcedures();
-            //modelBuilder.Entity<NotificationEntity>().MapToStoredProcedures();
+            //modelBuilder.Entity<UserEntity>().MapToStoredProcedures();
+            //modelBuilder.Entity<AuthEntity>().MapToStoredProcedures();
+            //modelBuilder.Entity<RoleEntity>().MapToStoredProcedures();
+            ////modelBuilder.Entity<LeaderEntity>().MapToStoredProcedures();
+            //modelBuilder.Entity<TeamEntity>().MapToStoredProcedures();
+            ////modelBuilder.Entity<FeatureEntity>().MapToStoredProcedures();
+            //modelBuilder.Entity<IssueTypeEntity>().MapToStoredProcedures();
+            //modelBuilder.Entity<PriorityEntity>().MapToStoredProcedures();
+            //modelBuilder.Entity<ResolutionEntity>().MapToStoredProcedures();
+            //modelBuilder.Entity<StatusEntity>().MapToStoredProcedures();
+            ////modelBuilder.Entity<IssueEntity>().MapToStoredProcedures();
+            //modelBuilder.Entity<CommentEntity>().MapToStoredProcedures();
+            //modelBuilder.Entity<ActionTypeEntity>().MapToStoredProcedures();
+            ////modelBuilder.Entity<RequestEntity>().MapToStoredProcedures();
+            ////modelBuilder.Entity<NotificationEntity>().MapToStoredProcedures();
         }
     }
 }

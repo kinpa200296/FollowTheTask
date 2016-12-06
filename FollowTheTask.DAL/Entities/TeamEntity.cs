@@ -10,7 +10,7 @@ namespace FollowTheTask.DAL.Entities
 
         public int LeaderId { get; set; }
 
-        public virtual LeaderEntity Leader { get; set; }
+        public virtual UserEntity Leader { get; set; }
 
         public virtual ICollection<UserEntity> Members { get; set; } = new HashSet<UserEntity>();
 

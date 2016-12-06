@@ -29,6 +29,9 @@ CREATE TABLE [dbo].[Users] (
 );
 GO
 
+CREATE INDEX [IX_Users_AuthId] ON [dbo].[Users]([AuthId]);
+GO
+
 CREATE TABLE [dbo].[Roles] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(50) NULL
@@ -45,6 +48,9 @@ CREATE TABLE [dbo].[UserRoles] (
     CONSTRAINT [FK_UserRoles_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[Users]([Id]),
     CONSTRAINT [FK_UserRoles_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [dbo].[Roles]([Id])
 );
+GO
+
+CREATE INDEX [IX_UserRoles_RoleId] ON [dbo].[UserRoles]([RoleId]);
 GO
 
 CREATE TABLE [dbo].[ActionTypes] (
@@ -69,6 +75,13 @@ CREATE TABLE [dbo].[Requests] (
 );
 GO
 
+CREATE INDEX [IX_Requests_ActionTypeId] ON [dbo].[Requests]([ActionTypeId]);
+GO
+CREATE INDEX [IX_Requests_SenderId] ON [dbo].[Requests]([SenderId]);
+GO
+CREATE INDEX [IX_Requests_ReceiverId] ON [dbo].[Requests]([ReceiverId]);
+GO
+
 CREATE TABLE [dbo].[Notifications] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [TargetId] int NOT NULL,
@@ -83,13 +96,11 @@ CREATE TABLE [dbo].[Notifications] (
 );
 GO
 
-CREATE TABLE [dbo].[Leaders] (
-    [Id] int IDENTITY(1,1) NOT NULL,
-    [UserId] int NOT NULL
-
-    CONSTRAINT [PK_Leaders] PRIMARY KEY CLUSTERED ([Id] ASC)
-    CONSTRAINT [FK_Leaders_UserId] FOREIGN KEY ([Id]) REFERENCES [dbo].[Users]([Id])
-);
+CREATE INDEX [IX_Notifications_ActionTypeId] ON [dbo].[Notifications]([ActionTypeId]);
+GO
+CREATE INDEX [IX_Notifications_SenderId] ON [dbo].[Notifications]([SenderId]);
+GO
+CREATE INDEX [IX_Notifications_ReceiverId] ON [dbo].[Notifications]([ReceiverId]);
 GO
 
 CREATE TABLE [dbo].[Teams] (
@@ -98,8 +109,11 @@ CREATE TABLE [dbo].[Teams] (
     [LeaderId] int NOT NULL
 
     CONSTRAINT [PK_Teams] PRIMARY KEY CLUSTERED ([Id] ASC)
-    CONSTRAINT [FK_Teams_LeaderId] FOREIGN KEY ([LeaderId]) REFERENCES [dbo].[Leaders]([Id])
+    CONSTRAINT [FK_Teams_LeaderId] FOREIGN KEY ([LeaderId]) REFERENCES [dbo].[Users]([Id])
 );
+GO
+
+CREATE INDEX [IX_Teams_LeaderId] ON [dbo].[Teams]([LeaderId]);
 GO
 
 CREATE TABLE [dbo].[UserTeams] (
@@ -112,6 +126,9 @@ CREATE TABLE [dbo].[UserTeams] (
 );
 GO
 
+CREATE INDEX [IX_UserTeams_UserId] ON [dbo].[UserTeams]([UserId]);
+GO
+
 CREATE TABLE [dbo].[Features] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(100) NULL,
@@ -122,6 +139,9 @@ CREATE TABLE [dbo].[Features] (
     CONSTRAINT [PK_Features] PRIMARY KEY CLUSTERED ([Id] ASC)
     CONSTRAINT [FK_Features_TeamId] FOREIGN KEY ([Id]) REFERENCES [dbo].[Teams]([Id])
 );
+GO
+
+CREATE INDEX [IX_Features_TeamId] ON [dbo].[Features]([TeamId]);
 GO
 
 CREATE TABLE [dbo].[IssueTypes] (
@@ -166,7 +186,7 @@ CREATE TABLE [dbo].[Issues] (
     [StatusId] int NULL,
     [ResolutionId] int NULL,
     [CreatedDateUtc] datetimeoffset NOT NULL,
-    [DeadlineDateUtc] datetimeoffset NOT NULL,
+    [DeadlineDateUtc] datetimeoffset NULL,
     [FeatureId] int NOT NULL,
     [ReporterName] nvarchar(120) NULL,
     [ReporterId] int NOT NULL,
@@ -184,6 +204,21 @@ CREATE TABLE [dbo].[Issues] (
 );
 GO
 
+CREATE INDEX [IX_Issues_TypeId] ON [dbo].[Issues]([TypeId]);
+GO
+CREATE INDEX [IX_Issues_PriorityId] ON [dbo].[Issues]([PriorityId]);
+GO
+CREATE INDEX [IX_Issues_StatusId] ON [dbo].[Issues]([StatusId]);
+GO
+CREATE INDEX [IX_Issues_ResolutionId] ON [dbo].[Issues]([ResolutionId]);
+GO
+CREATE INDEX [IX_Issues_FeatureId] ON [dbo].[Issues]([FeatureId]);
+GO
+CREATE INDEX [IX_Issues_ReporterId] ON [dbo].[Issues]([ReporterId]);
+GO
+CREATE INDEX [IX_Issues_AssigneeId] ON [dbo].[Issues]([AssigneeId]);
+GO
+
 CREATE TABLE [dbo].[Comments] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Message] nvarchar(700) NULL,
@@ -195,4 +230,9 @@ CREATE TABLE [dbo].[Comments] (
     CONSTRAINT [FK_Comments_UserId] FOREIGN KEY ([UserId]) REFERENCES [dbo].[Users]([Id]),
     CONSTRAINT [FK_Comments_IssueId] FOREIGN KEY ([IssueId]) REFERENCES [dbo].[Issues]([Id])
 );
+GO
+
+CREATE INDEX [IX_Comments_UserId] ON [dbo].[Comments]([UserId]);
+GO
+CREATE INDEX [IX_Comments_IssueId] ON [dbo].[Comments]([IssueId]);
 GO

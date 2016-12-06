@@ -62,7 +62,6 @@
     <Compile Include="Entities\Issue\ResolutionEntity.cs" />
     <Compile Include="Entities\Issue\StatusEntity.cs" />
     <Compile Include="Entities\Issue\IssueTypeEntity.cs" />
-    <Compile Include="Entities\LeaderEntity.cs" />
     <Compile Include="Entities\NotificationEntity.cs" />
     <Compile Include="Entities\RequestEntity.cs" />
     <Compile Include="Entities\RoleEntity.cs" />
@@ -76,9 +75,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="FollowTheTaskModel.edmx.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

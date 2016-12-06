@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FollowTheTask.Database", "F
 	ProjectSection(SolutionItems) = preProject
 		FollowTheTask.Database\CreateTables.sql = FollowTheTask.Database\CreateTables.sql
 		FollowTheTask.Database\DropTables.sql = FollowTheTask.Database\DropTables.sql
+		FollowTheTask.Database\InitTables.sql = FollowTheTask.Database\InitTables.sql
 	EndProjectSection
 EndProject
 Global
