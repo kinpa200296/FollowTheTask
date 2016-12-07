@@ -201,9 +201,9 @@ CREATE TABLE [dbo].[Issues] (
     [DeadlineDateUtc] datetimeoffset NULL,
     [FeatureId] int NOT NULL,
     [ReporterName] nvarchar(120) NULL,
-    [ReporterId] int NOT NULL,
+    [ReporterId] int NULL,
     [AssigneeName] nvarchar(120) NULL,
-    [AssigneeId] int NOT NULL
+    [AssigneeId] int NULL
 
     CONSTRAINT [PK_Issues] PRIMARY KEY CLUSTERED ([Id] ASC)
     CONSTRAINT [FK_Issues_TypeId] FOREIGN KEY ([TypeId]) REFERENCES [dbo].[IssueTypes]([Id]),
@@ -235,7 +235,8 @@ CREATE TABLE [dbo].[Comments] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Message] nvarchar(700) NULL,
     [DateCreatedUtc] datetimeoffset NOT NULL,
-    [UserId] int NOT NULL,
+    [UserName] nvarchar(120) NULL,
+    [UserId] int NULL,
     [IssueId] int NOT NULL
 
     CONSTRAINT [PK_Comments] PRIMARY KEY CLUSTERED ([Id] ASC)

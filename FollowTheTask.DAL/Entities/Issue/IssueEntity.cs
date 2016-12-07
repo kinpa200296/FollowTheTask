@@ -38,13 +38,13 @@ namespace FollowTheTask.DAL.Entities.Issue
 
         public string ReporterName { get; set; }
 
-        public int ReporterId { get; set; }
+        public int? ReporterId { get; set; }
 
         public virtual UserEntity Reporter { get; set; }
 
         public string AssigneeName { get; set; }
 
-        public int AssigneeId { get; set; }
+        public int? AssigneeId { get; set; }
 
         public virtual UserEntity Assignee { get; set; }
     }

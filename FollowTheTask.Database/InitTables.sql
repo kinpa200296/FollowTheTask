@@ -30,7 +30,7 @@ SET IDENTITY_INSERT [dbo].[AuthData] OFF
 
 SET IDENTITY_INSERT [dbo].[Users] ON
 INSERT INTO [dbo].[Users] ([Id], [Username], [Email], [EmailConfirmed], [FirstName], [LastName], [AuthId])
-    VALUES (1, NULL, 'admin@admin.com', 1, 'Lonely', 'Admin', 1);
+    VALUES (1, 'admin', 'admin@admin.com', 1, 'Lonely', 'Admin', 1);
 SET IDENTITY_INSERT [dbo].[Users] OFF
 
 INSERT INTO [dbo].[UserRoles]([UserId], [RoleId])

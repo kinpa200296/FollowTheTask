@@ -11,7 +11,9 @@ namespace FollowTheTask.DAL.Entities
 
         public DateTimeOffset DateCreatedUtc { get; set; }
 
-        public int UserId { get; set; }
+        public string UserName { get; set; }
+
+        public int? UserId { get; set; }
         
         public virtual UserEntity User { get; set; }
 
