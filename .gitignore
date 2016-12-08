@@ -194,3 +194,8 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
+
+# front-end libs from nuget
+FollowTheTask.Web/Scripts
+FollowTheTask.Web/Content/bootstrap
+FollowTheTask.Web/Content/fonts
