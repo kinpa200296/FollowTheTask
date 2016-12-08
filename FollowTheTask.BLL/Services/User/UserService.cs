@@ -13,7 +13,7 @@ namespace FollowTheTask.BLL.Services.User
         private readonly IUserRepository _repository;
 
 
-        protected UserService(IUserRepository repository) : base(repository)
+        public UserService(IUserRepository repository) : base(repository)
         {
             _repository = repository;
         }

@@ -6,9 +6,9 @@ namespace FollowTheTask.Sandbox
     {
         static void Main()
         {
-            using (var context = new TestContext())
+            AppData.Set();
+            using (var context = new FollowTheTaskContext())
             {
-                
             }
         }
     }
