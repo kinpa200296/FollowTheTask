@@ -45,10 +45,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auth\DataObjects\AuthDto.cs" />
+    <Compile Include="Command.cs" />
+    <Compile Include="Dto.cs" />
+    <Compile Include="Model\Commands\CreateModelCommand.cs" />
+    <Compile Include="Model\Commands\DeleteModelCommand.cs" />
+    <Compile Include="Model\Commands\UpdateModelCommand.cs" />
+    <Compile Include="Model\DataObjects\ModelDto.cs" />
+    <Compile Include="Model\Queries\AllModelsQuery.cs" />
+    <Compile Include="Model\Queries\ModelQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Query.cs" />
+    <Compile Include="User\DataObjects\UserDto.cs" />
+    <Compile Include="User\Queries\UserQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Auth\Commands\" />
+    <Folder Include="Auth\Queries\" />
+    <Folder Include="User\Commands\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,13 +1,24 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FollowTheTask.BLL", "FollowTheTask.BLL\FollowTheTask.BLL.csproj", "{311A8DE3-BB02-491F-A2D7-0FE731AAEED6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{12771580-AF7E-4830-8F96-6C049CAD1645} = {12771580-AF7E-4830-8F96-6C049CAD1645}
+		{CDF0AEF2-64B0-42BE-9695-E9E30BC90ECB} = {CDF0AEF2-64B0-42BE-9695-E9E30BC90ECB}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FollowTheTask.DAL", "FollowTheTask.DAL\FollowTheTask.DAL.csproj", "{CDF0AEF2-64B0-42BE-9695-E9E30BC90ECB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{12771580-AF7E-4830-8F96-6C049CAD1645} = {12771580-AF7E-4830-8F96-6C049CAD1645}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FollowTheTask.Sandbox", "FollowTheTask.Sandbox\FollowTheTask.Sandbox.csproj", "{30F793B4-2B14-4BFC-86F9-C67B35B4AF55}"
+	ProjectSection(ProjectDependencies) = postProject
+		{ADAE9165-7E52-4E97-B9B8-A394C001D672} = {ADAE9165-7E52-4E97-B9B8-A394C001D672}
+		{12771580-AF7E-4830-8F96-6C049CAD1645} = {12771580-AF7E-4830-8F96-6C049CAD1645}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FollowTheTask.Database", "FollowTheTask.Database", "{2205E94E-A617-48CA-88B1-6B45BA45E35A}"
 	ProjectSection(SolutionItems) = preProject
@@ -20,6 +31,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FollowTheTask.Database", "F
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FollowTheTask.Web", "FollowTheTask.Web\FollowTheTask.Web.csproj", "{61CEE7AB-927F-4984-9A82-8192AECF70E4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{ADAE9165-7E52-4E97-B9B8-A394C001D672} = {ADAE9165-7E52-4E97-B9B8-A394C001D672}
+		{12771580-AF7E-4830-8F96-6C049CAD1645} = {12771580-AF7E-4830-8F96-6C049CAD1645}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FollowTheTask.TransferObjects", "FollowTheTask.TransferObjects\FollowTheTask.TransferObjects.csproj", "{12771580-AF7E-4830-8F96-6C049CAD1645}"
 EndProject
