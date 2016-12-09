@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using FollowTheTask.Web.Auth;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -14,11 +15,13 @@ namespace FollowTheTask.Web
         {
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
+            app.CreatePerOwinContext<ApplicationRoleManager>(ApplicationRoleManager.Create);
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Account/Login"),
+                CookieName = ConfigurationManager.AppSettings["CookieName"],
                 Provider = new CookieAuthenticationProvider
                 {
                     OnValidateIdentity =

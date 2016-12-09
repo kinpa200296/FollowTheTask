@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 using FollowTheTask.BLL.Services.Model.ViewModels;
 
 namespace FollowTheTask.BLL.Services.User.ViewModels
@@ -6,8 +7,15 @@ namespace FollowTheTask.BLL.Services.User.ViewModels
     public class RegisterViewModel : ModelViewModel
     {
         [Required]
+        [StringLength(50)]
+        [Display(Name = "Username")]
+        [Remote("CheckUserName", "Account", ErrorMessage = "Username is already taken")]
+        public string UserName { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
+        [Remote("CheckEmail", "Account", ErrorMessage = "Email is already taken")]
         public string Email { get; set; }
 
         [Required]
@@ -18,7 +26,7 @@ namespace FollowTheTask.BLL.Services.User.ViewModels
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         [Required]

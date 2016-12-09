@@ -19,11 +19,6 @@ namespace FollowTheTask.DAL.Repositories.User
 
         #region Queries Implementation
 
-        #endregion Queries Implementation
-
-
-        #region Commands Implementation
-
         public UserDto Handle(UserQuery query)
         {
             UserModel model = null;
@@ -59,6 +54,11 @@ namespace FollowTheTask.DAL.Repositories.User
             }
             return model == null ? null : Mapper.Map<UserDto>(model);
         }
+
+        #endregion Queries Implementation
+
+
+        #region Commands Implementation
 
         #endregion Commands Implementation
     }

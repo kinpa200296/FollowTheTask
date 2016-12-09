@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Configuration;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using FollowTheTask.Web.Auth;
 using Microsoft.AspNet.Identity;
@@ -37,6 +40,8 @@ namespace FollowTheTask.Web
             manager.UserLockoutEnabledByDefault = true;
             manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(30);
             manager.MaxFailedAccessAttemptsBeforeLockout = 7;
+
+            manager.EmailService = new EmailService();
 
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
@@ -78,6 +83,39 @@ namespace FollowTheTask.Web
             IOwinContext context)
         {
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
+        }
+    }
+
+
+    public class ApplicationRoleManager : RoleManager<UserRole, int>
+    {
+        public ApplicationRoleManager(IRoleStore<UserRole, int> store) : base(store)
+        {
+        }
+
+
+        public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options,
+            IOwinContext context)
+        {
+            return new ApplicationRoleManager(new CustomRoleStore());
+        }
+    }
+
+
+    public class EmailService : IIdentityMessageService
+    {
+        public Task SendAsync(IdentityMessage message)
+        {
+            var from = new MailAddress(ConfigurationManager.AppSettings["EmailAdress"], "Follow The Task");
+            var to = new MailAddress(message.Destination);
+            var m = new MailMessage(from, to) { Subject = message.Subject, Body = message.Body, IsBodyHtml = true };
+            var smtpClient = new SmtpClient(ConfigurationManager.AppSettings["SmtpHost"], 587)
+            {
+                Credentials = new NetworkCredential(ConfigurationManager.AppSettings["EmailAdress"],
+                    ConfigurationManager.AppSettings["EmailPassword"]),
+                EnableSsl = true
+            };
+            return smtpClient.SendMailAsync(m);
         }
     }
 }

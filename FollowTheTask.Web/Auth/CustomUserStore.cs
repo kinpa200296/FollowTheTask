@@ -16,7 +16,7 @@ namespace FollowTheTask.Web.Auth
         IUserEmailStore<AuthUser>,
         IUserLockoutStore<AuthUser, string>,
         IUserTwoFactorStore<AuthUser, string>,
-        IUserSecurityStampStore<AuthUser>
+        IUserSecurityStampStore<AuthUser, string>
     {
         private readonly IUserService _userService;
 
@@ -51,7 +51,7 @@ namespace FollowTheTask.Web.Auth
 
         public async Task<AuthUser> FindByNameAsync(string userName)
         {
-            var result = await _userService.GetUserDtoAsync(new UserQuery { Email = userName});
+            var result = await _userService.GetUserDtoAsync(new UserQuery {Username = userName});
             return AuthUser.FromDto(ProcessQueryResult(result));
         }
 

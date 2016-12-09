@@ -13,8 +13,6 @@ namespace FollowTheTask.BLL.Services.User.ViewModels
 
         public string FirstName { get; set; }
 
-        public string MiddleName { get; set; }
-
         public string LastName { get; set; }
 
         public AuthViewModel Auth { get; set; }

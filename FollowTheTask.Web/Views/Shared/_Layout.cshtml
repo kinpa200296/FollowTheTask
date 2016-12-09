@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Home Chaley Bank</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/styles")
 
 </head>
@@ -21,6 +21,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                 </ul>
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
