@@ -98,8 +98,10 @@
     <Compile Include="Services\Service.cs" />
     <Compile Include="Services\User\IUserService.cs" />
     <Compile Include="Services\User\UserService.cs" />
+    <Compile Include="Services\User\ViewModels\EditUserViewModel.cs" />
     <Compile Include="Services\User\ViewModels\ForgotPasswordViewModel.cs" />
     <Compile Include="Services\User\ViewModels\LoginViewModel.cs" />
+    <Compile Include="Services\User\ViewModels\ManageUserViewModel.cs" />
     <Compile Include="Services\User\ViewModels\RegisterViewModel.cs" />
     <Compile Include="Services\User\ViewModels\ResetPasswordViewModel.cs" />
     <Compile Include="Services\User\ViewModels\UserViewModel.cs" />

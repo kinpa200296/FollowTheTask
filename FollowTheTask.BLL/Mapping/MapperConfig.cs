@@ -15,6 +15,9 @@ namespace FollowTheTask.BLL.Mapping
             config.AddConditionalObjectMapper().Where((s, d) => s.Name.Replace("Dto", "ViewModel") == d.Name);
 
             config.CreateMap<RegisterViewModel, UserDto>();
+            config.CreateMap<UserDto, ManageUserViewModel>();
+            config.CreateMap<UserDto, EditUserViewModel>();
+            config.CreateMap<EditUserViewModel, UserDto>();
         }
     }
 }

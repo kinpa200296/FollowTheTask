@@ -1,15 +1,57 @@
-﻿@{
-    ViewBag.Title = "Manage Account";
+﻿@model FollowTheTask.BLL.Services.User.ViewModels.ManageUserViewModel
+@{
+    ViewBag.Title = $"Manage user '{Model.Username}'";
 }
 
 <h2>@ViewBag.Title</h2>
-
 <p class="text-success">@ViewBag.StatusMessage</p>
-<div>
-    <h4>Change your account settings</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>Password:</dt>
-        <dd>@Html.ActionLink("Change your password", "ChangePassword")</dd>
-    </dl>
+<ul class="nav nav-pills">
+    <li>@Html.ActionLink("Edit personal data", "EditUser", "Manage", null)</li>
+    <li>@Html.ActionLink("Change password", "ChangePassword", "Manage", null)</li>
+</ul>
+<div class="row">
+    <div class="col-md-5">
+        <table class="table">
+            <tr class="row">
+                <td class="col-md-6">
+                    @Html.LabelFor(m => m.Username)
+                </td>
+                <td class="col-md-6">
+                    @Html.DisplayFor(m => m.Username)
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="col-md-6">
+                    @Html.LabelFor(m => m.Email)
+                </td>
+                <td class="col-md-6">
+                    @Html.DisplayFor(m => m.Email)
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="col-md-6">
+                    @Html.LabelFor(m => m.EmailConfirmed)
+                </td>
+                <td class="col-md-6">
+                    @Html.DisplayFor(m => m.EmailConfirmed)
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="col-md-6">
+                    @Html.LabelFor(m => m.FirstName)
+                </td>
+                <td class="col-md-6">
+                    @Html.DisplayFor(m => m.FirstName)
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="col-md-6">
+                    @Html.LabelFor(m => m.LastName)
+                </td>
+                <td class="col-md-6">
+                    @Html.DisplayFor(m => m.LastName)
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>

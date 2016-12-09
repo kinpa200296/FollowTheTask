@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using FollowTheTask.BLL.Services.Auth.ViewModels;
+using FollowTheTask.BLL.Services.User.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 
@@ -10,6 +12,7 @@ namespace FollowTheTask.Web.Controllers
     public enum ManageMessageId
     {
         ChangePasswordSuccess,
+        EditUserSuccess,
         Error
     }
 
@@ -43,14 +46,18 @@ namespace FollowTheTask.Web.Controllers
             SignInManager = signInManager;
         }
 
-        public ActionResult Index(ManageMessageId? message)
+        public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
+                : message == ManageMessageId.EditUserSuccess ? "User info has been changed."
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : "";
 
-            return View();
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            var model = Mapper.Map<ManageUserViewModel>(user.Dto);
+
+            return View(model);
         }
 
         [HttpGet]
@@ -75,7 +82,40 @@ namespace FollowTheTask.Web.Controllers
                 {
                     await SignInManager.SignInAsync(user, false, false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+                return RedirectToAction("Index", new {Message = ManageMessageId.ChangePasswordSuccess});
+            }
+            AddErrors(result);
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> EditUser()
+        {
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            var model = Mapper.Map<EditUserViewModel>(user.Dto);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditUser(EditUserViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            if (user == null)
+            {
+                ModelState.AddModelError("", "User not found");
+                return View(model);
+            }
+            Mapper.Map(model, user.Dto);
+            var result = await UserManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index", new {Message = ManageMessageId.EditUserSuccess});
             }
             AddErrors(result);
             return View(model);

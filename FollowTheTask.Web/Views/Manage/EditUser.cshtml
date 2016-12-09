@@ -1,0 +1,45 @@
+﻿@model FollowTheTask.BLL.Services.User.ViewModels.EditUserViewModel
+
+@{
+    ViewBag.Title = $"Edit user '{Model.Username}'";
+}
+
+<h2>Edit personal info for user '@Model.Username'</h2>
+
+<div>
+    <div class="form-horizontal">
+        @using (Html.BeginForm("EditUser", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.Username)
+
+            <div class="row form-group">
+                <p class="col-md-2">
+                    @Html.LabelFor(m => m.FirstName, new { @class = "control-label" })
+                </p>
+                <p class="col-md-4">
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                </p>
+            </div>
+            <div class="row form-group">
+                <p class="col-md-2">
+                    @Html.LabelFor(m => m.LastName, new { @class = "control-label" })
+                </p>
+                <p class="col-md-4">
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                </p>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-offset-2">
+                    <input type="submit" class="btn btn-primary" value="Save" />
+                    @Html.ActionLink("Cancel", "Index", "Manage", new { @class = "btn btn-default" })
+                </div>
+            </div>
+        }
+    </div>
+</div>

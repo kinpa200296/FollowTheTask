@@ -41,7 +41,7 @@ namespace FollowTheTask.Web
             manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(30);
             manager.MaxFailedAccessAttemptsBeforeLockout = 7;
 
-            manager.EmailService = new EmailService();
+            //manager.EmailService = new EmailService();
 
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
