@@ -45,19 +45,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionSource\DataObjects\ActionSourceDto.cs" />
+    <Compile Include="ActionType\DataObjects\ActionTypeDto.cs" />
     <Compile Include="Auth\DataObjects\AuthDto.cs" />
     <Compile Include="Command.cs" />
+    <Compile Include="Comment\DataObjects\CommentDto.cs" />
     <Compile Include="Dto.cs" />
+    <Compile Include="Feature\DataObjects\FeatureDto.cs" />
+    <Compile Include="IssueType\DataObjects\IssueTypeDto.cs" />
+    <Compile Include="Issue\DataObjects\IssueDto.cs" />
     <Compile Include="Model\Commands\CreateModelCommand.cs" />
     <Compile Include="Model\Commands\DeleteModelCommand.cs" />
     <Compile Include="Model\Commands\UpdateModelCommand.cs" />
     <Compile Include="Model\DataObjects\ModelDto.cs" />
     <Compile Include="Model\Queries\AllModelsQuery.cs" />
     <Compile Include="Model\Queries\ModelQuery.cs" />
+    <Compile Include="Notification\DataObjects\NotificationDto.cs" />
+    <Compile Include="Priority\DataObjects\PriorityDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query.cs" />
+    <Compile Include="Request\DataObjects\RequestDto.cs" />
+    <Compile Include="Resolution\DataObjects\ResolutionDto.cs" />
     <Compile Include="Role\DataObjects\RoleDto.cs" />
     <Compile Include="Role\Queries\RoleQuery.cs" />
+    <Compile Include="Status\DataObjects\StatusDto.cs" />
+    <Compile Include="Team\DataObjects\TeamDto.cs" />
     <Compile Include="User\DataObjects\UserDto.cs" />
     <Compile Include="User\Queries\UserQuery.cs" />
   </ItemGroup>
@@ -65,9 +77,33 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ActionSource\Commands\" />
+    <Folder Include="ActionSource\Queries\" />
+    <Folder Include="ActionType\Commands\" />
+    <Folder Include="ActionType\Queries\" />
     <Folder Include="Auth\Commands\" />
     <Folder Include="Auth\Queries\" />
+    <Folder Include="Comment\Commands\" />
+    <Folder Include="Comment\Queries\" />
+    <Folder Include="Feature\Commands\" />
+    <Folder Include="Feature\Queries\" />
+    <Folder Include="IssueType\Commands\" />
+    <Folder Include="IssueType\Queries\" />
+    <Folder Include="Issue\Commands\" />
+    <Folder Include="Issue\Queries\" />
+    <Folder Include="Notification\Commands\" />
+    <Folder Include="Notification\Queries\" />
+    <Folder Include="Priority\Commands\" />
+    <Folder Include="Priority\Queries\" />
+    <Folder Include="Request\Commands\" />
+    <Folder Include="Request\Queries\" />
+    <Folder Include="Resolution\Commands\" />
+    <Folder Include="Resolution\Queries\" />
     <Folder Include="Role\Commands\" />
+    <Folder Include="Status\Commands\" />
+    <Folder Include="Status\Queries\" />
+    <Folder Include="Team\Commands\" />
+    <Folder Include="Team\Queries\" />
     <Folder Include="User\Commands\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

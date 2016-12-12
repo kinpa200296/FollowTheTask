@@ -1,0 +1,25 @@
+﻿@model IEnumerable<FollowTheTask.BLL.Services.Team.ViewModels.TeamViewModel>
+
+@{
+    ViewBag.Title = "Teams";
+}
+
+<h2>List of existing teams</h2>
+
+<div class="row">
+    <div class="col-md-12">
+       <table class="table">
+           <tr class="row">
+               <th class="col-md-3">Team name</th>
+               <th class="col-md-3">Leader</th>
+           </tr>
+           @foreach (var team in Model)
+           {
+               <tr class="row">
+                   <td col-md-3>@team.Name</td>
+                   <td col-md-3>@team.LeaderId</td>
+               </tr>
+           }
+        </table>
+    </div>
+</div>
