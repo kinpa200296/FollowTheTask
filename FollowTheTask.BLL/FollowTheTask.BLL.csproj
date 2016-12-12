@@ -94,9 +94,11 @@
     <Compile Include="Services\Auth\ViewModels\ChangePasswordViewModel.cs" />
     <Compile Include="Services\Comment\CommentService.cs" />
     <Compile Include="Services\Comment\ICommentService.cs" />
+    <Compile Include="Services\Comment\ViewModels\CommentInfoViewModel.cs" />
     <Compile Include="Services\Comment\ViewModels\CommentViewModel.cs" />
     <Compile Include="Services\Feature\FeatureService.cs" />
     <Compile Include="Services\Feature\IFeatureService.cs" />
+    <Compile Include="Services\Feature\ViewModels\FeatureInfoViewModel.cs" />
     <Compile Include="Services\Feature\ViewModels\FeatureViewModel.cs" />
     <Compile Include="Services\IService.cs" />
     <Compile Include="Services\IssueType\IIssueTypeService.cs" />
@@ -104,6 +106,7 @@
     <Compile Include="Services\IssueType\ViewModels\IssueTypeViewModel.cs" />
     <Compile Include="Services\Issue\IIssueService.cs" />
     <Compile Include="Services\Issue\IssueService.cs" />
+    <Compile Include="Services\Issue\ViewModels\IssueInfoViewModel.cs" />
     <Compile Include="Services\Issue\ViewModels\IssueViewModel.cs" />
     <Compile Include="Services\Model\IModelService.cs" />
     <Compile Include="Services\Model\ModelService.cs" />
@@ -131,6 +134,8 @@
     <Compile Include="Services\Status\ViewModels\StatusViewModel.cs" />
     <Compile Include="Services\Team\ITeamService.cs" />
     <Compile Include="Services\Team\TeamService.cs" />
+    <Compile Include="Services\Team\ViewModels\TeamInfoViewModel.cs" />
+    <Compile Include="Services\Team\ViewModels\TeamMemberViewModel.cs" />
     <Compile Include="Services\Team\ViewModels\TeamViewModel.cs" />
     <Compile Include="Services\User\IUserService.cs" />
     <Compile Include="Services\User\UserService.cs" />

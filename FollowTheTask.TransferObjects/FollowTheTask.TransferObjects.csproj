@@ -50,10 +50,19 @@
     <Compile Include="Auth\DataObjects\AuthDto.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="Comment\DataObjects\CommentDto.cs" />
+    <Compile Include="Comment\DataObjects\CommentInfoDto.cs" />
+    <Compile Include="Comment\Queries\CommentQuery.cs" />
     <Compile Include="Dto.cs" />
     <Compile Include="Feature\DataObjects\FeatureDto.cs" />
+    <Compile Include="Feature\DataObjects\FeatureInfoDto.cs" />
+    <Compile Include="Feature\Queries\FeatureIssuesQuery.cs" />
+    <Compile Include="Feature\Queries\FeatureQuery.cs" />
+    <Compile Include="Issue\Queries\IssueCommentsQuery.cs" />
+    <Compile Include="Issue\Queries\IssueQuery.cs" />
+    <Compile Include="Team\Queries\TeamFeaturesQuery.cs" />
     <Compile Include="IssueType\DataObjects\IssueTypeDto.cs" />
     <Compile Include="Issue\DataObjects\IssueDto.cs" />
+    <Compile Include="Issue\DataObjects\IssueInfoDto.cs" />
     <Compile Include="Model\Commands\CreateModelCommand.cs" />
     <Compile Include="Model\Commands\DeleteModelCommand.cs" />
     <Compile Include="Model\Commands\UpdateModelCommand.cs" />
@@ -70,6 +79,10 @@
     <Compile Include="Role\Queries\RoleQuery.cs" />
     <Compile Include="Status\DataObjects\StatusDto.cs" />
     <Compile Include="Team\DataObjects\TeamDto.cs" />
+    <Compile Include="Team\DataObjects\TeamInfoDto.cs" />
+    <Compile Include="Team\DataObjects\TeamMemberDto.cs" />
+    <Compile Include="Team\Queries\TeamMembersQuery.cs" />
+    <Compile Include="Team\Queries\TeamQuery.cs" />
     <Compile Include="User\DataObjects\UserDto.cs" />
     <Compile Include="User\Queries\UserQuery.cs" />
   </ItemGroup>
@@ -84,13 +97,10 @@
     <Folder Include="Auth\Commands\" />
     <Folder Include="Auth\Queries\" />
     <Folder Include="Comment\Commands\" />
-    <Folder Include="Comment\Queries\" />
     <Folder Include="Feature\Commands\" />
-    <Folder Include="Feature\Queries\" />
     <Folder Include="IssueType\Commands\" />
     <Folder Include="IssueType\Queries\" />
     <Folder Include="Issue\Commands\" />
-    <Folder Include="Issue\Queries\" />
     <Folder Include="Notification\Commands\" />
     <Folder Include="Notification\Queries\" />
     <Folder Include="Priority\Commands\" />
@@ -103,7 +113,6 @@
     <Folder Include="Status\Commands\" />
     <Folder Include="Status\Queries\" />
     <Folder Include="Team\Commands\" />
-    <Folder Include="Team\Queries\" />
     <Folder Include="User\Commands\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
