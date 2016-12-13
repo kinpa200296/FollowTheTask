@@ -8,8 +8,10 @@ INSERT INTO [dbo].[ActionSources]([Id], [Name])
     VALUES (1, 'UserAction'), (2, 'RequestApproved'), (3, 'RequestDeclined');
 SET IDENTITY_INSERT [dbo].[ActionSources] OFF
 
-INSERT INTO [dbo].[ActionTypes]([Name])
-    VALUES ('JoinTeam'), ('SolveIssue'), ('BeLeader');
+SET IDENTITY_INSERT [dbo].[ActionTypes] ON
+INSERT INTO [dbo].[ActionTypes]([Id], [Name])
+    VALUES (1, 'BeLeader'), (2, 'JoinTeam'), (3, 'AssignIssue');
+SET IDENTITY_INSERT [dbo].[ActionTypes] OFF
 
 INSERT INTO [dbo].[IssueTypes]([Name])
     VALUES ('Story'), ('Improvement'), ('Bug'), ('Investigation');

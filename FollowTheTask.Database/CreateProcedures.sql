@@ -54,6 +54,27 @@ BEGIN
 END;
 GO
 
+CREATE FUNCTION ActionTypeIdBeLeader()
+RETURNS int AS
+BEGIN
+    RETURN 1;
+END;
+GO
+
+CREATE FUNCTION ActionTypeIdJoinTeam()
+RETURNS int AS
+BEGIN
+    RETURN 2;
+END;
+GO
+
+CREATE FUNCTION ActionTypeIdAssignIssue()
+RETURNS int AS
+BEGIN
+    RETURN 3;
+END;
+GO
+
 CREATE FUNCTION GetUserName(@UserId int)
 RETURNS nvarchar(120) AS
 BEGIN
@@ -109,6 +130,20 @@ GO
 CREATE PROCEDURE SendNotification(@TargetId int, @ActionSourceId int, @ActionTypeId int, @SenderId int, @ReceiverId int)
 AS INSERT INTO [dbo].[Notifications](TargetId, ActionSourceId, ActionTypeId, SenderId, ReceiverId)
     VALUES (@TargetId, @ActionSourceId, @ActionTypeId, @SenderId, @ReceiverId);
+GO
+
+CREATE FUNCTION ResolveTarget(@TargetId int, @ActionTypeId int)
+RETURNS nvarchar(200) AS
+BEGIN
+    DECLARE @Result nvarchar(200);
+    SELECT @Result = (SELECT CASE @ActionTypeId
+    WHEN [dbo].ActionTypeIdBeLeader() THEN [dbo].GetTeamName(@TargetId)
+    WHEN [dbo].ActionTypeIdJoinTeam() THEN [dbo].GetTeamName(@TargetId)
+    WHEN [dbo].ActionTypeIdAssignIssue() THEN [dbo].GetIssueName(@TargetId)
+    ELSE '<Unknown Target>'
+    END);
+    RETURN @Result;
+END;
 GO
 
 CREATE FUNCTION GetTeam(@TeamId int)
@@ -319,6 +354,113 @@ BEGIN
         SELECT Id, [Message], DateCreatedUtc, UserName, UserId, [dbo].GetUserName(T.UserId),
             IssueId, [dbo].GetIssueName(T.IssueId)
             FROM [dbo].[Comments] T WHERE IssueId = @IssueId;
+    RETURN;
+END;
+GO
+
+CREATE FUNCTION GetRequest(@RequestId int)
+RETURNS @Result table(
+    [Id] int NOT NULL,
+    [TargetId] int NOT NULL,
+    [Target] nvarchar(200),
+    [ActionTypeId] int NOT NULL,
+    [SenderId] int NOT NULL,
+    [Sender] nvarchar(120),
+    [ReceiverId] int NOT NULL,
+    [Receiver] nvarchar(120)
+) AS
+BEGIN
+    INSERT INTO @Result
+        SELECT Id, TargetId, [dbo].ResolveTarget(T.TargetId, T.ActionTypeId), ActionTypeId,
+            SenderId, [dbo].GetUserName(T.SenderId),
+            ReceiverId, [dbo].GetUserName(T.ReceiverId)
+            FROM [dbo].[Requests] T WHERE Id = @RequestId;
+    RETURN;
+END;
+GO
+
+CREATE FUNCTION GetRequests(@UserId int)
+RETURNS @Result table(
+    [Id] int NOT NULL,
+    [TargetId] int NOT NULL,
+    [Target] nvarchar(200),
+    [ActionTypeId] int NOT NULL,
+    [SenderId] int NOT NULL,
+    [Sender] nvarchar(120),
+    [ReceiverId] int NOT NULL,
+    [Receiver] nvarchar(120)
+) AS
+BEGIN
+    INSERT INTO @Result
+        SELECT Id, TargetId, [dbo].ResolveTarget(T.TargetId, T.ActionTypeId), ActionTypeId,
+            SenderId, [dbo].GetUserName(T.SenderId),
+            ReceiverId, [dbo].GetUserName(T.ReceiverId)
+            FROM [dbo].[Requests] T WHERE SenderId = @UserId;
+    RETURN;
+END;
+GO
+
+CREATE FUNCTION GetPendingRequests(@UserId int)
+RETURNS @Result table(
+    [Id] int NOT NULL,
+    [TargetId] int NOT NULL,
+    [Target] nvarchar(200),
+    [ActionTypeId] int NOT NULL,
+    [SenderId] int NOT NULL,
+    [Sender] nvarchar(120),
+    [ReceiverId] int NOT NULL,
+    [Receiver] nvarchar(120)
+) AS
+BEGIN
+    INSERT INTO @Result
+        SELECT Id, TargetId, [dbo].ResolveTarget(T.TargetId, T.ActionTypeId), ActionTypeId,
+            SenderId, [dbo].GetUserName(T.SenderId),
+            ReceiverId, [dbo].GetUserName(T.ReceiverId)
+            FROM [dbo].[Requests] T WHERE ReceiverId = @UserId;
+    RETURN;
+END;
+GO
+
+CREATE FUNCTION GetNotification(@NotificationId int)
+RETURNS @Result table(
+    [Id] int NOT NULL,
+    [TargetId] int NOT NULL,
+    [Target] nvarchar(200),
+    [ActionSourceId] int NOT NULL,
+    [ActionTypeId] int NOT NULL,
+    [SenderId] int NOT NULL,
+    [Sender] nvarchar(120),
+    [ReceiverId] int NOT NULL,
+    [Receiver] nvarchar(120)
+) AS
+BEGIN
+    INSERT INTO @Result
+        SELECT Id, TargetId, [dbo].ResolveTarget(T.TargetId, T.ActionTypeId), ActionSourceId, ActionTypeId,
+            SenderId, [dbo].GetUserName(T.SenderId),
+            ReceiverId, [dbo].GetUserName(T.ReceiverId)
+            FROM [dbo].[Notifications] T WHERE Id = @NotificationId;
+    RETURN;
+END;
+GO
+
+CREATE FUNCTION GetNotifications(@UserId int)
+RETURNS @Result table(
+    [Id] int NOT NULL,
+    [TargetId] int NOT NULL,
+    [Target] nvarchar(200),
+    [ActionSourceId] int NOT NULL,
+    [ActionTypeId] int NOT NULL,
+    [SenderId] int NOT NULL,
+    [Sender] nvarchar(120),
+    [ReceiverId] int NOT NULL,
+    [Receiver] nvarchar(120)
+) AS
+BEGIN
+    INSERT INTO @Result
+        SELECT Id, TargetId, [dbo].ResolveTarget(T.TargetId, T.ActionTypeId), ActionSourceId, ActionTypeId,
+            SenderId, [dbo].GetUserName(T.SenderId),
+            ReceiverId, [dbo].GetUserName(T.ReceiverId)
+            FROM [dbo].[Notifications] T WHERE ReceiverId = @UserId;
     RETURN;
 END;
 GO

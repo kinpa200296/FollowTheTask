@@ -14,6 +14,12 @@ DROP FUNCTION [dbo].[ActionSourceIdRequestApproved];
 GO
 DROP FUNCTION [dbo].[ActionSourceIdRequestDeclined];
 GO
+DROP FUNCTION [dbo].[ActionTypeIdBeLeader];
+GO
+DROP FUNCTION [dbo].[ActionTypeIdJoinTeam];
+GO
+DROP FUNCTION [dbo].[ActionTypeIdAssignIssue];
+GO
 DROP FUNCTION [dbo].[GetUserName];
 GO
 DROP FUNCTION [dbo].[GetTeamName];
@@ -25,6 +31,8 @@ GO
 DROP PROCEDURE [dbo].[SendRequest];
 GO
 DROP PROCEDURE [dbo].[SendNotification];
+GO
+DROP FUNCTION [dbo].[ResolveTarget];
 GO
 DROP FUNCTION [dbo].[GetTeam];
 GO
@@ -47,4 +55,14 @@ GO
 DROP FUNCTION [dbo].[GetComment];
 GO
 DROP FUNCTION [dbo].[GetComments];
+GO
+DROP FUNCTION [dbo].[GetRequest];
+GO
+DROP FUNCTION [dbo].[GetRequests];
+GO
+DROP FUNCTION [dbo].[GetPendingRequests];
+GO
+DROP FUNCTION [dbo].[GetNotification];
+GO
+DROP FUNCTION [dbo].[GetNotifications];
 GO

@@ -59,6 +59,13 @@
     <Compile Include="Feature\Queries\FeatureQuery.cs" />
     <Compile Include="Issue\Queries\IssueCommentsQuery.cs" />
     <Compile Include="Issue\Queries\IssueQuery.cs" />
+    <Compile Include="Notification\DataObjects\NotificationInfoDto.cs" />
+    <Compile Include="Notification\Queries\NotificationQuery.cs" />
+    <Compile Include="Notification\Queries\UserNotificationsQuery.cs" />
+    <Compile Include="Request\DataObjects\RequestInfoDto.cs" />
+    <Compile Include="Request\Queries\RequestQuery.cs" />
+    <Compile Include="Request\Queries\UserPendingRequestsQuery.cs" />
+    <Compile Include="Request\Queries\UserRequestsQuery.cs" />
     <Compile Include="Team\Queries\AllTeamsQuery.cs" />
     <Compile Include="Team\Queries\TeamFeaturesQuery.cs" />
     <Compile Include="IssueType\DataObjects\IssueTypeDto.cs" />
@@ -105,11 +112,9 @@
     <Folder Include="IssueType\Queries\" />
     <Folder Include="Issue\Commands\" />
     <Folder Include="Notification\Commands\" />
-    <Folder Include="Notification\Queries\" />
     <Folder Include="Priority\Commands\" />
     <Folder Include="Priority\Queries\" />
     <Folder Include="Request\Commands\" />
-    <Folder Include="Request\Queries\" />
     <Folder Include="Resolution\Commands\" />
     <Folder Include="Resolution\Queries\" />
     <Folder Include="Role\Commands\" />

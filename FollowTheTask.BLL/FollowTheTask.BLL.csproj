@@ -113,12 +113,14 @@
     <Compile Include="Services\Model\ViewModels\ModelViewModel.cs" />
     <Compile Include="Services\Notification\INotificationService.cs" />
     <Compile Include="Services\Notification\NotificationService.cs" />
+    <Compile Include="Services\Notification\ViewModels\NotificationInfoViewModel.cs" />
     <Compile Include="Services\Notification\ViewModels\NotificationViewModel.cs" />
     <Compile Include="Services\Priority\IPriorityService.cs" />
     <Compile Include="Services\Priority\PriorityService.cs" />
     <Compile Include="Services\Priority\ViewModels\PriorityViewModel.cs" />
     <Compile Include="Services\Request\IRequestService.cs" />
     <Compile Include="Services\Request\RequestService.cs" />
+    <Compile Include="Services\Request\ViewModels\RequestInfoViewModel.cs" />
     <Compile Include="Services\Request\ViewModels\RequestViewModel.cs" />
     <Compile Include="Services\Resolution\IResolutionService.cs" />
     <Compile Include="Services\Resolution\ResolutionService.cs" />
