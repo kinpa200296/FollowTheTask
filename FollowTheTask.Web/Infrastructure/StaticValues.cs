@@ -20,12 +20,12 @@ namespace FollowTheTask.Web.Infrastructure
 
         public static StaticValues Instance { get { return lazy.Value; } }
 
-        //public Dictionary<int?, string> Roles;
-        public Dictionary<int?, string> ActionSources;
-        public Dictionary<int?, string> ActionTypes;
-        public Dictionary<int?, string> IssueTypes;
-        public Dictionary<int?, string> Priorities;
-        public Dictionary<int?, string> Resolutions;
+        //public Dictionary<int?, string> Roles = new Dictionary<int?, string>();
+        public Dictionary<int?, string> ActionSources = new Dictionary<int?, string>();
+        public Dictionary<int?, string> ActionTypes = new Dictionary<int?, string>();
+        public Dictionary<int?, string> IssueTypes = new Dictionary<int?, string>();
+        public Dictionary<int?, string> Priorities = new Dictionary<int?, string>();
+        public Dictionary<int?, string> Resolutions = new Dictionary<int?, string>();
 
         private StaticValues()
         {
@@ -34,40 +34,40 @@ namespace FollowTheTask.Web.Infrastructure
             var list = query.Value?.ToArray();
             if (list != null)
                 for (var i = 0; i < list.Length; i++)
-                    ActionSources[i + 1] = list[i].Name;
-            ActionSources.Add(null, "None");
+                    ActionSources.Add(i+1, list[i].Name);
+            ActionSources.Add(0, "None");
 
             var query1 =
                 DependencyResolver.Current.GetService<IActionTypeService>().GetAllModelDtos(new AllModelsQuery());
             var list1 = query1.Value?.ToArray();
             if (list1 != null)
                 for (var i = 0; i < list1.Length; i++)
-                    ActionTypes[i + 1] = list1[i].Name;
-            ActionTypes.Add(null, "None");
+                    ActionTypes.Add(i + 1, list1[i].Name);
+            ActionTypes.Add(0, "None");
 
             var query2 =
                 DependencyResolver.Current.GetService<IIssueTypeService>().GetAllModelDtos(new AllModelsQuery());
             var list2 = query2.Value?.ToArray();
             if (list2 != null)
                 for (var i = 0; i < list2.Length; i++)
-                    IssueTypes[i + 1] = list2[i].Name;
-            IssueTypes.Add(null, "None");
+                    IssueTypes.Add(i + 1, list2[i].Name);
+            IssueTypes.Add(0, "None");
 
             var query3 =
                 DependencyResolver.Current.GetService<IPriorityService>().GetAllModelDtos(new AllModelsQuery());
             var list3 = query3.Value?.ToArray();
             if (list3 != null)
                 for (var i = 0; i < list3.Length; i++)
-                    Priorities[i + 1] = list3[i].Name;
-            Priorities.Add(null, "None");
+                    Priorities.Add(i + 1, list3[i].Name);
+            Priorities.Add(0, "None");
 
             var query4 =
                 DependencyResolver.Current.GetService<IResolutionService>().GetAllModelDtos(new AllModelsQuery());
             var list4 = query4.Value?.ToArray();
             if (list4 != null)
                 for (var i = 0; i < list4.Length; i++)
-                    Resolutions[i + 1] = list4[i].Name;
-            Resolutions.Add(null, "None");
+                    Resolutions.Add(i + 1, list4[i].Name);
+            Resolutions.Add(0, "None");
 
         }
 
