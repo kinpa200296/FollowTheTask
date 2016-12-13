@@ -80,5 +80,25 @@ namespace FollowTheTask.BLL.Services.Team
         {
             return (await RunListQueryAsync<TeamFeaturesQuery, FeatureInfoDto>(_repository, query)).MapTo<FeatureInfoViewModel>();
         }
+
+        public ListQueryResult<TeamInfoDto> GetAllTeamsDtos(AllTeamsQuery query)
+        {
+            return RunListQuery<AllTeamsQuery, TeamInfoDto>(_repository, query);
+        }
+
+        public async Task<ListQueryResult<TeamInfoDto>> GetAllTeamsDtosAsync(AllTeamsQuery query)
+        {
+            return await RunListQueryAsync<AllTeamsQuery, TeamInfoDto>(_repository, query);
+        }
+
+        public ListQueryResult<TeamInfoViewModel> GetAllTeams(AllTeamsQuery query)
+        {
+            return RunListQuery<AllTeamsQuery, TeamInfoDto>(_repository, query).MapTo<TeamInfoViewModel>();
+        }
+
+        public async Task<ListQueryResult<TeamInfoViewModel>> GetAllTeamsAsync(AllTeamsQuery query)
+        {
+            return (await RunListQueryAsync<AllTeamsQuery, TeamInfoDto>(_repository, query)).MapTo<TeamInfoViewModel>();
+        }
     }
 }

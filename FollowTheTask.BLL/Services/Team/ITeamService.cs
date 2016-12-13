@@ -34,5 +34,13 @@ namespace FollowTheTask.BLL.Services.Team
         ListQueryResult<FeatureInfoViewModel> GetTeamFeatures(TeamFeaturesQuery query);
 
         Task<ListQueryResult<FeatureInfoViewModel>> GetTeamFeaturesAsync(TeamFeaturesQuery query);
+
+        ListQueryResult<TeamInfoDto> GetAllTeamsDtos(AllTeamsQuery query);
+
+        Task<ListQueryResult<TeamInfoDto>> GetAllTeamsDtosAsync(AllTeamsQuery query);
+
+        ListQueryResult<TeamInfoViewModel> GetAllTeams(AllTeamsQuery query);
+
+        Task<ListQueryResult<TeamInfoViewModel>> GetAllTeamsAsync(AllTeamsQuery query);
     }
 }

@@ -59,6 +59,7 @@
     <Compile Include="Feature\Queries\FeatureQuery.cs" />
     <Compile Include="Issue\Queries\IssueCommentsQuery.cs" />
     <Compile Include="Issue\Queries\IssueQuery.cs" />
+    <Compile Include="Team\Queries\AllTeamsQuery.cs" />
     <Compile Include="Team\Queries\TeamFeaturesQuery.cs" />
     <Compile Include="IssueType\DataObjects\IssueTypeDto.cs" />
     <Compile Include="Issue\DataObjects\IssueDto.cs" />
@@ -84,7 +85,9 @@
     <Compile Include="Team\Queries\TeamMembersQuery.cs" />
     <Compile Include="Team\Queries\TeamQuery.cs" />
     <Compile Include="User\DataObjects\UserDto.cs" />
+    <Compile Include="User\Queries\LeaderTeamsQuery.cs" />
     <Compile Include="User\Queries\UserQuery.cs" />
+    <Compile Include="User\Queries\UserTeamsQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

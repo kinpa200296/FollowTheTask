@@ -28,7 +28,9 @@ DROP PROCEDURE [dbo].[SendNotification];
 GO
 DROP FUNCTION [dbo].[GetTeam];
 GO
-DROP FUNCTION [dbo].[GetTeams];
+DROP FUNCTION [dbo].[GetUserTeams];
+GO
+DROP FUNCTION [dbo].[GetLeaderTeams];
 GO
 DROP FUNCTION [dbo].[GetAllTeams];
 GO

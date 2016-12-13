@@ -1,10 +1,12 @@
 ﻿using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using FollowTheTask.DAL.Contexts;
 using FollowTheTask.DAL.Models;
 using FollowTheTask.DAL.Repositories.Model;
+using FollowTheTask.TransferObjects.Team.DataObjects;
 using FollowTheTask.TransferObjects.User.DataObjects;
 using FollowTheTask.TransferObjects.User.Queries;
 
@@ -53,6 +55,36 @@ namespace FollowTheTask.DAL.Repositories.User
                 model = await ModelsDao.FirstOrDefaultAsync(u => u.Username == query.Username);
             }
             return model == null ? null : Mapper.Map<UserDto>(model);
+        }
+
+        public IQueryable<TeamInfoDto> Handle(UserTeamsQuery query)
+        {
+            return
+                Context.Database.SqlQuery<TeamInfoDto>("select * from [dbo].GetUserTeams(@UserId)",
+                    new SqlParameter("UserId", query.UserId)).AsQueryable();
+        }
+
+        public Task<IQueryable<TeamInfoDto>> HandleAsync(UserTeamsQuery query)
+        {
+            return
+                Task.FromResult(
+                    Context.Database.SqlQuery<TeamInfoDto>("select * from [dbo].GetUserTeams(@UserId)",
+                        new SqlParameter("UserId", query.UserId)).AsQueryable());
+        }
+
+        public IQueryable<TeamInfoDto> Handle(LeaderTeamsQuery query)
+        {
+            return
+                Context.Database.SqlQuery<TeamInfoDto>("select * from [dbo].GetLeaderTeams(@LeaderId)",
+                    new SqlParameter("LeaderId", query.LeaderId)).AsQueryable();
+        }
+
+        public Task<IQueryable<TeamInfoDto>> HandleAsync(LeaderTeamsQuery query)
+        {
+            return
+                Task.FromResult(
+                    Context.Database.SqlQuery<TeamInfoDto>("select * from [dbo].GetLeaderTeams(@LeaderId)",
+                        new SqlParameter("LeaderId", query.LeaderId)).AsQueryable());
         }
 
         #endregion Queries Implementation

@@ -115,7 +115,7 @@ CREATE TRIGGER TeamsInsteadOfInsert ON [dbo].[Teams]
 INSTEAD OF INSERT AS
 BEGIN
     INSERT INTO [dbo].[Teams]([Name], [LeaderId])
-        SELECT Name, ISNULL(inserted.LeaderId, [dbo].UserIdAdmin()) FROM inserted;
+        SELECT Name, [dbo].UserIdAdmin() FROM inserted;
 END;
 GO
 

@@ -8,7 +8,8 @@ namespace FollowTheTask.DAL.Repositories.Team
     public interface ITeamRepository : IModelRepository<TeamDto>,
         IQueryRepository<TeamQuery, TeamInfoDto>,
         IListQueryRepository<TeamMembersQuery, TeamMemberDto>,
-        IListQueryRepository<TeamFeaturesQuery, FeatureInfoDto>
+        IListQueryRepository<TeamFeaturesQuery, FeatureInfoDto>,
+        IListQueryRepository<AllTeamsQuery, TeamInfoDto>
     {
     }
 }

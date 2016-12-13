@@ -126,7 +126,23 @@ BEGIN
 END;
 GO
 
-CREATE FUNCTION GetTeams(@LeaderId int)
+CREATE FUNCTION GetUserTeams(@UserId int)
+RETURNS @Result table(
+    [Id] int NOT NULL,
+    [Name] nvarchar(100) NULL,
+    [LeaderId] int NOT NULL,
+    [Leader] nvarchar(120) NULL
+) AS
+BEGIN
+    INSERT INTO @Result
+        SELECT Id, Name, LeaderId, [dbo].GetUserName(T.LeaderId)
+            FROM [dbo].[Teams] T WHERE Id IN 
+                (SELECT TeamId FROM [dbo].[UserTeams] WHERE UserId = @UserId);
+    RETURN;
+END;
+GO
+
+CREATE FUNCTION GetLeaderTeams(@LeaderId int)
 RETURNS @Result table(
     [Id] int NOT NULL,
     [Name] nvarchar(100) NULL,

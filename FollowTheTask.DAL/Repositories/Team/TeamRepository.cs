@@ -63,6 +63,18 @@ namespace FollowTheTask.DAL.Repositories.Team
                         new SqlParameter("TeamId", query.TeamId)).AsQueryable());
         }
 
+        public IQueryable<TeamInfoDto> Handle(AllTeamsQuery query)
+        {
+            return Context.Database.SqlQuery<TeamInfoDto>("select * from [dbo].GetAllTeams()").AsQueryable();
+        }
+
+        public Task<IQueryable<TeamInfoDto>> HandleAsync(AllTeamsQuery query)
+        {
+            return
+                Task.FromResult(
+                    Context.Database.SqlQuery<TeamInfoDto>("select * from [dbo].GetAllTeams()").AsQueryable());
+        }
+
         #endregion Queries Implementation
 
 
