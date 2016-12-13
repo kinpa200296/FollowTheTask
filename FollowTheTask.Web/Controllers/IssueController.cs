@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 using FollowTheTask.BLL.Services.Issue;
 using FollowTheTask.BLL.Services.Issue.ViewModels;
@@ -37,7 +36,7 @@ namespace FollowTheTask.Web.Controllers
         {
             if (model == null) return RedirectToAction("Index", "Error");
 
-            //needed? other fields?
+            model.AssigneeId = int.Parse(User.Identity.GetUserId());
             model.ReporterId = int.Parse(User.Identity.GetUserId());
 
             var queryResult = _issueService.CreateModel(model);
