@@ -87,6 +87,24 @@ namespace FollowTheTask.DAL.Repositories.User
                         new SqlParameter("LeaderId", query.LeaderId)).AsQueryable());
         }
 
+        public CreateIssueAllowedDto Handle(CreateIssueAllowedQuery query)
+        {
+            var allowed =
+                Context.Database.SqlQuery<bool>("select[dbo].CanUserCreateIssue(@UserId, @FeatureId)",
+                        new SqlParameter("UserId", query.UserId), new SqlParameter("FeatureId", query.FeatureId))
+                    .FirstOrDefault();
+            return new CreateIssueAllowedDto {Allowed = allowed};
+        }
+
+        public async Task<CreateIssueAllowedDto> HandleAsync(CreateIssueAllowedQuery query)
+        {
+            var allowed =
+                await Context.Database.SqlQuery<bool>("select[dbo].CanUserCreateIssue(@UserId, @FeatureId)",
+                        new SqlParameter("UserId", query.UserId), new SqlParameter("FeatureId", query.FeatureId))
+                    .FirstOrDefaultAsync();
+            return new CreateIssueAllowedDto {Allowed = allowed};
+        }
+
         #endregion Queries Implementation
 
 

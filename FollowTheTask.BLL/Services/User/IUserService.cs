@@ -34,5 +34,9 @@ namespace FollowTheTask.BLL.Services.User
         ListQueryResult<TeamInfoViewModel> GetLeaderTeams(LeaderTeamsQuery query);
 
         Task<ListQueryResult<TeamInfoViewModel>> GetLeaderTeamsAsync(LeaderTeamsQuery query);
+
+        QueryResult<CreateIssueAllowedDto> IsCreateIssueAllowed(CreateIssueAllowedQuery query);
+
+        Task<QueryResult<CreateIssueAllowedDto>> IsCreateIssueAllowedAsync(CreateIssueAllowedQuery query);
     }
 }

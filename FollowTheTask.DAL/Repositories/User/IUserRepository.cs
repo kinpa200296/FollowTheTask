@@ -8,7 +8,8 @@ namespace FollowTheTask.DAL.Repositories.User
     public interface IUserRepository : IModelRepository<UserDto>,
         IQueryRepository<UserQuery, UserDto>,
         IListQueryRepository<UserTeamsQuery, TeamInfoDto>,
-        IListQueryRepository<LeaderTeamsQuery, TeamInfoDto>
+        IListQueryRepository<LeaderTeamsQuery, TeamInfoDto>,
+        IQueryRepository<CreateIssueAllowedQuery, CreateIssueAllowedDto>
     {
     }
 }

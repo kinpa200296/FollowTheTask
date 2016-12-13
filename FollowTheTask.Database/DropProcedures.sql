@@ -66,3 +66,5 @@ DROP FUNCTION [dbo].[GetNotification];
 GO
 DROP FUNCTION [dbo].[GetNotifications];
 GO
+DROP FUNCTION [dbo].[CanUserCreateIssue];
+GO

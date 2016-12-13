@@ -91,7 +91,9 @@
     <Compile Include="Team\DataObjects\TeamMemberDto.cs" />
     <Compile Include="Team\Queries\TeamMembersQuery.cs" />
     <Compile Include="Team\Queries\TeamQuery.cs" />
+    <Compile Include="User\DataObjects\CreateIssueAllowedDto.cs" />
     <Compile Include="User\DataObjects\UserDto.cs" />
+    <Compile Include="User\Queries\CreateIssueAllowedQuery.cs" />
     <Compile Include="User\Queries\LeaderTeamsQuery.cs" />
     <Compile Include="User\Queries\UserQuery.cs" />
     <Compile Include="User\Queries\UserTeamsQuery.cs" />

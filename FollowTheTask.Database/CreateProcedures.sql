@@ -464,3 +464,17 @@ BEGIN
     RETURN;
 END;
 GO
+
+CREATE FUNCTION CanUserCreateIssue(@UserId int, @FeatureId int)
+RETURNS bit AS
+BEGIN
+    IF @UserId = [dbo].UserIdAdmin()
+        RETURN 1;
+    DECLARE @TeamId int;
+    SELECT @TeamId = (SELECT TeamId FROM [dbo].[Features] WHERE Id = @FeatureId)
+    IF @TeamId IN (SELECT Id FROM [dbo].[Teams] WHERE LeaderId = @UserId)
+        RETURN 1;
+    IF @UserId IN (SELECT UserId FROM [dbo].[UserTeams] WHERE TeamId = @TeamId)
+        RETURN 1;
+    RETURN 0;
+END;

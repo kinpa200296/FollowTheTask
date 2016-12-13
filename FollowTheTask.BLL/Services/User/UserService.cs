@@ -80,5 +80,15 @@ namespace FollowTheTask.BLL.Services.User
         {
             return (await RunListQueryAsync<LeaderTeamsQuery, TeamInfoDto>(_repository, query)).MapTo<TeamInfoViewModel>();
         }
+
+        public QueryResult<CreateIssueAllowedDto> IsCreateIssueAllowed(CreateIssueAllowedQuery query)
+        {
+            return RunQuery<CreateIssueAllowedQuery, CreateIssueAllowedDto>(_repository, query);
+        }
+
+        public async Task<QueryResult<CreateIssueAllowedDto>> IsCreateIssueAllowedAsync(CreateIssueAllowedQuery query)
+        {
+            return await RunQueryAsync<CreateIssueAllowedQuery, CreateIssueAllowedDto>(_repository, query);
+        }
     }
 }
