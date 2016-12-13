@@ -199,9 +199,6 @@ FakesAssemblies/
 FollowTheTask.Web/Scripts
 FollowTheTask.Web/Content/bootstrap
 FollowTheTask.Web/Content/fonts
-FollowTheTask.Web/Controllers/ErrorController.cs
-FollowTheTask.Web/Controllers/FeatureController.cs
-FollowTheTask.Web/Controllers/IssueController.cs
 FollowTheTask.Web/Infrastructure/ActionSources.cs
 FollowTheTask.Web/Infrastructure/ActionTypes.cs
 FollowTheTask.Web/Infrastructure/AuthData.cs
