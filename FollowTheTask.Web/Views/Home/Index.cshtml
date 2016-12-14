@@ -1,7 +1,13 @@
-﻿@{
+﻿@using FollowTheTask.Web.Infrastructure
+@using Microsoft.AspNet.Identity
+@{
     ViewBag.Title = "FollowTheTask";
 }
 
 <div>
     <h1>FollowTheTask</h1>
+    @*@if (User.Identity.IsAuthenticated && PermissionResolver.IsAdmin(int.Parse(User.Identity.GetUserId())))
+    {*@
+        @Html.ActionLink("Create team", "Create", "Team", new { }, new { @class = "btn btn-primary" })
+    @*}*@
 </div>

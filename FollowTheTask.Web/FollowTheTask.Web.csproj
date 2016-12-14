@@ -308,6 +308,10 @@
     <Content Include="Views\Manage\EditUser.cshtml" />
     <Content Include="Views\Team\Index.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Team\Create.cshtml" />
+    <Content Include="Views\Team\Edit.cshtml" />
+    <Content Include="Views\Team\TeamFeatures.cshtml" />
+    <Content Include="Views\Team\TeamMembers.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -345,6 +349,7 @@
     </Compile>
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="App_Start\JsEngineSwitcherConfig.cs" />
+    <Compile Include="Infrastructure\PermissionResolver.cs" />
     <Compile Include="Infrastructure\StaticValues.cs" />
     <Compile Include="Mapping\MapperConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using FollowTheTask.BLL.Services.Issue;
 using FollowTheTask.BLL.Services.Issue.ViewModels;
@@ -38,6 +39,7 @@ namespace FollowTheTask.Web.Controllers
 
             model.AssigneeId = int.Parse(User.Identity.GetUserId());
             model.ReporterId = int.Parse(User.Identity.GetUserId());
+            model.CreatedDateUtc = DateTimeOffset.UtcNow;
 
             var queryResult = _issueService.CreateModel(model);
             if (queryResult.IsFailed) return RedirectToAction("Internal", "Error");

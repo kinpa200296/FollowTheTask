@@ -1,9 +1,7 @@
 ﻿using System.Linq;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 using FollowTheTask.BLL.Services.Team;
 using FollowTheTask.BLL.Services.Team.ViewModels;
-using FollowTheTask.TransferObjects.Team.DataObjects;
 using FollowTheTask.TransferObjects.Team.Queries;
 using Microsoft.AspNet.Identity;
 
@@ -41,7 +39,7 @@ namespace FollowTheTask.Web.Controllers
         public ActionResult Create(TeamViewModel model)
         {
             if (model == null) return RedirectToAction("Index", "Error");
-            
+
             var result = _teamService.CreateModel(model);
 
             if (result.IsFailed) return RedirectToAction("Internal", "Error");
@@ -81,7 +79,7 @@ namespace FollowTheTask.Web.Controllers
         public ActionResult GetTeamFeatures(int teamId)
         {
             var list = _teamService.GetTeamFeatures(new TeamFeaturesQuery() {TeamId = teamId}).Value?.ToArray();
-            return View(list);
+            return PartialView(list);
         }
 
         [ChildActionOnly]
