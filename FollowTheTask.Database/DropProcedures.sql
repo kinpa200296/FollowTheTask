@@ -36,6 +36,18 @@ DROP PROCEDURE [dbo].[SendNotification];
 GO
 DROP FUNCTION [dbo].[ResolveTarget];
 GO
+DROP PROCEDURE [dbo].[ExecuteRequest];
+GO
+DROP PROCEDURE [dbo].[ExecuteRequests];
+GO
+DROP PROCEDURE [dbo].[ApproveRequest];
+GO
+DROP PROCEDURE [dbo].[ApproveRequests];
+GO
+DROP PROCEDURE [dbo].[DeclineRequest];
+GO
+DROP PROCEDURE [dbo].[DeclineRequests];
+GO
 DROP FUNCTION [dbo].[GetRoles];
 GO
 DROP FUNCTION [dbo].[GetTeam];

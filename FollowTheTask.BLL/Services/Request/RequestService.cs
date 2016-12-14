@@ -3,6 +3,7 @@ using FollowTheTask.BLL.Result;
 using FollowTheTask.BLL.Services.Model;
 using FollowTheTask.BLL.Services.Request.ViewModels;
 using FollowTheTask.DAL.Repositories.Request;
+using FollowTheTask.TransferObjects.Request.Commands;
 using FollowTheTask.TransferObjects.Request.DataObjects;
 using FollowTheTask.TransferObjects.Request.Queries;
 
@@ -77,6 +78,46 @@ namespace FollowTheTask.BLL.Services.Request
         public async Task<ListQueryResult<RequestInfoViewModel>> GetUserPendingRequestsAsync(UserPendingRequestsQuery query)
         {
             return (await RunListQueryAsync<UserPendingRequestsQuery, RequestInfoDto>(_repository, query)).MapTo<RequestInfoViewModel>();
+        }
+
+        public CommandResult ApproveRequest(ApproveRequestCommand command)
+        {
+            return ExecuteCommand(_repository, command);
+        }
+
+        public async Task<CommandResult> ApproveRequestAsync(ApproveRequestCommand command)
+        {
+            return await ExecuteCommandAsync(_repository, command);
+        }
+
+        public CommandResult ApprovePendingRequests(ApproveUserRequestsCommand command)
+        {
+            return ExecuteCommand(_repository, command);
+        }
+
+        public async Task<CommandResult> ApprovePendingRequestsAsync(ApproveUserRequestsCommand command)
+        {
+            return await ExecuteCommandAsync(_repository, command);
+        }
+
+        public CommandResult DeclineRequest(DeclineRequestCommand command)
+        {
+            return ExecuteCommand(_repository, command);
+        }
+
+        public async Task<CommandResult> DeclineRequestAsync(DeclineRequestCommand command)
+        {
+            return await ExecuteCommandAsync(_repository, command);
+        }
+
+        public CommandResult DeclinePendingRequests(DeclineUserRequestsCommand command)
+        {
+            return ExecuteCommand(_repository, command);
+        }
+
+        public async Task<CommandResult> DeclinePendingRequestsAsync(DeclineUserRequestsCommand command)
+        {
+            return await ExecuteCommandAsync(_repository, command);
         }
     }
 }

@@ -62,6 +62,10 @@
     <Compile Include="Notification\DataObjects\NotificationInfoDto.cs" />
     <Compile Include="Notification\Queries\NotificationQuery.cs" />
     <Compile Include="Notification\Queries\UserNotificationsQuery.cs" />
+    <Compile Include="Request\Commands\ApproveRequestCommand.cs" />
+    <Compile Include="Request\Commands\ApproveUserRequestsCommand.cs" />
+    <Compile Include="Request\Commands\DeclineRequestCommand.cs" />
+    <Compile Include="Request\Commands\DeclineUserRequestsCommand.cs" />
     <Compile Include="Request\DataObjects\RequestInfoDto.cs" />
     <Compile Include="Request\Queries\RequestQuery.cs" />
     <Compile Include="Request\Queries\UserPendingRequestsQuery.cs" />
@@ -117,7 +121,6 @@
     <Folder Include="Notification\Commands\" />
     <Folder Include="Priority\Commands\" />
     <Folder Include="Priority\Queries\" />
-    <Folder Include="Request\Commands\" />
     <Folder Include="Resolution\Commands\" />
     <Folder Include="Resolution\Queries\" />
     <Folder Include="Role\Commands\" />

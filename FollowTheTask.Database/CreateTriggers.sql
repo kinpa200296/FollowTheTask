@@ -111,14 +111,6 @@ BEGIN
 END;
 GO
 
-CREATE TRIGGER TeamsInsteadOfInsert ON [dbo].[Teams]
-INSTEAD OF INSERT AS
-BEGIN
-    INSERT INTO [dbo].[Teams]([Name], [LeaderId])
-        SELECT Name, [dbo].UserIdAdmin() FROM inserted;
-END;
-GO
-
 CREATE TRIGGER TeamsInsteadOfDelete ON [dbo].[Teams]
 INSTEAD OF DELETE AS
 BEGIN

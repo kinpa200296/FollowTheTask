@@ -1,9 +1,11 @@
-﻿using System.Data.SqlClient;
+﻿using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using FollowTheTask.DAL.Contexts;
 using FollowTheTask.DAL.Models;
 using FollowTheTask.DAL.Repositories.Model;
+using FollowTheTask.TransferObjects.Request.Commands;
 using FollowTheTask.TransferObjects.Request.DataObjects;
 using FollowTheTask.TransferObjects.Request.Queries;
 
@@ -66,6 +68,58 @@ namespace FollowTheTask.DAL.Repositories.Request
 
 
         #region Commands Implementation
+
+        public void Execute(ApproveRequestCommand command)
+        {
+            Context.Database.ExecuteSqlCommand(TransactionalBehavior.EnsureTransaction,
+                "exec [dbo].ApproveRequest @RequestId", new SqlParameter("RequestId", command.RequestId));
+        }
+
+        public async Task ExecuteAsync(ApproveRequestCommand command)
+        {
+            await
+                Context.Database.ExecuteSqlCommandAsync(TransactionalBehavior.EnsureTransaction,
+                    "exec [dbo].ApproveRequest @RequestId", new SqlParameter("RequestId", command.RequestId));
+        }
+
+        public void Execute(ApproveUserRequestsCommand command)
+        {
+            Context.Database.ExecuteSqlCommand(TransactionalBehavior.EnsureTransaction,
+                "exec [dbo].ApproveRequests @UserId", new SqlParameter("UserId", command.UserId));
+        }
+
+        public async Task ExecuteAsync(ApproveUserRequestsCommand command)
+        {
+            await
+                Context.Database.ExecuteSqlCommandAsync(TransactionalBehavior.EnsureTransaction,
+                    "exec [dbo].ApproveRequests @UserId", new SqlParameter("UserId", command.UserId));
+        }
+
+        public void Execute(DeclineRequestCommand command)
+        {
+            Context.Database.ExecuteSqlCommand(TransactionalBehavior.EnsureTransaction,
+                "exec [dbo].DeclineRequest @RequestId", new SqlParameter("RequestId", command.RequestId));
+        }
+
+        public async Task ExecuteAsync(DeclineRequestCommand command)
+        {
+            await
+                Context.Database.ExecuteSqlCommandAsync(TransactionalBehavior.EnsureTransaction,
+                    "exec [dbo].DeclineRequest @RequestId", new SqlParameter("RequestId", command.RequestId));
+        }
+
+        public void Execute(DeclineUserRequestsCommand command)
+        {
+            Context.Database.ExecuteSqlCommand(TransactionalBehavior.EnsureTransaction,
+                "exec [dbo].DeclineRequests @UserId", new SqlParameter("UserId", command.UserId));
+        }
+
+        public async Task ExecuteAsync(DeclineUserRequestsCommand command)
+        {
+            await
+                Context.Database.ExecuteSqlCommandAsync(TransactionalBehavior.EnsureTransaction,
+                    "exec [dbo].DeclineRequests @UserId", new SqlParameter("UserId", command.UserId));
+        }
 
         #endregion Commands Implementation
     }

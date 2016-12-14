@@ -155,6 +155,60 @@ BEGIN
 END;
 GO
 
+CREATE PROCEDURE ExecuteRequest(@RequestId int)
+AS
+BEGIN
+END;
+GO
+
+CREATE PROCEDURE ExecuteRequests(@UserId int)
+AS
+BEGIN
+END;
+GO
+
+CREATE PROCEDURE ApproveRequest(@RequestId int)
+AS
+BEGIN
+    --EXEC [dbo].ExecuteRequest @RequestId
+    INSERT INTO [dbo].[Notifications](TargetId, ActionSourceId, ActionTypeId, SenderId, ReceiverId)
+        SELECT TargetId, [dbo].ActionSourceIdRequestApproved(), ActionTypeId, SenderId, ReceiverId
+            FROM [dbo].[Requests] WHERE Id = @RequestId
+    DELETE FROM [dbo].[Requests] WHERE Id = @RequestId
+END;
+GO
+
+CREATE PROCEDURE ApproveRequests(@UserId int)
+AS
+BEGIN
+    --EXEC [dbo].ExecuteRequests @UserId
+    INSERT INTO [dbo].[Notifications](TargetId, ActionSourceId, ActionTypeId, SenderId, ReceiverId)
+        SELECT TargetId, [dbo].ActionSourceIdRequestApproved(), ActionTypeId, SenderId, ReceiverId
+            FROM [dbo].[Requests] WHERE ReceiverId = @UserId
+    DELETE FROM [dbo].[Requests] WHERE ReceiverId = @UserId
+END;
+GO
+
+CREATE PROCEDURE DeclineRequest(@RequestId int)
+AS
+BEGIN
+    INSERT INTO [dbo].[Notifications](TargetId, ActionSourceId, ActionTypeId, SenderId, ReceiverId)
+        SELECT TargetId, [dbo].ActionSourceIdRequestDeclined(), ActionTypeId, SenderId, ReceiverId
+            FROM [dbo].[Requests] WHERE Id = @RequestId
+    DELETE FROM [dbo].[Requests] WHERE Id = @RequestId
+END;
+GO
+
+CREATE PROCEDURE DeclineRequests(@UserId int)
+AS
+BEGIN
+    INSERT INTO [dbo].[Notifications](TargetId, ActionSourceId, ActionTypeId, SenderId, ReceiverId)
+        SELECT TargetId, [dbo].ActionSourceIdRequestDeclined(), ActionTypeId, SenderId, ReceiverId
+            FROM [dbo].[Requests] WHERE ReceiverId = @UserId
+    DELETE FROM [dbo].[Requests] WHERE ReceiverId = @UserId
+END;
+GO
+
 CREATE FUNCTION GetRoles(@UserId int)
 RETURNS @Result table(
     [Id] int NOT NULL,
