@@ -1,13 +1,31 @@
-﻿@model FollowTheTask.BLL.Services.Team.ViewModels.TeamInfoViewModel
+﻿@using Microsoft.AspNet.Identity
+@model FollowTheTask.BLL.Services.Team.ViewModels.TeamInfoViewModel
 
 @{
     ViewBag.Title = Model.Name;
 }
 
+<div>
+    <h1>@Model.Name</h1>
+    @if (User.IsInRole("Admin") || User.Identity.GetUserId() == Model.LeaderId.ToString())
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = @Model.Id })
+    }
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Delete", "Delete", new { id = @Model.Id })
+    }
+    
+</div>
+
+
+
+<br/>
+
 <h2>List of features</h2>
 
-@Html.Action("GetTeamFeatures")
+@Html.Action("GetTeamFeatures", "Team", new { teamId = @Model.Id })
 
 <h2>Members</h2>
 
-@Html.Action("GetTeamMembers")
+@Html.Action("GetTeamMembers", "Team", new { teamId = @Model.Id })
