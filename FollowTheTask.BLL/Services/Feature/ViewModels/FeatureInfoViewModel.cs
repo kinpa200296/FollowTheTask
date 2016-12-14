@@ -21,6 +21,6 @@ namespace FollowTheTask.BLL.Services.Feature.ViewModels
 
         [Display(Name = "Team name")]
         [StringLength(100)]
-        public int Team { get; set; }
+        public string Team { get; set; }
     }
 }

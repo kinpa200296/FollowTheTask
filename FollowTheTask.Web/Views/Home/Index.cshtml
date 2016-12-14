@@ -11,4 +11,11 @@
     {
         @Html.ActionLink("Create team", "Create", "Team", new { }, new { @class = "btn btn-primary" })
     }
+    
+    <hr/>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.Action("GetAllTeams", "Team")
+    }
 </div>

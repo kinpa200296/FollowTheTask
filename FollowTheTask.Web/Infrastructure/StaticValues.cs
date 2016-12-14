@@ -8,6 +8,7 @@ using FollowTheTask.BLL.Services.IssueType;
 using FollowTheTask.BLL.Services.Priority;
 using FollowTheTask.BLL.Services.Resolution;
 using FollowTheTask.BLL.Services.Role;
+using FollowTheTask.BLL.Services.Status;
 using FollowTheTask.TransferObjects.Model.Queries;
 
 namespace FollowTheTask.Web.Infrastructure
@@ -26,6 +27,7 @@ namespace FollowTheTask.Web.Infrastructure
         public Dictionary<int?, string> IssueTypes = new Dictionary<int?, string>();
         public Dictionary<int?, string> Priorities = new Dictionary<int?, string>();
         public Dictionary<int?, string> Resolutions = new Dictionary<int?, string>();
+        public Dictionary<int?, string> Statuses = new Dictionary<int?, string>();
 
         private StaticValues()
         {
@@ -68,6 +70,14 @@ namespace FollowTheTask.Web.Infrastructure
                 for (var i = 0; i < list4.Length; i++)
                     Resolutions.Add(i + 1, list4[i].Name);
             Resolutions.Add(0, "None");
+
+            var query5 =
+                DependencyResolver.Current.GetService<IStatusService>().GetAllModelDtos(new AllModelsQuery());
+            var list5 = query5.Value?.ToArray();
+            if (list5 != null)
+                for (var i = 0; i < list5.Length; i++)
+                    Statuses.Add(i + 1, list5[i].Name);
+            Statuses.Add(0, "None");
 
         }
 

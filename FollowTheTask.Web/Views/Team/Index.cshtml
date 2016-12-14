@@ -23,6 +23,7 @@
 <br/>
 
 <h2>List of features</h2>
+@Html.ActionLink("Create feature", "Create", "Feature", new {teamId = Model.Id}, new {})
 
 @Html.Action("GetTeamFeatures", "Team", new { teamId = @Model.Id })
 

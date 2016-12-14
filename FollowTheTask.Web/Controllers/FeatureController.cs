@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
 using FollowTheTask.BLL.Services.Feature;
 using FollowTheTask.BLL.Services.Feature.ViewModels;
 using FollowTheTask.BLL.Services.Team;
@@ -23,8 +24,8 @@ namespace FollowTheTask.Web.Controllers
         {
 
             var request = _featureService.GetFeature(new FeatureQuery() {Id = id});
-            if (request.IsFailed) return RedirectToAction("Index", "Error", request.Message);
-            if (request.Value == null) RedirectToAction("Index", "Error");
+            if (request.IsFailed) return RedirectToAction("Index", "Error", new { message = request.Message});
+            if (request.Value == null) return RedirectToAction("Index", "Error");
             return View(request.Value);
         }
 
@@ -42,19 +43,19 @@ namespace FollowTheTask.Web.Controllers
             var result = _featureService.CreateModel(model);
 
             if (result.IsFailed) return RedirectToAction("Internal", "Error");
-            return Index(model.Id);
+            return RedirectToAction("Index", new {id = model.Id});
         }
 
         [HttpGet]
         public ActionResult Edit(int id)
         {
             var model = _featureService.GetFeature(new FeatureQuery {Id = id});
-            if (model != null) return View(model);
+            if (model.Value != null) return View(model.Value);
             return RedirectToAction("Internal", "Error");
         }
 
         [HttpPost]
-        public ActionResult Edit(FeatureViewModel model)
+        public ActionResult Edit(FeatureInfoViewModel model)
         {
             if (model == null) return RedirectToAction("Index", "Error");
             
@@ -63,10 +64,10 @@ namespace FollowTheTask.Web.Controllers
             if (!(leaderId == int.Parse(User.Identity.GetUserId()) || User.IsInRole("Admin")))
                 RedirectToAction("AccessViolation", "Error");
 
-            var requestResult = _featureService.UpdateModel(model);
+            var requestResult = _featureService.UpdateModel(Mapper.Map<FeatureViewModel>(model));
 
-            if (requestResult.IsFailed) return RedirectToAction("Index", "Error", requestResult.Message);
-            return Index(model.Id);
+            if (requestResult.IsFailed) return RedirectToAction("Index", "Error", new { message = requestResult.Message});
+            return RedirectToAction("Index", new { id = model.Id });
         }
 
         [Authorize(Roles = "Admin,Leader")]
@@ -81,7 +82,7 @@ namespace FollowTheTask.Web.Controllers
             }
 
             var result = _featureService.DeleteModel(id);
-            if (result.IsFailed) return RedirectToAction("Index", "Error", result.Message);
+            if (result.IsFailed) return RedirectToAction("Index", "Error", new {message = result.Message});
             return RedirectToAction("Index", "Home");
         }
 

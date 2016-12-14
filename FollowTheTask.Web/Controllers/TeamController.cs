@@ -24,8 +24,8 @@ namespace FollowTheTask.Web.Controllers
         public ActionResult Index(int id)
         {
             var request = _teamService.GetTeam(new TeamQuery() {Id = id});
-            if (request.IsFailed) return RedirectToAction("Index", "Error", request.Message);
-            if (request.Value == null) RedirectToAction("Index", "Error");
+            if (request.IsFailed) return RedirectToAction("Index", "Error", new { message = request.Message});
+            if (request.Value == null) return RedirectToAction("Index", "Error");
             return View(request.Value);
         }
 
@@ -45,7 +45,7 @@ namespace FollowTheTask.Web.Controllers
             model.LeaderId = int.Parse(User.Identity.GetUserId());
             var result = _teamService.CreateModel(model);
 
-            if (result.IsFailed) return RedirectToAction("Index", "Error", result.Message);
+            if (result.IsFailed) return RedirectToAction("Index", "Error", new { message = result.Message});
             return RedirectToAction("Index", new {id = model.Id});
         }
 
@@ -66,7 +66,7 @@ namespace FollowTheTask.Web.Controllers
             
             var requestResult = _teamService.UpdateModel(Mapper.Map<TeamViewModel>(model));
 
-            if (requestResult.IsFailed) return RedirectToAction("Index", "Error", requestResult.Message);
+            if (requestResult.IsFailed) return RedirectToAction("Index", "Error", new {message = requestResult.Message } );
             return RedirectToAction("Index", new {id = model.Id});
         }
 
@@ -74,7 +74,7 @@ namespace FollowTheTask.Web.Controllers
         public ActionResult Delete(int id)
         {
             var result = _teamService.DeleteModel(id);
-            if (result.IsFailed) return RedirectToAction("Index", "Error", result.Message);
+            if (result.IsFailed) return RedirectToAction("Index", "Error", new {message = result.Message});
             return RedirectToAction("Index", "Home");
         }
 
@@ -89,6 +89,13 @@ namespace FollowTheTask.Web.Controllers
         public ActionResult GetTeamMembers(int teamId)
         {
             var list = _teamService.GetTeamMembers(new TeamMembersQuery() {TeamId = teamId}).Value?.ToArray();
+            return PartialView(list);
+        }
+
+        [ChildActionOnly]
+        public ActionResult GetAllTeams()
+        {
+            var list = _teamService.GetAllTeams(new AllTeamsQuery()).Value?.ToArray();
             return PartialView(list);
         }
     }

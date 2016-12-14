@@ -12,6 +12,6 @@ namespace FollowTheTask.TransferObjects.Feature.DataObjects
 
         public int TeamId { get; set; }
 
-        public int Team { get; set; }
+        public string Team { get; set; }
     }
 }

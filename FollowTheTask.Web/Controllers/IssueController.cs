@@ -21,8 +21,8 @@ namespace FollowTheTask.Web.Controllers
         public ActionResult Index(int id)
         {
             var request = _issueService.GetIssue(new IssueQuery {Id = id});
-            if (request.IsFailed) return RedirectToAction("Index", "Error", request.Message);
-            if (request.Value == null) RedirectToAction("Index", "Error");
+            if (request.IsFailed) return RedirectToAction("Index", "Error", new {message = request.Message});
+            if (request.Value == null) return RedirectToAction("Index", "Error");
             return View(request.Value);
         }
 
@@ -43,7 +43,7 @@ namespace FollowTheTask.Web.Controllers
 
             var queryResult = _issueService.CreateModel(model);
             if (queryResult.IsFailed) return RedirectToAction("Internal", "Error");
-            return Index(model.Id);
+            return RedirectToAction("Index", new { id = model.Id });
         }
 
         [HttpGet]
@@ -62,15 +62,15 @@ namespace FollowTheTask.Web.Controllers
 
             var requestResult = _issueService.UpdateModel(model);
 
-            if (requestResult.IsFailed) return RedirectToAction("Index", "Error", requestResult.Message);
-            return Index(model.Id);            
+            if (requestResult.IsFailed) return RedirectToAction("Index", "Error", new { message = requestResult.Message});
+            return RedirectToAction("Index", new { id = model.Id });            
         }
 
         [Authorize(Roles = "Admin,Leader")]
         public ActionResult Delete(int id)
         {
             var result = _issueService.DeleteModel(id);
-            if (result.IsFailed) return RedirectToAction("Index", "Error", result.Message);
+            if (result.IsFailed) return RedirectToAction("Index", "Error", new { message = result.Message});
             return RedirectToAction("Index", "Home");
         }
 

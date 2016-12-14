@@ -12,7 +12,7 @@ namespace FollowTheTask.Web.Controllers
         public ActionResult Index(string message)
         {
             if (message == null) message = "404 - Not found";
-            return View(message);
+            return View((object)message);
         }
 
         public ActionResult Internal()
