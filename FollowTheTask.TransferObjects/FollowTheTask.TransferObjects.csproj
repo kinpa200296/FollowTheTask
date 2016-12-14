@@ -96,6 +96,7 @@
     <Compile Include="User\Queries\CreateIssueAllowedQuery.cs" />
     <Compile Include="User\Queries\LeaderTeamsQuery.cs" />
     <Compile Include="User\Queries\UserQuery.cs" />
+    <Compile Include="User\Queries\UserRolesQuery.cs" />
     <Compile Include="User\Queries\UserTeamsQuery.cs" />
   </ItemGroup>
   <ItemGroup>

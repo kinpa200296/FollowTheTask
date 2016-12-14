@@ -22,6 +22,8 @@ DROP FUNCTION [dbo].[ActionTypeIdAssignIssue];
 GO
 DROP FUNCTION [dbo].[GetUserName];
 GO
+DROP FUNCTION [dbo].[GetRoleName];
+GO
 DROP FUNCTION [dbo].[GetTeamName];
 GO
 DROP FUNCTION [dbo].[GetFeatureName];
@@ -33,6 +35,8 @@ GO
 DROP PROCEDURE [dbo].[SendNotification];
 GO
 DROP FUNCTION [dbo].[ResolveTarget];
+GO
+DROP FUNCTION [dbo].[GetRoles];
 GO
 DROP FUNCTION [dbo].[GetTeam];
 GO

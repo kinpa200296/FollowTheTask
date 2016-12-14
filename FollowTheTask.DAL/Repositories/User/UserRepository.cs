@@ -6,6 +6,7 @@ using AutoMapper;
 using FollowTheTask.DAL.Contexts;
 using FollowTheTask.DAL.Models;
 using FollowTheTask.DAL.Repositories.Model;
+using FollowTheTask.TransferObjects.Role.DataObjects;
 using FollowTheTask.TransferObjects.Team.DataObjects;
 using FollowTheTask.TransferObjects.User.DataObjects;
 using FollowTheTask.TransferObjects.User.Queries;
@@ -55,6 +56,21 @@ namespace FollowTheTask.DAL.Repositories.User
                 model = await ModelsDao.FirstOrDefaultAsync(u => u.Username == query.Username);
             }
             return model == null ? null : Mapper.Map<UserDto>(model);
+        }
+
+        public IQueryable<RoleDto> Handle(UserRolesQuery query)
+        {
+            return
+                Context.Database.SqlQuery<RoleDto>("select * from [dbo].GetRoles(@UserId)",
+                    new SqlParameter("UserId", query.UserId)).AsQueryable();
+        }
+
+        public Task<IQueryable<RoleDto>> HandleAsync(UserRolesQuery query)
+        {
+            return
+                Task.FromResult(
+                    Context.Database.SqlQuery<RoleDto>("select * from [dbo].GetRoles(@UserId)",
+                        new SqlParameter("UserId", query.UserId)).AsQueryable());
         }
 
         public IQueryable<TeamInfoDto> Handle(UserTeamsQuery query)

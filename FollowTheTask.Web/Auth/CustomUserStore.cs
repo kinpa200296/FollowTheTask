@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using FollowTheTask.BLL.Result;
@@ -16,7 +18,8 @@ namespace FollowTheTask.Web.Auth
         IUserEmailStore<AuthUser>,
         IUserLockoutStore<AuthUser, string>,
         IUserTwoFactorStore<AuthUser, string>,
-        IUserSecurityStampStore<AuthUser, string>
+        IUserSecurityStampStore<AuthUser, string>,
+        IUserRoleStore<AuthUser>
     {
         private readonly IUserService _userService;
 
@@ -190,6 +193,32 @@ namespace FollowTheTask.Web.Auth
         }
 
         #endregion Two factor store
+
+        #region User role store
+
+        public Task AddToRoleAsync(AuthUser user, string roleName)
+        {
+            throw new NotSupportedException();
+        }
+
+        public Task RemoveFromRoleAsync(AuthUser user, string roleName)
+        {
+            throw new NotSupportedException();
+        }
+
+        public async Task<IList<string>> GetRolesAsync(AuthUser user)
+        {
+            return
+                (await _userService.GetUserRolesDtosAsync(new UserRolesQuery {UserId = user.Dto.Id})).Value?
+                    .AsEnumerable().Select(r => r.Name).ToList();
+        }
+
+        public async Task<bool> IsInRoleAsync(AuthUser user, string roleName)
+        {
+            return (await GetRolesAsync(user)).Contains(roleName);
+        }
+
+        #endregion User role store
 
 
         private void ProcessCommandResult(CommandResult result)

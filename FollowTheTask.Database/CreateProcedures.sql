@@ -95,6 +95,15 @@ BEGIN
 END;
 GO
 
+CREATE FUNCTION GetRoleName(@RoleId int)
+RETURNS nvarchar(100) AS
+BEGIN
+    DECLARE @Result nvarchar(100);
+    SELECT @Result = (SELECT Name FROM [dbo].[Roles] WHERE Id = @RoleId);
+    RETURN @Result;
+END;
+GO
+
 CREATE FUNCTION GetTeamName(@TeamId int)
 RETURNS nvarchar(100) AS
 BEGIN
@@ -143,6 +152,19 @@ BEGIN
     ELSE '<Unknown Target>'
     END);
     RETURN @Result;
+END;
+GO
+
+CREATE FUNCTION GetRoles(@UserId int)
+RETURNS @Result table(
+    [Id] int NOT NULL,
+    [Name] nvarchar(50) NULL
+) AS
+BEGIN
+    INSERT INTO @Result
+        SELECT RoleId, [dbo].GetRoleName(T.RoleId)
+            FROM [dbo].[UserRoles] T WHERE UserId = @UserId;
+    RETURN;
 END;
 GO
 

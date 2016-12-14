@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using FollowTheTask.BLL.Result;
@@ -9,7 +10,7 @@ using Microsoft.AspNet.Identity;
 
 namespace FollowTheTask.Web.Auth
 {
-    public class CustomRoleStore : IRoleStore<UserRole, int>
+    public class CustomRoleStore : IQueryableRoleStore<UserRole, int>
     {
         private readonly IRoleService _roleService;
 
@@ -24,6 +25,13 @@ namespace FollowTheTask.Web.Auth
         {
             _roleService.Dispose();
         }
+
+        public IQueryable<UserRole> Roles
+            =>
+            _roleService.GetAllModelDtos(new AllModelsQuery())?
+                .Value.AsEnumerable()
+                .Select(UserRole.FromDto)
+                .AsQueryable();
 
         public Task CreateAsync(UserRole role)
         {
