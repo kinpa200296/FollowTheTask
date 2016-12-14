@@ -5,6 +5,7 @@ using FollowTheTask.BLL.Services.Issue.ViewModels;
 using FollowTheTask.BLL.Services.Model;
 using FollowTheTask.DAL.Repositories.Issue;
 using FollowTheTask.TransferObjects.Comment.DataObjects;
+using FollowTheTask.TransferObjects.Issue.Commands;
 using FollowTheTask.TransferObjects.Issue.DataObjects;
 using FollowTheTask.TransferObjects.Issue.Queries;
 
@@ -59,6 +60,16 @@ namespace FollowTheTask.BLL.Services.Issue
         public async Task<ListQueryResult<CommentInfoViewModel>> GetIssueCommentsAsync(IssueCommentsQuery query)
         {
             return (await RunListQueryAsync<IssueCommentsQuery, CommentInfoDto>(_repository, query)).MapTo<CommentInfoViewModel>();
+        }
+
+        public CommandResult AssignIssue(RequestAssignIssueCommand command)
+        {
+            return ExecuteCommand(_repository, command);
+        }
+
+        public async Task<CommandResult> AssignIssueAsync(RequestAssignIssueCommand command)
+        {
+            return await ExecuteCommandAsync(_repository, command);
         }
     }
 }

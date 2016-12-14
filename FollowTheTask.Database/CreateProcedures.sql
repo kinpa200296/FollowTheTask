@@ -132,13 +132,66 @@ END;
 GO
 
 CREATE PROCEDURE SendRequest(@TargetId int, @ActionTypeId int, @SenderId int, @ReceiverId int)
-AS INSERT INTO [dbo].[Requests](TargetId, ActionTypeId, SenderId, ReceiverId)
-    VALUES (@TargetId, @ActionTypeId, @SenderId, @ReceiverId);
+AS
+BEGIN
+    DECLARE @RequestId int;
+    SET @RequestId = NULL;
+    SELECT @RequestId = (SELECT Id FROM [dbo].[Requests] 
+        WHERE TargetId = @TargetId AND ActionTypeId = @ActionTypeId
+            AND SenderId = @SenderId AND ReceiverId = @ReceiverId)
+    IF @RequestId IS NULL
+        INSERT INTO [dbo].[Requests](TargetId, ActionTypeId, SenderId, ReceiverId)
+            VALUES (@TargetId, @ActionTypeId, @SenderId, @ReceiverId);
+END;
 GO
 
 CREATE PROCEDURE SendNotification(@TargetId int, @ActionSourceId int, @ActionTypeId int, @SenderId int, @ReceiverId int)
-AS INSERT INTO [dbo].[Notifications](TargetId, ActionSourceId, ActionTypeId, SenderId, ReceiverId)
-    VALUES (@TargetId, @ActionSourceId, @ActionTypeId, @SenderId, @ReceiverId);
+AS
+BEGIN
+    DECLARE @NotificationId int;
+    SET @NotificationId = NULL;
+    SELECT @NotificationId = (SELECT Id FROM [dbo].[Notifications] 
+        WHERE TargetId = @TargetId AND ActionSourceId = @ActionSourceId
+            AND ActionTypeId = @ActionTypeId AND SenderId = @SenderId AND ReceiverId = @ReceiverId)
+    IF @NotificationId IS NULL
+        INSERT INTO [dbo].[Notifications](TargetId, ActionSourceId, ActionTypeId, SenderId, ReceiverId)
+            VALUES (@TargetId, @ActionSourceId, @ActionTypeId, @SenderId, @ReceiverId);
+END;
+GO
+
+CREATE PROCEDURE SendBeLeaderRequest(@UserId int, @TeamId int)
+AS
+BEGIN
+    DECLARE @ActionTypeId int;
+    SET @ActionTypeId = [dbo].ActionTypeIdBeLeader();
+    DECLARE @AdminId int;
+    SET @AdminId = [dbo].UserIdAdmin();
+    EXEC [dbo].SendRequest @TeamId, @ActionTypeId, @UserId, @AdminId;
+END;
+GO
+
+CREATE PROCEDURE SendJoinTeamRequest(@UserId int, @TeamId int)
+AS
+BEGIN
+    DECLARE @LeaderId int;
+    SELECT @LeaderId = (SELECT LeaderId FROM [dbo].[Teams] WHERE Id = @TeamId);
+    DECLARE @ActionTypeId int;
+    SET @ActionTypeId = [dbo].ActionTypeIdJoinTeam();
+    EXEC [dbo].SendRequest @TeamId, @ActionTypeId, @UserId, @LeaderId;
+END;
+GO
+
+CREATE PROCEDURE SendAssignIssueRequest(@UserId int, @IssueId int)
+AS
+BEGIN
+    DECLARE @LeaderId int;
+    SELECT @LeaderId = (SELECT LeaderId FROM [dbo].[Teams] WHERE Id = 
+        (SELECT TeamId FROM [dbo].[Features] WHERE Id = 
+            (SELECT FeatureId FROM [dbo].[Issues] WHERE Id = @IssueId)));
+    DECLARE @ActionTypeId int;
+    SET @ActionTypeId = [dbo].ActionTypeIdAssignIssue();
+    EXEC [dbo].SendRequest @IssueId, @ActionTypeId, @UserId, @LeaderId;
+END;
 GO
 
 CREATE FUNCTION ResolveTarget(@TargetId int, @ActionTypeId int)

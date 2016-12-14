@@ -4,6 +4,7 @@ using FollowTheTask.BLL.Services.Feature.ViewModels;
 using FollowTheTask.BLL.Services.Model;
 using FollowTheTask.BLL.Services.Team.ViewModels;
 using FollowTheTask.TransferObjects.Feature.DataObjects;
+using FollowTheTask.TransferObjects.Team.Commands;
 using FollowTheTask.TransferObjects.Team.DataObjects;
 using FollowTheTask.TransferObjects.Team.Queries;
 
@@ -42,5 +43,13 @@ namespace FollowTheTask.BLL.Services.Team
         ListQueryResult<TeamInfoViewModel> GetAllTeams(AllTeamsQuery query);
 
         Task<ListQueryResult<TeamInfoViewModel>> GetAllTeamsAsync(AllTeamsQuery query);
+
+        CommandResult JoinTeam(RequestJoinTeamCommand command);
+
+        Task<CommandResult> JoinTeamAsync(RequestJoinTeamCommand command);
+
+        CommandResult BecomeLeader(RequestLeadershipCommand command);
+
+        Task<CommandResult> BecomeLeaderAsync(RequestLeadershipCommand command);
     }
 }

@@ -5,6 +5,7 @@ using FollowTheTask.BLL.Services.Model;
 using FollowTheTask.BLL.Services.Team.ViewModels;
 using FollowTheTask.DAL.Repositories.Team;
 using FollowTheTask.TransferObjects.Feature.DataObjects;
+using FollowTheTask.TransferObjects.Team.Commands;
 using FollowTheTask.TransferObjects.Team.DataObjects;
 using FollowTheTask.TransferObjects.Team.Queries;
 
@@ -99,6 +100,26 @@ namespace FollowTheTask.BLL.Services.Team
         public async Task<ListQueryResult<TeamInfoViewModel>> GetAllTeamsAsync(AllTeamsQuery query)
         {
             return (await RunListQueryAsync<AllTeamsQuery, TeamInfoDto>(_repository, query)).MapTo<TeamInfoViewModel>();
+        }
+
+        public CommandResult JoinTeam(RequestJoinTeamCommand command)
+        {
+            return ExecuteCommand(_repository, command);
+        }
+
+        public async Task<CommandResult> JoinTeamAsync(RequestJoinTeamCommand command)
+        {
+            return await ExecuteCommandAsync(_repository, command);
+        }
+
+        public CommandResult BecomeLeader(RequestLeadershipCommand command)
+        {
+            return ExecuteCommand(_repository, command);
+        }
+
+        public async Task<CommandResult> BecomeLeaderAsync(RequestLeadershipCommand command)
+        {
+            return await ExecuteCommandAsync(_repository, command);
         }
     }
 }

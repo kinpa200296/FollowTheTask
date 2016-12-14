@@ -34,6 +34,12 @@ DROP PROCEDURE [dbo].[SendRequest];
 GO
 DROP PROCEDURE [dbo].[SendNotification];
 GO
+DROP PROCEDURE [dbo].[SendBeLeaderRequest];
+GO
+DROP PROCEDURE [dbo].[SendJoinTeamRequest];
+GO
+DROP PROCEDURE [dbo].[SendAssignIssueRequest];
+GO
 DROP FUNCTION [dbo].[ResolveTarget];
 GO
 DROP PROCEDURE [dbo].[ExecuteRequest];

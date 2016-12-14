@@ -1,5 +1,6 @@
 ﻿using FollowTheTask.DAL.Repositories.Model;
 using FollowTheTask.TransferObjects.Feature.DataObjects;
+using FollowTheTask.TransferObjects.Team.Commands;
 using FollowTheTask.TransferObjects.Team.DataObjects;
 using FollowTheTask.TransferObjects.Team.Queries;
 
@@ -9,7 +10,9 @@ namespace FollowTheTask.DAL.Repositories.Team
         IQueryRepository<TeamQuery, TeamInfoDto>,
         IListQueryRepository<TeamMembersQuery, TeamMemberDto>,
         IListQueryRepository<TeamFeaturesQuery, FeatureInfoDto>,
-        IListQueryRepository<AllTeamsQuery, TeamInfoDto>
+        IListQueryRepository<AllTeamsQuery, TeamInfoDto>,
+        ICommandRepository<RequestJoinTeamCommand>,
+        ICommandRepository<RequestLeadershipCommand>
     {
     }
 }

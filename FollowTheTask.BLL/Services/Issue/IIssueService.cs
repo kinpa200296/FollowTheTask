@@ -4,6 +4,7 @@ using FollowTheTask.BLL.Services.Comment.ViewModels;
 using FollowTheTask.BLL.Services.Issue.ViewModels;
 using FollowTheTask.BLL.Services.Model;
 using FollowTheTask.TransferObjects.Comment.DataObjects;
+using FollowTheTask.TransferObjects.Issue.Commands;
 using FollowTheTask.TransferObjects.Issue.DataObjects;
 using FollowTheTask.TransferObjects.Issue.Queries;
 
@@ -26,5 +27,9 @@ namespace FollowTheTask.BLL.Services.Issue
         ListQueryResult<CommentInfoViewModel> GetIssueComments(IssueCommentsQuery query);
 
         Task<ListQueryResult<CommentInfoViewModel>> GetIssueCommentsAsync(IssueCommentsQuery query);
+
+        CommandResult AssignIssue(RequestAssignIssueCommand command);
+
+        Task<CommandResult> AssignIssueAsync(RequestAssignIssueCommand command);
     }
 }

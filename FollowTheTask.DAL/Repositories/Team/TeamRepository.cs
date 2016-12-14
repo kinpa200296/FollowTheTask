@@ -1,10 +1,12 @@
-﻿using System.Data.SqlClient;
+﻿using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using FollowTheTask.DAL.Contexts;
 using FollowTheTask.DAL.Models;
 using FollowTheTask.DAL.Repositories.Model;
 using FollowTheTask.TransferObjects.Feature.DataObjects;
+using FollowTheTask.TransferObjects.Team.Commands;
 using FollowTheTask.TransferObjects.Team.DataObjects;
 using FollowTheTask.TransferObjects.Team.Queries;
 
@@ -79,6 +81,36 @@ namespace FollowTheTask.DAL.Repositories.Team
 
 
         #region Commands Implementation
+
+        public void Execute(RequestJoinTeamCommand command)
+        {
+            Context.Database.ExecuteSqlCommand(TransactionalBehavior.EnsureTransaction,
+                "exec [dbo].SendJoinTeamRequest @UserId, @TeamId", new SqlParameter("UserId", command.UserId),
+                new SqlParameter("TeamId", command.TeamId));
+        }
+
+        public async Task ExecuteAsync(RequestJoinTeamCommand command)
+        {
+            await
+                Context.Database.ExecuteSqlCommandAsync(TransactionalBehavior.EnsureTransaction,
+                    "exec [dbo].SendJoinTeamRequest @UserId, @TeamId", new SqlParameter("UserId", command.UserId),
+                    new SqlParameter("TeamId", command.TeamId));
+        }
+
+        public void Execute(RequestLeadershipCommand command)
+        {
+            Context.Database.ExecuteSqlCommand(TransactionalBehavior.EnsureTransaction,
+                "exec [dbo].SendBeLeaderRequest @UserId, @TeamId", new SqlParameter("UserId", command.UserId),
+                new SqlParameter("TeamId", command.TeamId));
+        }
+
+        public async Task ExecuteAsync(RequestLeadershipCommand command)
+        {
+            await
+                Context.Database.ExecuteSqlCommandAsync(TransactionalBehavior.EnsureTransaction,
+                    "exec [dbo].SendBeLeaderRequest @UserId, @TeamId", new SqlParameter("UserId", command.UserId),
+                    new SqlParameter("TeamId", command.TeamId));
+        }
 
         #endregion Commands Implementation
     }

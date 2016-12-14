@@ -57,6 +57,7 @@
     <Compile Include="Feature\DataObjects\FeatureInfoDto.cs" />
     <Compile Include="Feature\Queries\FeatureIssuesQuery.cs" />
     <Compile Include="Feature\Queries\FeatureQuery.cs" />
+    <Compile Include="Issue\Commands\RequestAssignIssueCommand.cs" />
     <Compile Include="Issue\Queries\IssueCommentsQuery.cs" />
     <Compile Include="Issue\Queries\IssueQuery.cs" />
     <Compile Include="Notification\DataObjects\NotificationInfoDto.cs" />
@@ -70,6 +71,8 @@
     <Compile Include="Request\Queries\RequestQuery.cs" />
     <Compile Include="Request\Queries\UserPendingRequestsQuery.cs" />
     <Compile Include="Request\Queries\UserRequestsQuery.cs" />
+    <Compile Include="Team\Commands\RequestJoinTeamCommand.cs" />
+    <Compile Include="Team\Commands\RequestLeadershipCommand.cs" />
     <Compile Include="Team\Queries\AllTeamsQuery.cs" />
     <Compile Include="Team\Queries\TeamFeaturesQuery.cs" />
     <Compile Include="IssueType\DataObjects\IssueTypeDto.cs" />
@@ -117,7 +120,6 @@
     <Folder Include="Feature\Commands\" />
     <Folder Include="IssueType\Commands\" />
     <Folder Include="IssueType\Queries\" />
-    <Folder Include="Issue\Commands\" />
     <Folder Include="Notification\Commands\" />
     <Folder Include="Priority\Commands\" />
     <Folder Include="Priority\Queries\" />
@@ -126,7 +128,6 @@
     <Folder Include="Role\Commands\" />
     <Folder Include="Status\Commands\" />
     <Folder Include="Status\Queries\" />
-    <Folder Include="Team\Commands\" />
     <Folder Include="User\Commands\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
