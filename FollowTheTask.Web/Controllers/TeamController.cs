@@ -1,7 +1,9 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
 using FollowTheTask.BLL.Services.Team;
 using FollowTheTask.BLL.Services.Team.ViewModels;
+using FollowTheTask.TransferObjects.Team.DataObjects;
 using FollowTheTask.TransferObjects.Team.Queries;
 using Microsoft.AspNet.Identity;
 
@@ -40,31 +42,32 @@ namespace FollowTheTask.Web.Controllers
         {
             if (model == null) return RedirectToAction("Index", "Error");
 
+            model.LeaderId = int.Parse(User.Identity.GetUserId());
             var result = _teamService.CreateModel(model);
 
-            if (result.IsFailed) return RedirectToAction("Internal", "Error");
-            return Index(model.Id);
+            if (result.IsFailed) return RedirectToAction("Index", "Error", result.Message);
+            return RedirectToAction("Index", new {id = model.Id});
         }
 
         [HttpGet]
         public ActionResult Edit(int id)
         {
             var model =  _teamService.GetTeam(new TeamQuery {Id = id});
-            if (model != null) return View(model);
+            if (model.Value != null) return View(model.Value);
             return RedirectToAction("Internal", "Error");
         }
 
         [HttpPost]
-        public ActionResult Edit(TeamViewModel model)
+        public ActionResult Edit(TeamInfoViewModel model)
         {
             if (model == null) return RedirectToAction("Index", "Error");
             if (!(model.LeaderId == int.Parse(User.Identity.GetUserId()) || User.IsInRole("Admin")))
                 RedirectToAction("AccessViolation", "Error");
             
-            var requestResult = _teamService.UpdateModel(model);
+            var requestResult = _teamService.UpdateModel(Mapper.Map<TeamViewModel>(model));
 
             if (requestResult.IsFailed) return RedirectToAction("Index", "Error", requestResult.Message);
-            return Index(model.Id);
+            return RedirectToAction("Index", new {id = model.Id});
         }
 
         [Authorize(Roles = "Admin")]

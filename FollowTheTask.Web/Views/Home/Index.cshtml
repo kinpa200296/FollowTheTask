@@ -6,8 +6,9 @@
 
 <div>
     <h1>FollowTheTask</h1>
-    @*@if (User.Identity.IsAuthenticated && PermissionResolver.IsAdmin(int.Parse(User.Identity.GetUserId())))
-    {*@
+    
+    @if (User.IsInRole("Admin"))
+    {
         @Html.ActionLink("Create team", "Create", "Team", new { }, new { @class = "btn btn-primary" })
-    @*}*@
+    }
 </div>

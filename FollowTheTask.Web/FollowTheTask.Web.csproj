@@ -310,8 +310,8 @@
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Team\Create.cshtml" />
     <Content Include="Views\Team\Edit.cshtml" />
-    <Content Include="Views\Team\TeamFeatures.cshtml" />
-    <Content Include="Views\Team\TeamMembers.cshtml" />
+    <Content Include="Views\Team\GetTeamFeatures.cshtml" />
+    <Content Include="Views\Team\GetTeamMembers.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

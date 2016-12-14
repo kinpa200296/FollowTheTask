@@ -18,13 +18,13 @@ namespace FollowTheTask.Web.Controllers
         public ActionResult Internal()
         {
             var message = "500 - Internal error :(";
-            return View("Index", message );
+            return RedirectToAction("Index", "Error", new { message = message});
         }
 
         public ActionResult AccessViolation()
         {
             var message = "403 - Access voilation";
-            return View("Index", message );
+            return RedirectToAction("Index", "Error", new {message = message});
         }
     }
 }
