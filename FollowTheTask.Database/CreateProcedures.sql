@@ -211,19 +211,61 @@ GO
 CREATE PROCEDURE ExecuteRequest(@RequestId int)
 AS
 BEGIN
+    DECLARE @ActionTypeId int;
+    SELECT @ActionTypeId = (SELECT ActionTypeId FROM [dbo].[Requests] WHERE Id = @RequestId);
+    IF @ActionTypeId = [dbo].ActionTypeIdBeLeader()
+    BEGIN
+        IF [dbo].UserIdAdmin() != (SELECT ReceiverId FROM [dbo].[Requests] WHERE Id = @RequestId)
+        BEGIN
+            RAISERROR('Not enough rights', 10, 1)
+            RETURN;
+        END;
+        UPDATE T SET LeaderId = R.SenderId
+            FROM [dbo].[Teams] T, [dbo].[Requests] R WHERE R.Id = @RequestId AND T.Id = R.TargetId
+    END;
+    IF @ActionTypeId = [dbo].ActionTypeIdJoinTeam()
+    BEGIN
+        IF (SELECT LeaderId FROM [dbo].[Teams] WHERE Id = 
+                (SELECT TargetId FROM [dbo].[Requests] WHERE Id = @RequestId))
+            != (SELECT ReceiverId FROM [dbo].[Requests] WHERE Id = @RequestId)
+            AND [dbo].UserIdAdmin() != (SELECT ReceiverId FROM [dbo].[Requests] WHERE Id = @RequestId)
+        BEGIN
+            RAISERROR('Not enough rights', 10, 1)
+            RETURN;
+        END;
+        INSERT INTO [dbo].[UserTeams](TeamId, UserId)
+            SELECT TargetId, SenderId FROM [dbo].[Requests] WHERE Id = @RequestId
+    END;
+    IF @ActionTypeId = [dbo].ActionTypeIdAssignIssue()
+    BEGIN
+        IF (SELECT LeaderId FROM [dbo].[Teams] WHERE Id = 
+                (SELECT TargetId FROM [dbo].[Requests] WHERE Id = @RequestId))
+            != (SELECT ReceiverId FROM [dbo].[Requests] WHERE Id = @RequestId)
+            AND [dbo].UserIdAdmin() != (SELECT ReceiverId FROM [dbo].[Requests] WHERE Id = @RequestId)
+        BEGIN
+            RAISERROR('Not enough rights', 10, 1)
+            RETURN;
+        END;
+        UPDATE T SET AssigneeId = R.SenderId
+            FROM [dbo].[Issues] T, [dbo].[Requests] R WHERE R.Id = @RequestId AND T.Id = R.TargetId
+    END;
 END;
 GO
 
 CREATE PROCEDURE ExecuteRequests(@UserId int)
 AS
 BEGIN
+    DECLARE @Code varchar(max) = '';
+    SELECT @Code = @Code + 'exec [dbo].ExecuteRequest ' + CONVERT(varchar(10),Id) + ';'
+        FROM [dbo].[Requests] WHERE ReceiverId = @UserId;
+    EXEC (@Code);
 END;
 GO
 
 CREATE PROCEDURE ApproveRequest(@RequestId int)
 AS
 BEGIN
-    --EXEC [dbo].ExecuteRequest @RequestId
+    EXEC [dbo].ExecuteRequest @RequestId
     INSERT INTO [dbo].[Notifications](TargetId, ActionSourceId, ActionTypeId, SenderId, ReceiverId)
         SELECT TargetId, [dbo].ActionSourceIdRequestApproved(), ActionTypeId, SenderId, ReceiverId
             FROM [dbo].[Requests] WHERE Id = @RequestId
@@ -234,7 +276,7 @@ GO
 CREATE PROCEDURE ApproveRequests(@UserId int)
 AS
 BEGIN
-    --EXEC [dbo].ExecuteRequests @UserId
+    EXEC [dbo].ExecuteRequests @UserId
     INSERT INTO [dbo].[Notifications](TargetId, ActionSourceId, ActionTypeId, SenderId, ReceiverId)
         SELECT TargetId, [dbo].ActionSourceIdRequestApproved(), ActionTypeId, SenderId, ReceiverId
             FROM [dbo].[Requests] WHERE ReceiverId = @UserId
