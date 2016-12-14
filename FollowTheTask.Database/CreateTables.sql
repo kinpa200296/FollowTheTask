@@ -149,7 +149,7 @@ CREATE TABLE [dbo].[Features] (
     [TeamId] int NOT NULL
 
     CONSTRAINT [PK_Features] PRIMARY KEY CLUSTERED ([Id] ASC)
-    CONSTRAINT [FK_Features_TeamId] FOREIGN KEY ([Id]) REFERENCES [dbo].[Teams]([Id])
+    CONSTRAINT [FK_Features_TeamId] FOREIGN KEY ([TeamId]) REFERENCES [dbo].[Teams]([Id])
 );
 GO
 
