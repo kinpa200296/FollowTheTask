@@ -95,14 +95,22 @@ namespace FollowTheTask.DAL.Repositories.Model
 
         public void Execute(DeleteModelCommand command)
         {
-            var model = new TModel { Id = command.Id };
+            var model = ModelsDao.Find(command.Id);
+            if (model == null)
+            {
+                throw new ArgumentException("Model with given Id not found");
+            }
             ModelsDao.Remove(model);
             Save();
         }
 
         public async Task ExecuteAsync(DeleteModelCommand command)
         {
-            var model = new TModel { Id = command.Id };
+            var model = await ModelsDao.FindAsync(command.Id);
+            if (model == null)
+            {
+                throw new ArgumentException("Model with given Id not found");
+            }
             ModelsDao.Remove(model);
             await SaveAsync();
         }
