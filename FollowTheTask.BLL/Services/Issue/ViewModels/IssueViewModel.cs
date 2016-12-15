@@ -6,19 +6,19 @@ namespace FollowTheTask.BLL.Services.Issue.ViewModels
 {
     public class IssueViewModel : ModelViewModel
     {
-        [Display(Name = "Issue Name")]
+        [Display(Name = "Name")]
         [StringLength(100)]
         public string Name { get; set; }
 
-        [Display(Name = "Issue Description")]
+        [Display(Name = "Description")]
         [StringLength(3000)]
         public string Description { get; set; }
 
-        [Display(Name = "Issue Version")]
+        [Display(Name = "Version")]
         [StringLength(50)]
         public string Version { get; set; }
 
-        [Display(Name = "Issue Type")]
+        [Display(Name = "Type")]
         public int? TypeId { get; set; }
 
         [Display(Name = "Priority")]

@@ -5,7 +5,7 @@ namespace FollowTheTask.BLL.Services.Team.ViewModels
 {
     public class TeamViewModel : ModelViewModel
     {
-        [Display(Name = "Team name")]
+        [Display(Name = "Name")]
         [StringLength(100)]
         public string Name { get; set; }
 

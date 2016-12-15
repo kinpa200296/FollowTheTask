@@ -5,15 +5,16 @@ namespace FollowTheTask.BLL.Services.Feature.ViewModels
 {
     public class FeatureViewModel : ModelViewModel
     {
-        [Display(Name = "Feature Name")]
+        [Required]
+        [Display(Name = "Name")]
         [StringLength(100)]
         public string Name { get; set; }
 
-        [Display(Name = "Feature Description")]
+        [Display(Name = "Description")]
         [StringLength(2000)]
         public string Description { get; set; }
 
-        [Display(Name = "Feature Version")]
+        [Display(Name = "Version")]
         [StringLength(50)]
         public string Version { get; set; }
 

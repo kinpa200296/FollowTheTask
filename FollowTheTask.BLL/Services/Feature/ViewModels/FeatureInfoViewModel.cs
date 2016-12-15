@@ -5,6 +5,7 @@ namespace FollowTheTask.BLL.Services.Feature.ViewModels
 {
     public class FeatureInfoViewModel : ModelViewModel
     {
+        [Required]
         [Display(Name = "Name")]
         [StringLength(100)]
         public string Name { get; set; }
@@ -19,7 +20,7 @@ namespace FollowTheTask.BLL.Services.Feature.ViewModels
 
         public int TeamId { get; set; }
 
-        [Display(Name = "Team name")]
+        [Display(Name = "Team")]
         [StringLength(100)]
         public string Team { get; set; }
     }

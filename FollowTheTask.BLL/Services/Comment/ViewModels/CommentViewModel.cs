@@ -6,6 +6,7 @@ namespace FollowTheTask.BLL.Services.Comment.ViewModels
 {
     public class CommentViewModel : ModelViewModel
     {
+        [Required]
         [Display(Name = "Message")]
         [StringLength(700)]
         public string Message { get; set; }
@@ -13,7 +14,7 @@ namespace FollowTheTask.BLL.Services.Comment.ViewModels
         [Display(Name = "Created")]
         public DateTimeOffset DateCreatedUtc { get; set; }
 
-        [Display(Name = "Username")]
+        [Display(Name = "User")]
         public string UserName { get; set; }
 
         public int? UserId { get; set; }
