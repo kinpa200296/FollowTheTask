@@ -79,7 +79,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ReporterName)
+            @(Model.ReporterId == null ? Html.DisplayFor(model => model.ReporterName) : Html.DisplayFor(model => model.Reporter))
         </dd>
 
         <dt>
@@ -87,7 +87,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AssigneeName)
+            @(Model.AssigneeId == null ? Html.DisplayFor(model => model.AssigneeName) : Html.DisplayFor(model => model.Assignee))
         </dd>
 
     </dl>
