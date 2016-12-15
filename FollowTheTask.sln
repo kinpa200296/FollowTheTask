@@ -28,6 +28,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FollowTheTask.Database", "F
 		FollowTheTask.Database\DropProcedures.sql = FollowTheTask.Database\DropProcedures.sql
 		FollowTheTask.Database\DropTables.sql = FollowTheTask.Database\DropTables.sql
 		FollowTheTask.Database\InitTables.sql = FollowTheTask.Database\InitTables.sql
+		FollowTheTask.Database\SeedDb.sql = FollowTheTask.Database\SeedDb.sql
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FollowTheTask.Web", "FollowTheTask.Web\FollowTheTask.Web.csproj", "{61CEE7AB-927F-4984-9A82-8192AECF70E4}"

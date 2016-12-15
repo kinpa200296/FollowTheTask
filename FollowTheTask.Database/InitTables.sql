@@ -27,7 +27,7 @@ INSERT INTO [dbo].[Statuses]([Name])
 
 SET IDENTITY_INSERT [dbo].[AuthData] ON
 INSERT INTO [dbo].[AuthData] ([Id], [PasswordHash], [Salt], [SecurityStamp], [LockoutEnabled], [AccessFailedCnt], [LockoutDateUtc], [AccessGrantedTotal], [LastAccessGrantedDateUtc], [AccessFailedTotal], [LastAccessFailedDateUtc])
-    VALUES (1, 'lxUvyFwXdQt25i++waSfGhvmKWXIwigi7LP1hsdroI0=', 'sskwfPZT5E+FccQz+7II9A==', '2487e0cb-fa63-43ff-b00e-a5ad13a22bc4', 0, 0, NULL, 0, NULL, 0, NULL);
+    VALUES (1, 'lxUvyFwXdQt25i++waSfGhvmKWXIwigi7LP1hsdroI0=', 'sskwfPZT5E+FccQz+7II9A==', LOWER(NEWID()), 0, 0, NULL, 0, NULL, 0, NULL);
 SET IDENTITY_INSERT [dbo].[AuthData] OFF
 
 SET IDENTITY_INSERT [dbo].[Users] ON
