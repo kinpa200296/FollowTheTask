@@ -1,9 +1,11 @@
-﻿using System.Data.SqlClient;
+﻿using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using FollowTheTask.DAL.Contexts;
 using FollowTheTask.DAL.Models;
 using FollowTheTask.DAL.Repositories.Model;
+using FollowTheTask.TransferObjects.Notification.Commands;
 using FollowTheTask.TransferObjects.Notification.DataObjects;
 using FollowTheTask.TransferObjects.Notification.Queries;
 
@@ -51,6 +53,32 @@ namespace FollowTheTask.DAL.Repositories.Notification
 
 
         #region Commands Implementation
+
+        public void Execute(NotificationReadCommand command)
+        {
+            Context.Database.ExecuteSqlCommand(TransactionalBehavior.EnsureTransaction,
+                "exec [dbo].MarkNotificationRead @NotificationId", new SqlParameter("NotificationId", command.NotificationId));
+        }
+
+        public async Task ExecuteAsync(NotificationReadCommand command)
+        {
+            await
+                Context.Database.ExecuteSqlCommandAsync(TransactionalBehavior.EnsureTransaction,
+                    "exec [dbo].MarkNotificationRead @NotificationId", new SqlParameter("NotificationId", command.NotificationId));
+        }
+
+        public void Execute(NotificationsReadCommand command)
+        {
+            Context.Database.ExecuteSqlCommand(TransactionalBehavior.EnsureTransaction,
+                "exec [dbo].MarkNotificationsRead @UserId", new SqlParameter("UserId", command.UserId));
+        }
+
+        public async Task ExecuteAsync(NotificationsReadCommand command)
+        {
+            await
+                Context.Database.ExecuteSqlCommandAsync(TransactionalBehavior.EnsureTransaction,
+                    "exec [dbo].MarkNotificationsRead @UserId", new SqlParameter("UserId", command.UserId));
+        }
 
         #endregion Commands Implementation
     }

@@ -60,6 +60,8 @@
     <Compile Include="Issue\Commands\RequestAssignIssueCommand.cs" />
     <Compile Include="Issue\Queries\IssueCommentsQuery.cs" />
     <Compile Include="Issue\Queries\IssueQuery.cs" />
+    <Compile Include="Notification\Commands\NotificationReadCommand.cs" />
+    <Compile Include="Notification\Commands\NotificationsReadCommand.cs" />
     <Compile Include="Notification\DataObjects\NotificationInfoDto.cs" />
     <Compile Include="Notification\Queries\NotificationQuery.cs" />
     <Compile Include="Notification\Queries\UserNotificationsQuery.cs" />
@@ -120,7 +122,6 @@
     <Folder Include="Feature\Commands\" />
     <Folder Include="IssueType\Commands\" />
     <Folder Include="IssueType\Queries\" />
-    <Folder Include="Notification\Commands\" />
     <Folder Include="Priority\Commands\" />
     <Folder Include="Priority\Queries\" />
     <Folder Include="Resolution\Commands\" />

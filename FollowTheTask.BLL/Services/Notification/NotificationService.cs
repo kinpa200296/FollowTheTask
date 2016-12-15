@@ -3,6 +3,7 @@ using FollowTheTask.BLL.Result;
 using FollowTheTask.BLL.Services.Model;
 using FollowTheTask.BLL.Services.Notification.ViewModels;
 using FollowTheTask.DAL.Repositories.Notification;
+using FollowTheTask.TransferObjects.Notification.Commands;
 using FollowTheTask.TransferObjects.Notification.DataObjects;
 using FollowTheTask.TransferObjects.Notification.Queries;
 
@@ -57,6 +58,26 @@ namespace FollowTheTask.BLL.Services.Notification
         public async Task<ListQueryResult<NotificationInfoViewModel>> GetUserNotificationsAsync(UserNotificationsQuery query)
         {
             return (await RunListQueryAsync<UserNotificationsQuery, NotificationInfoDto>(_repository, query)).MapTo<NotificationInfoViewModel>();
+        }
+
+        public CommandResult MarkNotificationRead(NotificationReadCommand command)
+        {
+            return ExecuteCommand(_repository, command);
+        }
+
+        public async Task<CommandResult> MarkNotificationReadAsync(NotificationReadCommand command)
+        {
+            return await ExecuteCommandAsync(_repository, command);
+        }
+
+        public CommandResult MarkNotificationsRead(NotificationsReadCommand command)
+        {
+            return ExecuteCommand(_repository, command);
+        }
+
+        public async Task<CommandResult> MarkNotificationsReadAsync(NotificationsReadCommand command)
+        {
+            return await ExecuteCommandAsync(_repository, command);
         }
     }
 }

@@ -54,6 +54,10 @@ DROP PROCEDURE [dbo].[DeclineRequest];
 GO
 DROP PROCEDURE [dbo].[DeclineRequests];
 GO
+DROP PROCEDURE [dbo].[MarkNotificationRead];
+GO
+DROP PROCEDURE [dbo].[MarkNotificationsRead];
+GO
 DROP FUNCTION [dbo].[GetRoles];
 GO
 DROP FUNCTION [dbo].[GetTeam];

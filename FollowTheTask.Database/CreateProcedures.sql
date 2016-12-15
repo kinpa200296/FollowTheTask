@@ -304,6 +304,20 @@ BEGIN
 END;
 GO
 
+CREATE PROCEDURE MarkNotificationRead(@NotificationId int)
+AS
+BEGIN
+    DELETE FROM [dbo].[Notifications] WHERE Id = @NotificationId
+END;
+GO
+
+CREATE PROCEDURE MarkNotificationsRead(@UserId int)
+AS
+BEGIN
+    DELETE FROM [dbo].[Notifications] WHERE ReceiverId = @UserId
+END;
+GO
+
 CREATE FUNCTION GetRoles(@UserId int)
 RETURNS @Result table(
     [Id] int NOT NULL,
