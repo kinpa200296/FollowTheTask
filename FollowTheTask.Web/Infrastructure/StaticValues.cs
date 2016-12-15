@@ -22,12 +22,12 @@ namespace FollowTheTask.Web.Infrastructure
         public static StaticValues Instance { get { return lazy.Value; } }
 
         //public Dictionary<int?, string> Roles = new Dictionary<int?, string>();
-        public Dictionary<int?, string> ActionSources = new Dictionary<int?, string>();
-        public Dictionary<int?, string> ActionTypes = new Dictionary<int?, string>();
-        public Dictionary<int?, string> IssueTypes = new Dictionary<int?, string>();
-        public Dictionary<int?, string> Priorities = new Dictionary<int?, string>();
-        public Dictionary<int?, string> Resolutions = new Dictionary<int?, string>();
-        public Dictionary<int?, string> Statuses = new Dictionary<int?, string>();
+        public Dictionary<int, string> ActionSources = new Dictionary<int, string>();
+        public Dictionary<int, string> ActionTypes = new Dictionary<int, string>();
+        public Dictionary<int, string> IssueTypes = new Dictionary<int, string>();
+        public Dictionary<int, string> Priorities = new Dictionary<int, string>();
+        public Dictionary<int, string> Resolutions = new Dictionary<int, string>();
+        public Dictionary<int, string> Statuses = new Dictionary<int, string>();
 
         private StaticValues()
         {
@@ -80,19 +80,5 @@ namespace FollowTheTask.Web.Infrastructure
             Statuses.Add(0, "None");
 
         }
-
-        //private void ApplyDictionary<T>(ListQueryResult<T> query, Dictionary<int?, string> dict)
-        //{
-        //    var list = query.Value?.ToArray();
-        //    dict[null] = "None";
-        //    if (list != null)
-        //    {
-        //        for (int i = 0; i < list.Length)
-        //            {
-        //                dict[i+1] = list[i].???
-        //            }
-        //    }
-            
-        //}
     }
 }

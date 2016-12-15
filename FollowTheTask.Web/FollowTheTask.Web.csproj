@@ -347,6 +347,7 @@
     <Compile Include="Auth\CustomUserStore.cs" />
     <Compile Include="Auth\UserRole.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FeatureController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -356,6 +357,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\DictSelectHelper.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="App_Start\JsEngineSwitcherConfig.cs" />
     <Compile Include="Infrastructure\PermissionResolver.cs" />

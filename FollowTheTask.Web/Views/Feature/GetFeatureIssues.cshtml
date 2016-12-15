@@ -12,9 +12,6 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Version)
             </th>
             <th>
@@ -35,12 +32,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.DeadlineDateUtc)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReporterName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AssigneeName)
-            </th>
             @*<th></th>*@
         </tr>
 
@@ -48,10 +39,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
+                    @Html.ActionLink(item.Name, "Index", "Issue", new {id = item.Id}, new {})
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Version)
@@ -73,12 +61,6 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DeadlineDateUtc)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ReporterName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AssigneeName)
                 </td>
             </tr>
         }

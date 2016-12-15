@@ -1,4 +1,5 @@
-﻿@model FollowTheTask.BLL.Services.Issue.ViewModels.IssueInfoViewModel
+﻿@using FollowTheTask.Web.Infrastructure
+@model FollowTheTask.BLL.Services.Issue.ViewModels.IssueInfoViewModel
 
 @{
     ViewBag.Title = Model.Name;
@@ -30,7 +31,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TypeId)
+            @StaticValues.Instance.IssueTypes[Model.ResolutionId ?? 0]
         </dd>
 
         <dt>
@@ -38,7 +39,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PriorityId)
+            @StaticValues.Instance.Priorities[Model.ResolutionId ?? 0]
         </dd>
 
         <dt>
@@ -46,7 +47,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.StatusId)
+            @StaticValues.Instance.Statuses[Model.StatusId ?? 0]
         </dd>
 
         <dt>
@@ -54,7 +55,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ResolutionId)
+            @StaticValues.Instance.Resolutions[Model.ResolutionId ?? 0]
         </dd>
 
         <dt>
@@ -93,5 +94,16 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to feature", "Index", "Feature", new {id = Model.FeatureId}, new {})
+    @Html.ActionLink("Back to feature", "Index", "Feature", new {id = Model.FeatureId}, new {})|
+    @Html.ActionLink("Delete", "Delete", new {id = Model.Id})
 </p>
+
+<hr/>
+
+<h3>Comments</h3>
+
+@Html.Action("GetComments", new {issueId = Model.Id})
+
+<hr/>
+
+@*@Html.Action("Create", "Comment", new {issueId = Model.Id})*@

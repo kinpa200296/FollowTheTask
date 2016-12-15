@@ -42,4 +42,6 @@
 
 <h2>Issues of these feature</h2>
 
+@Html.ActionLink("Add issue", "Create", "Issue", new {featureId = Model.Id}, new {})
+
 @Html.Action("GetFeatureIssues", new { featureId  = Model.Id})

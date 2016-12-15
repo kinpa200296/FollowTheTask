@@ -74,16 +74,16 @@ namespace FollowTheTask.Web.Controllers
         public ActionResult Delete(int id)
         {
             //this is bit unsafe, check if user is teamLeader
+            var teamId = _featureService.GetFeature(new FeatureQuery()).Value.TeamId;
             if (!User.IsInRole("Admin"))
             {
-                var teamId = _featureService.GetFeature(new FeatureQuery()).Value.TeamId;
                 var leaderId = DependencyResolver.Current.GetService<ITeamService>().GetTeam(new TeamQuery { Id = teamId }).Value?.LeaderId;
                 if (leaderId != int.Parse(User.Identity.GetUserId())) return RedirectToAction("AccessViolation", "Error");
             }
-
+            
             var result = _featureService.DeleteModel(id);
             if (result.IsFailed) return RedirectToAction("Index", "Error", new {message = result.Message});
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Team", new {id = teamId});
         }
 
         [ChildActionOnly]
