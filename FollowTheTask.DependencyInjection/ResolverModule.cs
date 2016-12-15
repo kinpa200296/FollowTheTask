@@ -16,12 +16,12 @@ namespace FollowTheTask.DependencyInjection
             kernel.Bind(
                 m => m.From("FollowTheTask.DAL")
                         .Select(t => t.Namespace.Contains("DAL.Repositories"))
-                        .BindDefaultInterface());
+                        .BindDefaultInterface().Configure(c => c.InThreadScope()));
             kernel.Bind(
                 m => m.From("FollowTheTask.BLL")
                         .Select(t => t.Namespace.Contains("BLL.Services"))
-                        .BindDefaultInterface());
-            kernel.Bind<FollowTheTaskContext>().ToSelf().InSingletonScope();
+                        .BindDefaultInterface().Configure(c => c.InThreadScope()));
+            kernel.Bind<FollowTheTaskContext>().ToSelf().InThreadScope();
         }
     }
 }
