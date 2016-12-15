@@ -1,0 +1,63 @@
+﻿@model IEnumerable<FollowTheTask.BLL.Services.Comment.ViewModels.CommentInfoViewModel>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Message)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateCreatedUtc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IssueId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Issue)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Message)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateCreatedUtc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IssueId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Issue)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

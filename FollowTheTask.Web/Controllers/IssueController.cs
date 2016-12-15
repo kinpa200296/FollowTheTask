@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
 using FollowTheTask.BLL.Services.Issue;
 using FollowTheTask.BLL.Services.Issue.ViewModels;
 using FollowTheTask.TransferObjects.Issue.Queries;
@@ -50,17 +51,17 @@ namespace FollowTheTask.Web.Controllers
         public ActionResult Edit(int id)
         {
             var model = _issueService.GetIssue(new IssueQuery { Id = id });
-            if (model != null) return View(model);
+            if (model.Value != null) return View(model.Value);
             return RedirectToAction("Internal", "Error");
         }
 
         [HttpPost]
-        public ActionResult Edit(IssueViewModel model)
+        public ActionResult Edit(IssueInfoViewModel model)
         {
             if (model == null) return RedirectToAction("Index", "Error");
             //check access violation here
 
-            var requestResult = _issueService.UpdateModel(model);
+            var requestResult = _issueService.UpdateModel(Mapper.Map<IssueViewModel>(model));
 
             if (requestResult.IsFailed) return RedirectToAction("Index", "Error", new { message = requestResult.Message});
             return RedirectToAction("Index", new { id = model.Id });            

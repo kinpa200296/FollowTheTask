@@ -317,6 +317,10 @@
     <Content Include="Views\Feature\Edit.cshtml" />
     <Content Include="Views\Feature\GetFeatureIssues.cshtml" />
     <Content Include="Views\Team\GetAllTeams.cshtml" />
+    <Content Include="Views\Issue\Index.cshtml" />
+    <Content Include="Views\Issue\Create.cshtml" />
+    <Content Include="Views\Issue\Edit.cshtml" />
+    <Content Include="Views\Issue\GetComments.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -377,7 +381,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Comment\" />
-    <Folder Include="Views\Issue\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
