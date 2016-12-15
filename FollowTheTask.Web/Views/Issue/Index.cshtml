@@ -1,14 +1,29 @@
 ﻿@using FollowTheTask.Web.Infrastructure
+@using Microsoft.AspNet.Identity
 @model FollowTheTask.BLL.Services.Issue.ViewModels.IssueInfoViewModel
 
 @{
     ViewBag.Title = Model.Name;
 }
 
-<h2>@Model.Name issue</h2>
-
 <div>
-    <hr />
+    <h2>@Model.Name</h2>
+    <ul class="nav nav-pills">
+        @if (PermissionResolver.IssueEditGeneralPermission(int.Parse(User.Identity.GetUserId()), Model.Id))
+        {
+            <li>@Html.ActionLink("Edit", "Edit", new {id = Model.Id})</li>
+        }
+        @if (PermissionResolver.IssueDeletePermission(int.Parse(User.Identity.GetUserId()), Model.Id))
+        {
+            <li>@Html.ActionLink("Delete", "Delete", new {id = Model.Id})</li>
+        }
+        @if (PermissionResolver.IssueAssignPermission(int.Parse(User.Identity.GetUserId()), Model.Id))
+        {
+            <li>@Html.ActionLink("Assign To Me", "AssignToMe", new { issueId = Model.Id })</li>
+        }
+        <li>@Html.ActionLink("Back to feature", "Index", "Feature", new { id = Model.FeatureId }, new { })</li>
+    </ul>
+    <hr/>
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Description)
@@ -92,16 +107,11 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to feature", "Index", "Feature", new {id = Model.FeatureId}, new {})|
-    @Html.ActionLink("Delete", "Delete", new {id = Model.Id})
-</p>
 
-<hr/>
+<div>
+    <h3>Comments</h3>
 
-<h3>Comments</h3>
+    @Html.Action("GetComments", new { issueId = Model.Id })
 
-@Html.Action("GetComments", new {issueId = Model.Id})
-
-@Html.Action("Create", "Comment", new { issueId = Model.Id})
+    @Html.Action("Create", "Comment", new { issueId = Model.Id })
+</div>

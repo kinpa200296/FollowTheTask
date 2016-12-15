@@ -267,7 +267,7 @@ AS
 BEGIN
     EXEC [dbo].ExecuteRequest @RequestId
     INSERT INTO [dbo].[Notifications](TargetId, ActionSourceId, ActionTypeId, SenderId, ReceiverId)
-        SELECT TargetId, [dbo].ActionSourceIdRequestApproved(), ActionTypeId, SenderId, ReceiverId
+        SELECT TargetId, [dbo].ActionSourceIdRequestApproved(), ActionTypeId, ReceiverId, SenderId
             FROM [dbo].[Requests] WHERE Id = @RequestId
     DELETE FROM [dbo].[Requests] WHERE Id = @RequestId
 END;
@@ -278,7 +278,7 @@ AS
 BEGIN
     EXEC [dbo].ExecuteRequests @UserId
     INSERT INTO [dbo].[Notifications](TargetId, ActionSourceId, ActionTypeId, SenderId, ReceiverId)
-        SELECT TargetId, [dbo].ActionSourceIdRequestApproved(), ActionTypeId, SenderId, ReceiverId
+        SELECT TargetId, [dbo].ActionSourceIdRequestApproved(), ActionTypeId, ReceiverId, SenderId
             FROM [dbo].[Requests] WHERE ReceiverId = @UserId
     DELETE FROM [dbo].[Requests] WHERE ReceiverId = @UserId
 END;
@@ -288,7 +288,7 @@ CREATE PROCEDURE DeclineRequest(@RequestId int)
 AS
 BEGIN
     INSERT INTO [dbo].[Notifications](TargetId, ActionSourceId, ActionTypeId, SenderId, ReceiverId)
-        SELECT TargetId, [dbo].ActionSourceIdRequestDeclined(), ActionTypeId, SenderId, ReceiverId
+        SELECT TargetId, [dbo].ActionSourceIdRequestDeclined(), ActionTypeId, ReceiverId, SenderId
             FROM [dbo].[Requests] WHERE Id = @RequestId
     DELETE FROM [dbo].[Requests] WHERE Id = @RequestId
 END;
@@ -298,7 +298,7 @@ CREATE PROCEDURE DeclineRequests(@UserId int)
 AS
 BEGIN
     INSERT INTO [dbo].[Notifications](TargetId, ActionSourceId, ActionTypeId, SenderId, ReceiverId)
-        SELECT TargetId, [dbo].ActionSourceIdRequestDeclined(), ActionTypeId, SenderId, ReceiverId
+        SELECT TargetId, [dbo].ActionSourceIdRequestDeclined(), ActionTypeId, ReceiverId, SenderId
             FROM [dbo].[Requests] WHERE ReceiverId = @UserId
     DELETE FROM [dbo].[Requests] WHERE ReceiverId = @UserId
 END;

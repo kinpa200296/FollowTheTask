@@ -1,16 +1,15 @@
 ﻿@model FollowTheTask.BLL.Services.Team.ViewModels.TeamInfoViewModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit team";
 }
 
-<h2>Edit</h2>
+<h2>Edit team</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
-        <h4>TeamViewModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
@@ -26,12 +25,13 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-primary" />
+                @Html.ActionLink("Cancel", "Index", new {id = Model.Id}, new {@class = "btn btn-default"})
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    
 </div>

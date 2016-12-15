@@ -1,0 +1,31 @@
+﻿@using FollowTheTask.Web.Infrastructure
+@model IEnumerable<FollowTheTask.BLL.Services.Request.ViewModels.RequestInfoViewModel>
+
+@{
+    ViewBag.Title = "Requests";
+}
+
+<h2>User pending requests</h2>
+<p>
+    @Html.ActionLink("Approve All", "ApproveAll", null, new { @class = "btn btn-success" })
+    @Html.ActionLink("Decline All", "DeclineAll", null, new { @class = "btn btn-danger" })
+</p>
+<table class="table">
+    <tr>
+        <th class="col-md-10">Message</th>
+        <th class="col-md-2">Actions</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @RequestHelper.GetMessage(item)
+        </td>
+        <td>
+            @Html.ActionLink("Approve", "Approve", new { id = item.Id }, new { @class = "btn btn-success" })
+            @Html.ActionLink("Decline", "Decline", new {id = item.Id}, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>

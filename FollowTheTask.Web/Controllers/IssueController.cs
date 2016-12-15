@@ -4,7 +4,9 @@ using System.Web.Mvc;
 using AutoMapper;
 using FollowTheTask.BLL.Services.Issue;
 using FollowTheTask.BLL.Services.Issue.ViewModels;
+using FollowTheTask.TransferObjects.Issue.Commands;
 using FollowTheTask.TransferObjects.Issue.Queries;
+using FollowTheTask.TransferObjects.Team.Commands;
 using Microsoft.AspNet.Identity;
 
 namespace FollowTheTask.Web.Controllers
@@ -75,6 +77,14 @@ namespace FollowTheTask.Web.Controllers
             if (result.IsFailed) return RedirectToAction("Index", "Error", new { message = result.Message});
             if (featureId == null) return RedirectToAction("Index", "Error");
             return RedirectToAction("Index", "Feature", new {id = featureId});
+        }
+
+        public ActionResult AssignToMe(int issueId)
+        {
+            var command = _issueService.AssignIssue(
+                new RequestAssignIssueCommand {UserId = int.Parse(User.Identity.GetUserId()), IssueId = issueId});
+            if (command.IsFailed) return RedirectToAction("Index", "Error", new {message = command.Message});
+            return RedirectToAction("Index", new { id = issueId });
         }
 
         [ChildActionOnly]

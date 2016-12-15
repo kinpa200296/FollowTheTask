@@ -324,6 +324,11 @@
     <Content Include="Views\Comment\Index.cshtml" />
     <Content Include="Views\Comment\Create.cshtml" />
     <Content Include="Views\Comment\Edit.cshtml" />
+    <Content Include="Views\Request\Index.cshtml" />
+    <Content Include="Views\Error\Unauthorized.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\InternalError.cshtml" />
+    <Content Include="Views\Notification\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -356,6 +361,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IssueController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
+    <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -363,7 +370,9 @@
     <Compile Include="Infrastructure\DictSelectHelper.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="App_Start\JsEngineSwitcherConfig.cs" />
+    <Compile Include="Infrastructure\NotificationHelper.cs" />
     <Compile Include="Infrastructure\PermissionResolver.cs" />
+    <Compile Include="Infrastructure\RequestHelper.cs" />
     <Compile Include="Infrastructure\StaticValues.cs" />
     <Compile Include="Mapping\MapperConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

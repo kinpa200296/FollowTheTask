@@ -1,13 +1,22 @@
-﻿@model FollowTheTask.BLL.Services.Feature.ViewModels.FeatureInfoViewModel
+﻿@using FollowTheTask.Web.Infrastructure
+@using Microsoft.AspNet.Identity
+@model FollowTheTask.BLL.Services.Feature.ViewModels.FeatureInfoViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Model.Name;
 }
 
-<h2>@Model.Name</h2>
-
 <div>
-    <hr />
+    <h2>@Model.Name</h2>
+    <ul class="nav nav-pills">
+        @if (PermissionResolver.TeamEditPermission(int.Parse(User.Identity.GetUserId()), Model.TeamId))
+        {
+            <li>@Html.ActionLink("Edit", "Edit", new {id = Model.Id})</li>
+            <li>@Html.ActionLink("Delete", "Delete", new {id = Model.Id})</li>
+        }
+        <li>@Html.ActionLink("Back to team", "Index", "Team", new {id = Model.TeamId}, new {})</li>
+    </ul>
+    <hr/>
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Name)
@@ -34,14 +43,13 @@
         </dd>
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to team", "Index", "Team", new {id = Model.TeamId}, new {})|
-    @Html.ActionLink("Delete", "Delete", new { id = Model.Id})
-</p>
 
-<h2>Issues of these feature</h2>
+<div>
+    <h2>Issues</h2>
 
-@Html.ActionLink("Add issue", "Create", "Issue", new {featureId = Model.Id}, new {})
+    <ul class="nav nav-pills">
+        <li>@Html.ActionLink("Add issue", "Create", "Issue", new { featureId = Model.Id }, new { })</li>
+    </ul>
 
-@Html.Action("GetFeatureIssues", new { featureId  = Model.Id})
+    @Html.Action("GetFeatureIssues", new { featureId = Model.Id })
+</div>

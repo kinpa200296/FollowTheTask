@@ -74,7 +74,7 @@ namespace FollowTheTask.Web.Controllers
         public ActionResult Delete(int id)
         {
             //this is bit unsafe, check if user is teamLeader
-            var teamId = _featureService.GetFeature(new FeatureQuery()).Value.TeamId;
+            var teamId = _featureService.GetFeature(new FeatureQuery {Id = id}).Value.TeamId;
             if (!User.IsInRole("Admin"))
             {
                 var leaderId = DependencyResolver.Current.GetService<ITeamService>().GetTeam(new TeamQuery { Id = teamId }).Value?.LeaderId;

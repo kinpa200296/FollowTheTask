@@ -40,10 +40,10 @@ INSERT INTO [dbo].[Users] (Username, Email, EmailConfirmed, FirstName, LastName,
 
 INSERT INTO [dbo].[Teams](Name, LeaderId)
     VALUES
-        ('FollowTheTask Team', 2),
-        ('Team 1', 13),
-        ('Team 2', 14),
-        ('Team 3', 15);
+        ('FollowTheTask Team', 1),
+        ('Team 1', 1),
+        ('Team 2', 1),
+        ('Team 3', 1);
 
 exec [dbo].SendBeLeaderRequest 2, 1
 exec [dbo].SendBeLeaderRequest 13, 2

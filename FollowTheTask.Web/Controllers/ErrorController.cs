@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace FollowTheTask.Web.Controllers
 {
@@ -25,6 +21,21 @@ namespace FollowTheTask.Web.Controllers
         {
             var message = "403 - Access voilation";
             return RedirectToAction("Index", "Error", new {message = message});
+        }
+
+        public ActionResult Unauthorized()
+        {
+            return View();
+        }
+
+        public ActionResult NotFound()
+        {
+            return View();
+        }
+
+        public ActionResult InternalError()
+        {
+            return View();
         }
     }
 }

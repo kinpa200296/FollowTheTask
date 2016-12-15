@@ -1,0 +1,28 @@
+﻿@using FollowTheTask.Web.Infrastructure
+@model IEnumerable<FollowTheTask.BLL.Services.Notification.ViewModels.NotificationInfoViewModel>
+
+@{
+    ViewBag.Title = "Notifications";
+}
+
+<h2>User notifications</h2>
+
+<p>
+    @Html.ActionLink("Remove All", "MarkAllAsSeen", null, new { @class = "btn btn-warning" })
+</p>
+<table class="table">
+    <tr>
+        <th class="col-md-10">Message</th>
+        <th class="col-md-2">Actions</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>@NotificationHelper.GetMessage(item)</td>
+        <td>
+            @Html.ActionLink("Remove", "MarkAsSeen", new { id=item.Id }, new { @class = "btn btn-warning" })
+        </td>
+    </tr>
+}
+
+</table>

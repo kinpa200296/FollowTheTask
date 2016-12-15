@@ -1,33 +1,47 @@
-﻿@model FollowTheTask.BLL.Services.Comment.ViewModels.CommentInfoViewModel
+﻿@using Microsoft.AspNet.Identity
+@model FollowTheTask.BLL.Services.Comment.ViewModels.CommentInfoViewModel
 
 <div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Message)
-        </dt>
+    <table class="table">
+        <tr>
+            <td>
+                <dl class="dl-horizontal">
 
-        <dd>
-            @Html.DisplayFor(model => model.Message)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.User)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DateCreatedUtc)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.User)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.DateCreatedUtc)
-        </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DateCreatedUtc)
+                    </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.DateCreatedUtc)
+                    </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-    </dl>
-    @Html.ActionLink("Edit", "Edit", "Comment", new { id = Model.Id }, new {}) |
-    @Html.ActionLink("Delete", "Delete", "Comment", new { id = Model.Id}, new {})
-    <hr/>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Message)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Message)
+                    </dd>
+
+                </dl>
+            </td>
+            <td>
+                @if (User.Identity.GetUserId() == Model.UserId?.ToString())
+                {
+                    <ul class="nav nav-pills">
+                        <li>@Html.ActionLink("Edit", "Edit", "Comment", new { id = Model.Id }, new { })</li>
+                        <li>@Html.ActionLink("Delete", "Delete", "Comment", new { id = Model.Id }, new { })</li>
+                    </ul>
+                }
+            </td>
+        </tr>
+    </table>
 </div>

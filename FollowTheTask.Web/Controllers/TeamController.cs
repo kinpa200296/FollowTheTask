@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using AutoMapper;
 using FollowTheTask.BLL.Services.Team;
 using FollowTheTask.BLL.Services.Team.ViewModels;
-using FollowTheTask.TransferObjects.Team.DataObjects;
+using FollowTheTask.TransferObjects.Team.Commands;
 using FollowTheTask.TransferObjects.Team.Queries;
 using Microsoft.AspNet.Identity;
 
@@ -76,6 +76,22 @@ namespace FollowTheTask.Web.Controllers
             var result = _teamService.DeleteModel(id);
             if (result.IsFailed) return RedirectToAction("Index", "Error", new {message = result.Message});
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult BecomeLeader(int teamId)
+        {
+            var command = _teamService.BecomeLeader(
+                new RequestLeadershipCommand {UserId = int.Parse(User.Identity.GetUserId()), TeamId = teamId});
+            if (command.IsFailed) return RedirectToAction("Index", "Error", new {message = command.Message});
+            return RedirectToAction("Index", new {id = teamId});
+        }
+
+        public ActionResult JoinTeam(int teamId)
+        {
+            var command = _teamService.JoinTeam(
+                new RequestJoinTeamCommand {UserId = int.Parse(User.Identity.GetUserId()), TeamId = teamId});
+            if (command.IsFailed) return RedirectToAction("Index", "Error", new { message = command.Message });
+            return RedirectToAction("Index", new {id = teamId});
         }
 
         [ChildActionOnly]

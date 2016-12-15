@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNet.Identity
+﻿@using FollowTheTask.Web.Infrastructure
+@using Microsoft.AspNet.Identity
 @model FollowTheTask.BLL.Services.Team.ViewModels.TeamInfoViewModel
 
 @{
@@ -7,26 +8,39 @@
 
 <div>
     <h1>@Model.Name</h1>
-    @if (User.IsInRole("Admin") || User.Identity.GetUserId() == Model.LeaderId.ToString())
-    {
-        @Html.ActionLink("Edit", "Edit", new { id = @Model.Id })
-    }
-    @if (User.IsInRole("Admin"))
-    {
-        @Html.ActionLink("Delete", "Delete", new { id = @Model.Id })
-    }
-    
+    <ul class="nav nav-pills">
+        @if (User.IsInRole("Admin") || User.Identity.GetUserId() == Model.LeaderId.ToString())
+        {
+            <li>@Html.ActionLink("Edit", "Edit", new { id = @Model.Id })</li>
+        }
+        @if (User.IsInRole("Admin"))
+        {
+            <li>@Html.ActionLink("Delete", "Delete", new { id = @Model.Id })</li>
+        }
+        @if (User.Identity.GetUserId() != Model.LeaderId.ToString())
+        {
+            <li>@Html.ActionLink("Become Leader", "BecomeLeader", new { teamId = Model.Id })</li>
+        }
+    </ul>
 </div>
 
+<div>
+    <h2>Members</h2>
+    <ul class="nav nav-pills">
+        @if (PermissionResolver.TeamJoinPermision(int.Parse(User.Identity.GetUserId()), Model.Id))
+        {
+            <li>@Html.ActionLink("Join Team", "JoinTeam", new {teamId = Model.Id})</li>
+        }
+    </ul>
 
+    @Html.Action("GetTeamMembers", "Team", new { teamId = @Model.Id })
+</div>
 
-<br/>
+<div>
+    <h2>Features</h2>
+    <ul class="nav nav-pills">
+        <li>@Html.ActionLink("Create feature", "Create", "Feature", new { teamId = Model.Id }, null)</li>
+    </ul>
 
-<h2>List of features</h2>
-@Html.ActionLink("Create feature", "Create", "Feature", new {teamId = Model.Id}, new {})
-
-@Html.Action("GetTeamFeatures", "Team", new { teamId = @Model.Id })
-
-<h2>Members</h2>
-
-@Html.Action("GetTeamMembers", "Team", new { teamId = @Model.Id })
+    @Html.Action("GetTeamFeatures", "Team", new { teamId = @Model.Id })
+</div>
