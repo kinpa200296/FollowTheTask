@@ -66,13 +66,13 @@
             @Html.DisplayFor(model => model.CreatedDateUtc)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.DeadlineDateUtc)
-        </dt>
+        </dt>*@
 
-        <dd>
+        @*<dd>
             @Html.DisplayFor(model => model.DeadlineDateUtc)
-        </dd>
+        </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.ReporterName)
@@ -104,6 +104,4 @@
 
 @Html.Action("GetComments", new {issueId = Model.Id})
 
-<hr/>
-
-@*@Html.Action("Create", "Comment", new {issueId = Model.Id})*@
+@Html.Action("Create", "Comment", new { issueId = Model.Id})

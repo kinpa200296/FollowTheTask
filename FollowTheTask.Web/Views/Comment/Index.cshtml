@@ -1,0 +1,33 @@
+﻿@model FollowTheTask.BLL.Services.Comment.ViewModels.CommentInfoViewModel
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Message)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Message)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreatedUtc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreatedUtc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+    </dl>
+    @Html.ActionLink("Edit", "Edit", "Comment", new { id = Model.Id }, new {}) |
+    @Html.ActionLink("Delete", "Delete", "Comment", new { id = Model.Id}, new {})
+    <hr/>
+</div>

@@ -91,7 +91,7 @@
             @Html.HiddenFor(model => model.ResolutionId)
         }
         
-        @if (PermissionResolver.IssueEditNoAssigneePermission(int.Parse(User.Identity.GetUserId()), Model.Id))
+        @*@if (PermissionResolver.IssueEditNoAssigneePermission(int.Parse(User.Identity.GetUserId()), Model.Id))
         {
             <div class="form-group">
                 @Html.LabelFor(model => model.DeadlineDateUtc, htmlAttributes: new {@class = "control-label col-md-2"})
@@ -104,7 +104,7 @@
         else
         {
             @Html.HiddenFor(model => model.DeadlineDateUtc)
-        }
+        }*@
 
 
         <div class="form-group">

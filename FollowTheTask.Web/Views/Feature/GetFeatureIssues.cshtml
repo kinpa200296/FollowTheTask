@@ -3,9 +3,6 @@
 
 @if (Model != null && Model.Count() != 0)
 {
-
-
-
     <table class="table">
         <tr>
             <th>
@@ -29,10 +26,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.CreatedDateUtc)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.DeadlineDateUtc)
-            </th>
-            @*<th></th>*@
+            </th>*@
         </tr>
 
         @foreach (var item in Model)
@@ -59,9 +55,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.CreatedDateUtc)
                 </td>
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.DeadlineDateUtc)
-                </td>
+                </td>*@
             </tr>
         }
 

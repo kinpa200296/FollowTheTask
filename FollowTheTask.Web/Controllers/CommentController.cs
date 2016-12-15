@@ -18,15 +18,19 @@ namespace FollowTheTask.Web.Controllers
             _commentService = commentService;
         }
 
-        public ActionResult Index(int id)
+        //public ActionResult Index(int id)
+        //{
+        //    var comment = _commentService.GetComment(new CommentQuery {Id = id}).Value;
+        //    if (comment == null) return RedirectToAction("Internal", "Error");
+        //    return PartialView(comment);
+        //}
+
+        public ActionResult Index(CommentInfoViewModel model)
         {
-            var comment = _commentService.GetComment(new CommentQuery {Id = id}).Value;
-            if (comment == null) return RedirectToAction("Internal", "Error");
-            return PartialView(comment);
+            return PartialView(model);
         }
 
-        [HttpGet]
-        [ChildActionOnly]
+
         public ActionResult Create(int issueId)
         {
             return PartialView(new CommentViewModel {IssueId = issueId});
