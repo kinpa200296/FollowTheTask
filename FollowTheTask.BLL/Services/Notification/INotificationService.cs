@@ -2,6 +2,7 @@
 using FollowTheTask.BLL.Result;
 using FollowTheTask.BLL.Services.Model;
 using FollowTheTask.BLL.Services.Notification.ViewModels;
+using FollowTheTask.TransferObjects.Notification.Commands;
 using FollowTheTask.TransferObjects.Notification.DataObjects;
 using FollowTheTask.TransferObjects.Notification.Queries;
 
@@ -24,5 +25,13 @@ namespace FollowTheTask.BLL.Services.Notification
         ListQueryResult<NotificationInfoViewModel> GetUserNotifications(UserNotificationsQuery query);
 
         Task<ListQueryResult<NotificationInfoViewModel>> GetUserNotificationsAsync(UserNotificationsQuery query);
+
+        CommandResult MarkNotificationRead(NotificationReadCommand command);
+
+        Task<CommandResult> MarkNotificationReadAsync(NotificationReadCommand command);
+
+        CommandResult MarkNotificationsRead(NotificationsReadCommand command);
+
+        Task<CommandResult> MarkNotificationsReadAsync(NotificationsReadCommand command);
     }
 }

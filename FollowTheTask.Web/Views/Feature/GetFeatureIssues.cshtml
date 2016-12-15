@@ -1,80 +1,73 @@
 ﻿@model IEnumerable<FollowTheTask.BLL.Services.Issue.ViewModels.IssueInfoViewModel>
 @using FollowTheTask.Web.Infrastructure
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Version)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TypeId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PriorityId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StatusId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ResolutionId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedDateUtc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DeadlineDateUtc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ReporterName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AssigneeName)
-        </th>
-        @*<th></th>*@
-    </tr>
+@if (Model != null && Model.Count() != 0)
+{
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Version)
-        </td>
-        <td>
-            @StaticValues.Instance.IssueTypes[item.TypeId ?? 0]
-        </td>
-        <td>
-            @StaticValues.Instance.Priorities[item.PriorityId ?? 0]
-        </td>
-        <td>
-            @StaticValues.Instance.Statuses[item.StatusId ?? 0]
-        </td>
-        <td>
-            @StaticValues.Instance.Resolutions[item.ResolutionId ?? 0]
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedDateUtc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DeadlineDateUtc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReporterName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AssigneeName)
-        </td>
-    </tr>
+
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Version)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TypeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PriorityId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ResolutionId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDateUtc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeadlineDateUtc)
+            </th>
+            @*<th></th>*@
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Name, "Index", "Issue", new {id = item.Id}, new {})
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Version)
+                </td>
+                <td>
+                    @StaticValues.Instance.IssueTypes[item.TypeId ?? 0]
+                </td>
+                <td>
+                    @StaticValues.Instance.Priorities[item.PriorityId ?? 0]
+                </td>
+                <td>
+                    @StaticValues.Instance.Statuses[item.StatusId ?? 0]
+                </td>
+                <td>
+                    @StaticValues.Instance.Resolutions[item.ResolutionId ?? 0]
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDateUtc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeadlineDateUtc)
+                </td>
+            </tr>
+        }
+
+    </table>
 }
-
-</table>
+else
+{
+    <h4>No issues in these feature! Isn't that good?</h4>
+}

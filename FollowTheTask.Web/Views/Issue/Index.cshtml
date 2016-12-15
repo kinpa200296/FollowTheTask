@@ -1,0 +1,109 @@
+﻿@using FollowTheTask.Web.Infrastructure
+@model FollowTheTask.BLL.Services.Issue.ViewModels.IssueInfoViewModel
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+<h2>@Model.Name issue</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Version)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Version)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TypeId)
+        </dt>
+
+        <dd>
+            @StaticValues.Instance.IssueTypes[Model.ResolutionId ?? 0]
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PriorityId)
+        </dt>
+
+        <dd>
+            @StaticValues.Instance.Priorities[Model.ResolutionId ?? 0]
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StatusId)
+        </dt>
+
+        <dd>
+            @StaticValues.Instance.Statuses[Model.StatusId ?? 0]
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ResolutionId)
+        </dt>
+
+        <dd>
+            @StaticValues.Instance.Resolutions[Model.ResolutionId ?? 0]
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDateUtc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDateUtc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeadlineDateUtc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeadlineDateUtc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReporterName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReporterName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AssigneeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssigneeName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to feature", "Index", "Feature", new {id = Model.FeatureId}, new {})|
+    @Html.ActionLink("Delete", "Delete", new {id = Model.Id})
+</p>
+
+<hr/>
+
+<h3>Comments</h3>
+
+@Html.Action("GetComments", new {issueId = Model.Id})
+
+<hr/>
+
+@*@Html.Action("Create", "Comment", new {issueId = Model.Id})*@

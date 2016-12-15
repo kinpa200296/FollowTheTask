@@ -317,6 +317,10 @@
     <Content Include="Views\Feature\Edit.cshtml" />
     <Content Include="Views\Feature\GetFeatureIssues.cshtml" />
     <Content Include="Views\Team\GetAllTeams.cshtml" />
+    <Content Include="Views\Issue\Index.cshtml" />
+    <Content Include="Views\Issue\Create.cshtml" />
+    <Content Include="Views\Issue\Edit.cshtml" />
+    <Content Include="Views\Issue\GetComments.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -343,6 +347,7 @@
     <Compile Include="Auth\CustomUserStore.cs" />
     <Compile Include="Auth\UserRole.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FeatureController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -352,6 +357,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\DictSelectHelper.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="App_Start\JsEngineSwitcherConfig.cs" />
     <Compile Include="Infrastructure\PermissionResolver.cs" />
@@ -377,7 +383,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Comment\" />
-    <Folder Include="Views\Issue\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
