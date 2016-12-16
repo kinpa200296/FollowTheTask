@@ -233,8 +233,13 @@ BEGIN
             RAISERROR('Not enough rights', 10, 1)
             RETURN;
         END;
-        INSERT INTO [dbo].[UserTeams](TeamId, UserId)
-            SELECT TargetId, SenderId FROM [dbo].[Requests] WHERE Id = @RequestId
+        DECLARE @Tmp int;
+        SELECT @Tmp = (SELECT T.UserId 
+            FROM [dbo].[UserTeams] T, [dbo].[Requests] R 
+            WHERE R.Id = @RequestId And T.TeamId = R.TargetId AND T.UserId = R.SenderId);
+        IF @Tmp IS NULL
+            INSERT INTO [dbo].[UserTeams](TeamId, UserId)
+                SELECT TargetId, SenderId FROM [dbo].[Requests] WHERE Id = @RequestId
     END;
     IF @ActionTypeId = [dbo].ActionTypeIdAssignIssue()
     BEGIN

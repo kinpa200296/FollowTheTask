@@ -66,25 +66,25 @@ namespace FollowTheTask.Web.Infrastructure
 
         public static bool IssueEditGeneralPermission(int userId, int issueId)
         {
-            return IsAdmin(userId) || IsTeamLeader(userId, GetTeamLeaderIdForIssue(issueId) ?? 0) ||
+            return IsAdmin(userId) || IsTeamLeader(userId, GetTeamIdForIssue(issueId) ?? 0) ||
                    IsIssueReporter(issueId, userId) || IsIssueAssignee(issueId, userId);
         }
 
         public static bool IssueEditNoRepPermission(int userId, int issueId)
         {
-            return IsAdmin(userId) || IsTeamLeader(userId, GetTeamLeaderIdForIssue(issueId) ?? 0) ||
+            return IsAdmin(userId) || IsTeamLeader(userId, GetTeamIdForIssue(issueId) ?? 0) ||
                    IsIssueAssignee(issueId, userId);
         }
 
         public static bool IssueEditNoAssigneePermission(int userId, int issueId)
         {
-            return IsAdmin(userId) || IsTeamLeader(userId, GetTeamLeaderIdForIssue(issueId) ?? 0) ||
+            return IsAdmin(userId) || IsTeamLeader(userId, GetTeamIdForIssue(issueId) ?? 0) ||
                    IsIssueReporter(issueId, userId);
         }
 
         public static bool IssueDeletePermission(int userId, int issueId)
         {
-            return IsAdmin(userId) || IsTeamLeader(userId, GetTeamLeaderIdForIssue(issueId) ?? 0);
+            return IsAdmin(userId) || IsTeamLeader(userId, GetTeamIdForIssue(issueId) ?? 0);
         }
 
         public static bool IssueAssignPermission(int userId, int issueId)
@@ -96,22 +96,6 @@ namespace FollowTheTask.Web.Infrastructure
         #endregion
 
         #region Private methods
-
-        private static int? GetTeamLeaderIdForIssue(int issueId)
-        {
-            var featureId = DependencyResolver.Current.GetService<IIssueService>()
-                .GetIssue(new IssueQuery() {Id = issueId})
-                .Value?.FeatureId;
-            if (featureId == null) return null;
-            var teamId =
-                DependencyResolver.Current.GetService<IFeatureService>()
-                    .GetFeature(new FeatureQuery() {Id = featureId.Value}).Value?.TeamId;
-            if (teamId == null) return null;
-            return
-                DependencyResolver.Current.GetService<ITeamService>()
-                    .GetTeam(new TeamQuery() {Id = teamId.Value})
-                    .Value?.LeaderId;
-        }
 
         private static int? GetTeamIdForIssue(int issueId)
         {
